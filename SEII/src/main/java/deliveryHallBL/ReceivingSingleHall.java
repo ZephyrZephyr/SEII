@@ -1,0 +1,5 @@
+package deliveryHallBL;
+
+class ReceivingSingleHall {
+
+}

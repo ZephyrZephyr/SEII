@@ -1,0 +1,5 @@
+package postManBL;
+
+class Customer {
+
+}
