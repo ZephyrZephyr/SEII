@@ -358,9 +358,312 @@ public class MainFrame extends javax.swing.JFrame {
         center_transfer_transfer_line_vehicle = new javax.swing.JRadioButton();
         center_transfer_transfer_submit = new javax.swing.JButton();
         financePanel = new javax.swing.JPanel();
+        finance_button_settelement = new javax.swing.JButton();
+        finance_button_cost = new javax.swing.JButton();
+        finance_button_numerical = new javax.swing.JButton();
+        finance_button_account = new javax.swing.JButton();
+        finance_mainPanel = new javax.swing.JPanel();
+        finance_settlementManagement = new javax.swing.JPanel();
+        finance_settlement_receiptPanel = new javax.swing.JPanel();
+        finance_settlement_receipt_label_date = new javax.swing.JLabel();
+        finance_settlement_receipt_year = new javax.swing.JComboBox();
+        finance_settlement_receipt_label_year = new javax.swing.JLabel();
+        finance_settlement_receipt_month = new javax.swing.JComboBox();
+        finance_settlement_receipt_label_month = new javax.swing.JLabel();
+        finance_settlement_receipt_day = new javax.swing.JComboBox();
+        finance_settlement_receipt_label_day = new javax.swing.JLabel();
+        finance_settlement_receipt_label_department = new javax.swing.JLabel();
+        finance_settlement_receipt_department = new javax.swing.JTextField();
+        finance_settlement_receipt_label_payee = new javax.swing.JLabel();
+        finance_settlement_receipt_payee = new javax.swing.JTextField();
+        finance_settlement_receipt_label_party = new javax.swing.JLabel();
+        finance_settlement_receipt_party = new javax.swing.JTextField();
+        finance_settlement_receipt_label_amount = new javax.swing.JLabel();
+        finance_settlement_receipt_amount = new javax.swing.JTextField();
+        finance_settlement_receipt_label_yuan = new javax.swing.JLabel();
+        finance_settlement_receipt_label_place = new javax.swing.JLabel();
+        finance_settlement_receipt_province = new javax.swing.JTextField();
+        finance_settlement_receipt_label_province = new javax.swing.JLabel();
+        finance_settlement_receipt_city = new javax.swing.JTextField();
+        finance_settlement_receipt_label_city = new javax.swing.JLabel();
+        finance_settlement_receipt_address = new javax.swing.JTextField();
+        finance_settlement_receipt_button_save = new javax.swing.JButton();
+        finance_settlement_receipt_button_reset = new javax.swing.JButton();
+        finance_settlement_checkReceiptPanel = new javax.swing.JPanel();
+        finance_settlement_checkReceipt_label_date = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_year = new javax.swing.JComboBox();
+        finance_settlement_checkReceipt_label_year = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_month = new javax.swing.JComboBox();
+        finance_settlement_checkReceipt_label_month = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_day = new javax.swing.JComboBox();
+        finance_settlement_checkReceipt_label_day = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_label_receiptHall = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_hall = new javax.swing.JTextField();
+        finance_settlement_checkReceipt_button_check = new javax.swing.JButton();
+        finance_settlement_checkReceipt_resultPanel = new javax.swing.JPanel();
+        finance_settlement_checkReceipt_result_listPanel = new javax.swing.JScrollPane();
+        finance_settlement_checkReceipt_result_list = new javax.swing.JTable();
+        finance_settlement_checkReceipt_label_totalPrice = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_result_totalPrice = new javax.swing.JLabel();
+        finance_settlement_checkReceipt_label_yuan = new javax.swing.JLabel();
+        finance_costManagement = new javax.swing.JPanel();
+        finance_cost_paymentPanel1 = new javax.swing.JPanel();
+        finance_cost_payment_payee1 = new javax.swing.JTextField();
+        finance_cost_payment_label_day1 = new javax.swing.JLabel();
+        finance_cost_payment_day1 = new javax.swing.JComboBox();
+        finance_cost_payment_label_date1 = new javax.swing.JLabel();
+        finance_cost_payment_label_payee1 = new javax.swing.JLabel();
+        finance_cost_payment_label_month1 = new javax.swing.JLabel();
+        finance_cost_payment_year1 = new javax.swing.JComboBox();
+        finance_cost_payment_label_year1 = new javax.swing.JLabel();
+        finance_cost_payment_month1 = new javax.swing.JComboBox();
+        finance_cost_payment_label_yuan1 = new javax.swing.JLabel();
+        finance_cost_payment_label_amount1 = new javax.swing.JLabel();
+        finance_cost_payment_amount1 = new javax.swing.JTextField();
+        finance_cost_payment_label_account1 = new javax.swing.JLabel();
+        finance_cost_payment_account1 = new javax.swing.JTextField();
+        finance_cost_payment_entry_rent1 = new javax.swing.JRadioButton();
+        finance_cost_payment_entry_freight1 = new javax.swing.JRadioButton();
+        finance_cost_payment_entry_salary1 = new javax.swing.JRadioButton();
+        finance_cost_payment_entry_bonus1 = new javax.swing.JRadioButton();
+        finance_cost_label_entry1 = new javax.swing.JLabel();
+        finance_cost_payment_label_remark1 = new javax.swing.JLabel();
+        finance_cost_payment_remarkPanel = new javax.swing.JScrollPane();
+        finance_cost_payment_remark1 = new javax.swing.JTextArea();
+        finance_cost_payment_button_reset1 = new javax.swing.JButton();
+        finance_cost_payment_button_save1 = new javax.swing.JButton();
+        finance_cost_costAndIncomePanel = new javax.swing.JPanel();
+        finance_cost_costAndIncomePanel_year = new javax.swing.JComboBox();
+        finance_cost_costAndIncomePanel_label_day = new javax.swing.JLabel();
+        finance_cost_costAndIncomePanel_day = new javax.swing.JComboBox();
+        finance_cost_costAndIncomePanel_label_endDate = new javax.swing.JLabel();
+        finance_cost_costAndIncomePanel_month = new javax.swing.JComboBox();
+        finance_cost_costAndIncomePanel_label_year = new javax.swing.JLabel();
+        finance_cost_costAndIncomePanel_label_month = new javax.swing.JLabel();
+        finance_cost_costAndIncomePanel_resultPanel = new javax.swing.JPanel();
+        finance_cost_costAndIncomePanel_result_tablePanel = new javax.swing.JScrollPane();
+        finance_cost_costAndIncomePanel_result_table = new javax.swing.JTable();
+        finance_cost_costAndIncomePanel_button_export = new javax.swing.JButton();
+        finance_numericalStatement = new javax.swing.JPanel();
+        finance_numerical_label_from_date = new javax.swing.JLabel();
+        finance_numerical_from_year = new javax.swing.JComboBox();
+        finance_numerical_label_from_year = new javax.swing.JLabel();
+        finance_numerical_from_month = new javax.swing.JComboBox();
+        finance_numerical_label_from_month = new javax.swing.JLabel();
+        finance_numerical_from_day = new javax.swing.JComboBox();
+        finance_numerical_label_from_day = new javax.swing.JLabel();
+        finance_numerical_label_to = new javax.swing.JLabel();
+        finance_numerical_to_year = new javax.swing.JComboBox();
+        finance_numerical_label_to_year = new javax.swing.JLabel();
+        finance_numerical_to_month = new javax.swing.JComboBox();
+        finance_numerical_label_to_month = new javax.swing.JLabel();
+        finance_numerical_to_day = new javax.swing.JComboBox();
+        finance_numerical_label_to_day = new javax.swing.JLabel();
+        finance_numerical_button_check = new javax.swing.JButton();
+        finance_numerical_resultPanel = new javax.swing.JPanel();
+        finance_numerical_receiptPanel = new javax.swing.JScrollPane();
+        finance_numerical_receipt = new javax.swing.JTable();
+        finance_numerical_paymentPanel = new javax.swing.JScrollPane();
+        finance_numerical_payment = new javax.swing.JTable();
+        finance_numerical_button_export_payment = new javax.swing.JButton();
+        finance_numerical_button_export_receipt = new javax.swing.JButton();
+        finance_accountManagement = new javax.swing.JPanel();
+        finance_account_accountListPanel = new javax.swing.JPanel();
+        finance_account_accountList_listPanel = new javax.swing.JScrollPane();
+        finance_account_accountList_list = new javax.swing.JTable();
+        finance_account_addPanel = new javax.swing.JPanel();
+        finance_account_add_label_name = new javax.swing.JLabel();
+        finance_account_add_name = new javax.swing.JTextField();
+        finance_account_add_button_add = new javax.swing.JButton();
+        finance_account_searchAndDeletePanel = new javax.swing.JPanel();
+        finance_account_searchAndDelete_name = new javax.swing.JTextField();
+        finance_account_searchAndDelete_button_search = new javax.swing.JButton();
+        finance_account_searchAndDelete_resultPanel = new javax.swing.JPanel();
+        finance_account_searchAndDelete_detailPanel = new javax.swing.JScrollPane();
+        finance_account_searchAndDelete_detail = new javax.swing.JTable();
+        finance_account_searchAndDelete_delete = new javax.swing.JButton();
+        finance_account_initPanel = new javax.swing.JPanel();
+        finance_account_init_name = new javax.swing.JTextField();
+        finance_account_init_label_accountName = new javax.swing.JLabel();
+        finance_account_init_button_check = new javax.swing.JButton();
+        finance_account_init_resultPanel = new javax.swing.JPanel();
+        finance_account_init_result_staffPanel = new javax.swing.JScrollPane();
+        finance_account_init_result_staff = new javax.swing.JTable();
+        finance_account_init_result_carsPanel = new javax.swing.JScrollPane();
+        finance_account_init_result_cars = new javax.swing.JTable();
+        finance_account_init_result_label_departent = new javax.swing.JLabel();
+        finance_account_init_result_department = new javax.swing.JLabel();
+        finance_account_init_result_amount = new javax.swing.JLabel();
+        finance_account_init_result_label_Amount = new javax.swing.JLabel();
+        finance_account_init_result_label_yuan = new javax.swing.JLabel();
+        finance_account_init_button_init = new javax.swing.JButton();
         managerPanel = new javax.swing.JPanel();
+        manager_button_staff = new javax.swing.JButton();
+        manager_button_department = new javax.swing.JButton();
+        manager_button_ducument = new javax.swing.JButton();
+        manager_button_statement = new javax.swing.JButton();
+        manager_mainPanel = new javax.swing.JPanel();
+        manager_staffPanel = new javax.swing.JPanel();
+        manager_staff_departmentPanel = new javax.swing.JPanel();
+        manager_staff_departmentTreePanel = new javax.swing.JScrollPane();
+        manager_staff_departments = new javax.swing.JTree();
+        manager_staff_stafflistPanel = new javax.swing.JPanel();
+        manager_staff_listPanel = new javax.swing.JScrollPane();
+        manager_staff_stafflist = new javax.swing.JTable();
+        manager_staff_updatePanel = new javax.swing.JPanel();
+        manager_staff_updatePanel_label_staffId = new javax.swing.JLabel();
+        manager_staff_update_id = new javax.swing.JTextField();
+        manager_staff_update_salary = new javax.swing.JTextField();
+        manager_staff_updatePanel_label_salary = new javax.swing.JLabel();
+        manager_staff_update_button_submit = new javax.swing.JButton();
+        manager_departmentPanel = new javax.swing.JPanel();
+        manager_department_departmentPanel = new javax.swing.JPanel();
+        manager_department_departmentTreePanel = new javax.swing.JScrollPane();
+        manager_department_departments = new javax.swing.JTree();
+        manager_department_staffPanel = new javax.swing.JPanel();
+        manager_department_stafflistPanel = new javax.swing.JScrollPane();
+        manager_department_stafflist = new javax.swing.JTable();
+        manager_department_staff_label_move = new javax.swing.JLabel();
+        manager_department_staff_label_id = new javax.swing.JLabel();
+        manager_department_staff_id = new javax.swing.JTextField();
+        manager_department_staff_from = new javax.swing.JTextField();
+        manager_department_staff_label_from = new javax.swing.JLabel();
+        manager_department_staff_to = new javax.swing.JTextField();
+        manager_department_staff_label_to = new javax.swing.JLabel();
+        manager_department_staff_button_save = new javax.swing.JButton();
+        manager_department_updatePanel = new javax.swing.JPanel();
+        manager_department_updatePanel_label_id = new javax.swing.JLabel();
+        manager_department_updatePanel_id = new javax.swing.JTextField();
+        manager_department_updatePanel_name = new javax.swing.JTextField();
+        manager_department_updatePanel_label_name = new javax.swing.JLabel();
+        manager_department_updatePanel_manager = new javax.swing.JTextField();
+        manager_department_updatePanel_label_manager = new javax.swing.JLabel();
+        manager_department_updatePanel_parent = new javax.swing.JTextField();
+        manager_department_updatePanel_label_parent = new javax.swing.JLabel();
+        manager_department_updatePanel_button_save = new javax.swing.JButton();
+        manager_documentPanel = new javax.swing.JPanel();
+        manager_document_documentlistPanel = new javax.swing.JPanel();
+        manager_document_documentpanel = new javax.swing.JScrollPane();
+        manager_document_documentlist = new javax.swing.JTable();
+        manager_button_numercial = new javax.swing.JButton();
         curtomerPanel = new javax.swing.JPanel();
         centerStockPanel = new javax.swing.JPanel();
+        stock_button_inwarehouse = new javax.swing.JButton();
+        stock_button_exwarehouse = new javax.swing.JButton();
+        stock_button_inventoryCheck = new javax.swing.JButton();
+        stock_button_inventoryCounts = new javax.swing.JButton();
+        stock_button_inventoryAdjustments = new javax.swing.JButton();
+        stock_realtimePanel = new javax.swing.JPanel();
+        stock_realtime_treePanel = new javax.swing.JScrollPane();
+        stock_realtime_tree = new javax.swing.JTree();
+        stock_realtime_listPanel = new javax.swing.JScrollPane();
+        stock_realtime_list = new javax.swing.JTable();
+        stock_mainPanel = new javax.swing.JPanel();
+        stock_inwarehouse = new javax.swing.JPanel();
+        stock_inwarehouse_label_date = new javax.swing.JLabel();
+        stock_inwarehouse_year = new javax.swing.JComboBox();
+        stock_inwarehouse_label_year = new javax.swing.JLabel();
+        stock_inwarehouse_month = new javax.swing.JComboBox();
+        stock_inwarehouse_label_month = new javax.swing.JLabel();
+        stock_inwarehouse_day = new javax.swing.JComboBox();
+        stock_inwarehouse_label_day = new javax.swing.JLabel();
+        stock_inwarehouse_label_goodsNo = new javax.swing.JLabel();
+        stock_inwarehouse_goodsNo = new javax.swing.JTextField();
+        stock_inwarehouse_label_destination = new javax.swing.JLabel();
+        stock_inwarehouse_province = new javax.swing.JTextField();
+        stock_inwarehouse_label_province = new javax.swing.JLabel();
+        stock_inwarehouse_city = new javax.swing.JTextField();
+        stock_inwarehouse_label_city = new javax.swing.JLabel();
+        stock_inwarehouse_address = new javax.swing.JTextField();
+        stock_inwarehouse_label_position = new javax.swing.JLabel();
+        stock_inwarehouse_label_unit = new javax.swing.JLabel();
+        stock_inwarehouse_unit = new javax.swing.JComboBox();
+        stock_inwarehouse_label_row = new javax.swing.JLabel();
+        stock_inwarehouse_row = new javax.swing.JComboBox();
+        stock_inwarehouse_label_line = new javax.swing.JLabel();
+        stock_inwarehouse_line = new javax.swing.JComboBox();
+        stock_inwarehouse_button_inwarehouse = new javax.swing.JButton();
+        stock_exwarehouse = new javax.swing.JPanel();
+        stock_exwarehouse_label_goodsNo = new javax.swing.JLabel();
+        stock_exwarehouse_goodsNo = new javax.swing.JTextField();
+        stock_exwarehouse_label_date = new javax.swing.JLabel();
+        stock_exwarehouse_year = new javax.swing.JComboBox();
+        stock_exwarehouse_label_year = new javax.swing.JLabel();
+        stock_exwarehouse_month = new javax.swing.JComboBox();
+        stock_exwarehouse_label_month = new javax.swing.JLabel();
+        stock_exwarehouse_day = new javax.swing.JComboBox();
+        stock_exwarehouse_label_day = new javax.swing.JLabel();
+        stock_exwarehouse_label_destination = new javax.swing.JLabel();
+        stock_exwarehouse_province = new javax.swing.JTextField();
+        stock_exwarehouse_label_province = new javax.swing.JLabel();
+        stock_exwarehouse_city = new javax.swing.JTextField();
+        stock_exwarehouse_label_city = new javax.swing.JLabel();
+        stock_exwarehouse_address = new javax.swing.JTextField();
+        stock_exwarehouse_label_position = new javax.swing.JLabel();
+        stock_exwarehouse_label_unit = new javax.swing.JLabel();
+        stock_exwarehouse_unit = new javax.swing.JComboBox();
+        stock_exwarehouse_label_row = new javax.swing.JLabel();
+        stock_exwarehouse_row = new javax.swing.JComboBox();
+        stock_exwarehouse_label_line = new javax.swing.JLabel();
+        stock_exwarehouse_line = new javax.swing.JComboBox();
+        stock_exwarehouse_label_exactposition = new javax.swing.JLabel();
+        stock_exwarehouse_exactposition = new javax.swing.JComboBox();
+        stock_exwarehouse_label_transportNo = new javax.swing.JLabel();
+        stock_exwarehouse_transportNo = new javax.swing.JTextField();
+        stock_exwarehouse_button_exwarehouse = new javax.swing.JButton();
+        stock_inventoryCheck = new javax.swing.JPanel();
+        stock_inventoryCheck_label_front = new javax.swing.JLabel();
+        stock_inventoryCheck_front_year = new javax.swing.JComboBox();
+        stock_inventoryCheck_label_front_year = new javax.swing.JLabel();
+        stock_inventoryCheck_front_month = new javax.swing.JComboBox();
+        stock_inventoryCheck_label_front_month = new javax.swing.JLabel();
+        stock_inventoryCheck_front_day = new javax.swing.JComboBox();
+        stock_inventoryCheck_label_front_day = new javax.swing.JLabel();
+        stock_inventoryCheck_label_end = new javax.swing.JLabel();
+        stock_inventoryCheck_end_year = new javax.swing.JComboBox();
+        stock_inventoryCheck_label_end_year = new javax.swing.JLabel();
+        stock_inventoryCheck_end_month = new javax.swing.JComboBox();
+        stock_inventoryCheck_label_end_month = new javax.swing.JLabel();
+        stock_inventoryCheck_end_day = new javax.swing.JComboBox();
+        stock_inventoryCheck_label_end_day = new javax.swing.JLabel();
+        stock_inventoryCheck_button_check = new javax.swing.JButton();
+        stock_inventoryCheck_button_reset = new javax.swing.JButton();
+        stock_inventoryCheck_resultPanel = new javax.swing.JPanel();
+        stock_inventoryCheck_label_inwarehouse = new javax.swing.JLabel();
+        stock_inventoryCheck_result_exwarehouse = new javax.swing.JLabel();
+        stock_inventoryCheck_result_inSubex = new javax.swing.JLabel();
+        stock_inventoryCheck_listPanel = new javax.swing.JScrollPane();
+        stock_inventoryCheck_list = new javax.swing.JTable();
+        stock_inventoryCheck_label_exwarehouse = new javax.swing.JLabel();
+        stock_inventoryCheck_label_inSubex = new javax.swing.JLabel();
+        stock_inventoryCheck_label_total = new javax.swing.JLabel();
+        stock_inventoryCheck_result_inwarehouse = new javax.swing.JLabel();
+        stock_inventoryyCounts = new javax.swing.JPanel();
+        stock_inventoryCounts_tablePanel = new javax.swing.JScrollPane();
+        stock_inventoryCounts_table = new javax.swing.JTable();
+        stock_inventoryCounts_label_time = new javax.swing.JLabel();
+        stock_inventoryCounts_snaptime = new javax.swing.JLabel();
+        stock_inventoryCounts_button_export = new javax.swing.JButton();
+        stock_inventoryAdjustments = new javax.swing.JPanel();
+        stock_inventoryAdjust_label_warningPercent = new javax.swing.JLabel();
+        stock_inventoryAdjust_warningPercent = new javax.swing.JComboBox();
+        stock_inventoryAdjust_button_check = new javax.swing.JButton();
+        stock_inventoryAdjust_tablePanel = new javax.swing.JScrollPane();
+        stock_inventoryAdjust_table = new javax.swing.JTable();
+        stock_inventoryAdjust_label_Adjust = new javax.swing.JLabel();
+        stock_inventoryAdjust_label_from = new javax.swing.JLabel();
+        stock_inventoryAdjust_from_unit = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_unit = new javax.swing.JLabel();
+        stock_inventoryAdjust_from_row = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_fromRow = new javax.swing.JLabel();
+        stock_inventoryAdjust_from_line = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_fromLine = new javax.swing.JLabel();
+        stock_inventoryAdjust_label_to = new javax.swing.JLabel();
+        stock_inventoryAdjust_to_row = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_toRow = new javax.swing.JLabel();
+        stock_inventoryAdjust_to_line = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_toLine = new javax.swing.JLabel();
+        stock_inventoryAdjust_button_Save = new javax.swing.JButton();
         mainPanel_userName = new javax.swing.JLabel();
         mainPanel_logout = new javax.swing.JButton();
 
@@ -604,8 +907,7 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(hall_acceptanceAndDistribution_Arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_city)))
-                                .addGap(72, 72, 72))))
+                                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_city))))))
                     .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(hall_acceptanceAndDistribution_Arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1087,34 +1389,32 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
                                 .addGap(75, 75, 75)
-                                .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_label_departure_province)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_label_departure_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_departure_address, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
                                 .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                        .addGap(75, 75, 75)
-                                        .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_label_destination_province))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                        .addGap(75, 75, 75)
+                                        .addComponent(hall_vehicleLoading_label_departure_province)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_vehicleLoading_label_departure_city)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_vehicleLoading_departure_address, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
                                         .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(hall_vehicleLoading_label_destination_province))
                                             .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_label_destination_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehicleLoading_destination_address)))))
+                                            .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_vehicleLoading_label_destination_city)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_vehicleLoading_destination_address)))))))
                 .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
@@ -1283,7 +1583,7 @@ public class MainFrame extends javax.swing.JFrame {
         hallPanelLayout.setVerticalGroup(
             hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hallPanelLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(hall_mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(hallPanelLayout.createSequentialGroup()
@@ -1384,7 +1684,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login_loginButton)
                     .addComponent(login_registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         cardPanel.add(loginPanel, "card1");
@@ -1816,7 +2116,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(postman_consighmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(7, 7, 7)
                         .addComponent(postman_recipientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                         .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(postman_ticketNO)
                             .addComponent(postman_getArriveTimeButton)
@@ -2859,33 +3159,1601 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(center_button_vehicle)
                         .addGap(18, 18, 18)
                         .addComponent(center_button_transfer)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         cardPanel.add(centerPanel, "card4");
+
+        finance_button_settelement.setText("Settlement Management");
+        finance_button_settelement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_button_settelementActionPerformed(evt);
+            }
+        });
+
+        finance_button_cost.setText("Cost Management");
+        finance_button_cost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_button_costActionPerformed(evt);
+            }
+        });
+
+        finance_button_numerical.setText("Numerical Statement");
+        finance_button_numerical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_button_numericalActionPerformed(evt);
+            }
+        });
+
+        finance_button_account.setText("Account Management");
+        finance_button_account.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_button_accountActionPerformed(evt);
+            }
+        });
+
+        finance_mainPanel.setLayout(new java.awt.CardLayout());
+
+        finance_settlement_receiptPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Receipt List"));
+
+        finance_settlement_receipt_label_date.setText("Collect Date:");
+
+        finance_settlement_receipt_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        finance_settlement_receipt_label_year.setText("Year");
+
+        finance_settlement_receipt_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        finance_settlement_receipt_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_settlement_receipt_monthActionPerformed(evt);
+            }
+        });
+
+        finance_settlement_receipt_label_month.setText("Month");
+
+        finance_settlement_receipt_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        finance_settlement_receipt_label_day.setText("Day");
+
+        finance_settlement_receipt_label_department.setText("Collect Department:");
+
+        finance_settlement_receipt_department.setText("xxx-xxx-xx");
+
+        finance_settlement_receipt_label_payee.setText("Payee :");
+
+        finance_settlement_receipt_payee.setText("xxx-xxx-xx");
+
+        finance_settlement_receipt_label_party.setText("Beneficiary Party:");
+
+        finance_settlement_receipt_party.setText("xxx-xxx-xx");
+
+        finance_settlement_receipt_label_amount.setText("Amount:");
+
+        finance_settlement_receipt_amount.setText("123456");
+
+        finance_settlement_receipt_label_yuan.setText("yuan");
+
+        finance_settlement_receipt_label_place.setText("Collect Place:");
+
+        finance_settlement_receipt_label_province.setText("Province");
+
+        finance_settlement_receipt_label_city.setText("City");
+
+        finance_settlement_receipt_button_save.setText("Save");
+
+        finance_settlement_receipt_button_reset.setText("Reset");
+
+        javax.swing.GroupLayout finance_settlement_receiptPanelLayout = new javax.swing.GroupLayout(finance_settlement_receiptPanel);
+        finance_settlement_receiptPanel.setLayout(finance_settlement_receiptPanelLayout);
+        finance_settlement_receiptPanelLayout.setHorizontalGroup(
+            finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlement_receiptPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_settlement_receipt_label_date)
+                    .addComponent(finance_settlement_receipt_label_department)
+                    .addGroup(finance_settlement_receiptPanelLayout.createSequentialGroup()
+                        .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(finance_settlement_receiptPanelLayout.createSequentialGroup()
+                                .addComponent(finance_settlement_receipt_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_label_year)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_label_month)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_settlement_receiptPanelLayout.createSequentialGroup()
+                                .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(finance_settlement_receipt_payee, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(finance_settlement_receipt_department, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(finance_settlement_receipt_party, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_settlement_receiptPanelLayout.createSequentialGroup()
+                                .addComponent(finance_settlement_receipt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(finance_settlement_receipt_label_yuan)
+                                .addGap(47, 47, 47)))
+                        .addComponent(finance_settlement_receipt_label_day))
+                    .addComponent(finance_settlement_receipt_label_payee)
+                    .addComponent(finance_settlement_receipt_label_party)
+                    .addComponent(finance_settlement_receipt_label_amount)
+                    .addComponent(finance_settlement_receipt_label_place)
+                    .addGroup(finance_settlement_receiptPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finance_settlement_receipt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(finance_settlement_receiptPanelLayout.createSequentialGroup()
+                                .addComponent(finance_settlement_receipt_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_label_province)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_settlement_receipt_label_city)))))
+                .addContainerGap(65, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_settlement_receiptPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(finance_settlement_receipt_button_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finance_settlement_receipt_button_save, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+        finance_settlement_receiptPanelLayout.setVerticalGroup(
+            finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlement_receiptPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(finance_settlement_receipt_label_date)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_settlement_receipt_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_receipt_label_year)
+                    .addComponent(finance_settlement_receipt_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_receipt_label_month)
+                    .addComponent(finance_settlement_receipt_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_receipt_label_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_receipt_label_department)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finance_settlement_receipt_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_receipt_label_payee)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finance_settlement_receipt_payee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_receipt_label_party)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finance_settlement_receipt_party, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_receipt_label_amount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_settlement_receipt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_receipt_label_yuan))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_receipt_label_place)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(finance_settlement_receipt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(finance_settlement_receipt_label_city))
+                    .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(finance_settlement_receipt_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(finance_settlement_receipt_label_province)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_receipt_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(finance_settlement_receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_settlement_receipt_button_save)
+                    .addComponent(finance_settlement_receipt_button_reset))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        finance_settlement_checkReceiptPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Check Receipt"));
+
+        finance_settlement_checkReceipt_label_date.setText("Receipt Date:");
+
+        finance_settlement_checkReceipt_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        finance_settlement_checkReceipt_label_year.setText("Year");
+
+        finance_settlement_checkReceipt_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        finance_settlement_checkReceipt_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_settlement_checkReceipt_monthActionPerformed(evt);
+            }
+        });
+
+        finance_settlement_checkReceipt_label_month.setText("Month");
+
+        finance_settlement_checkReceipt_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        finance_settlement_checkReceipt_label_day.setText("Day");
+
+        finance_settlement_checkReceipt_label_receiptHall.setText("Receipt Hall:");
+
+        finance_settlement_checkReceipt_hall.setText("xxx-xxx-xx");
+
+        finance_settlement_checkReceipt_button_check.setText("Check");
+
+        finance_settlement_checkReceipt_result_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Receipt No", "Price"
+            }
+        ));
+        finance_settlement_checkReceipt_result_listPanel.setViewportView(finance_settlement_checkReceipt_result_list);
+
+        finance_settlement_checkReceipt_label_totalPrice.setText("Total Price:");
+
+        finance_settlement_checkReceipt_result_totalPrice.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        finance_settlement_checkReceipt_result_totalPrice.setText("99");
+
+        finance_settlement_checkReceipt_label_yuan.setText("yuan");
+
+        javax.swing.GroupLayout finance_settlement_checkReceipt_resultPanelLayout = new javax.swing.GroupLayout(finance_settlement_checkReceipt_resultPanel);
+        finance_settlement_checkReceipt_resultPanel.setLayout(finance_settlement_checkReceipt_resultPanelLayout);
+        finance_settlement_checkReceipt_resultPanelLayout.setHorizontalGroup(
+            finance_settlement_checkReceipt_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(finance_settlement_checkReceipt_result_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(finance_settlement_checkReceipt_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_settlement_checkReceipt_label_totalPrice)
+                .addGap(30, 30, 30)
+                .addComponent(finance_settlement_checkReceipt_result_totalPrice)
+                .addGap(47, 47, 47)
+                .addComponent(finance_settlement_checkReceipt_label_yuan)
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+        finance_settlement_checkReceipt_resultPanelLayout.setVerticalGroup(
+            finance_settlement_checkReceipt_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlement_checkReceipt_resultPanelLayout.createSequentialGroup()
+                .addComponent(finance_settlement_checkReceipt_result_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(finance_settlement_checkReceipt_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_settlement_checkReceipt_resultPanelLayout.createSequentialGroup()
+                        .addComponent(finance_settlement_checkReceipt_label_totalPrice)
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_settlement_checkReceipt_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(finance_settlement_checkReceipt_result_totalPrice)
+                        .addComponent(finance_settlement_checkReceipt_label_yuan)))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout finance_settlement_checkReceiptPanelLayout = new javax.swing.GroupLayout(finance_settlement_checkReceiptPanel);
+        finance_settlement_checkReceiptPanel.setLayout(finance_settlement_checkReceiptPanelLayout);
+        finance_settlement_checkReceiptPanelLayout.setHorizontalGroup(
+            finance_settlement_checkReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlement_checkReceiptPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_settlement_checkReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_settlement_checkReceipt_label_date)
+                    .addGroup(finance_settlement_checkReceiptPanelLayout.createSequentialGroup()
+                        .addComponent(finance_settlement_checkReceipt_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_settlement_checkReceipt_label_year)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_settlement_checkReceipt_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_settlement_checkReceipt_label_month)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_settlement_checkReceipt_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_settlement_checkReceipt_label_day))
+                    .addComponent(finance_settlement_checkReceipt_label_receiptHall)
+                    .addGroup(finance_settlement_checkReceiptPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(finance_settlement_checkReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finance_settlement_checkReceipt_resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(finance_settlement_checkReceiptPanelLayout.createSequentialGroup()
+                                .addComponent(finance_settlement_checkReceipt_hall, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(finance_settlement_checkReceipt_button_check)))))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        finance_settlement_checkReceiptPanelLayout.setVerticalGroup(
+            finance_settlement_checkReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlement_checkReceiptPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(finance_settlement_checkReceipt_label_date)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_settlement_checkReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_settlement_checkReceipt_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_checkReceipt_label_year)
+                    .addComponent(finance_settlement_checkReceipt_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_checkReceipt_label_month)
+                    .addComponent(finance_settlement_checkReceipt_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_checkReceipt_label_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_checkReceipt_label_receiptHall)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_settlement_checkReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_settlement_checkReceipt_hall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_settlement_checkReceipt_button_check))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_settlement_checkReceipt_resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout finance_settlementManagementLayout = new javax.swing.GroupLayout(finance_settlementManagement);
+        finance_settlementManagement.setLayout(finance_settlementManagementLayout);
+        finance_settlementManagementLayout.setHorizontalGroup(
+            finance_settlementManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlementManagementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_settlement_receiptPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(finance_settlement_checkReceiptPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        finance_settlementManagementLayout.setVerticalGroup(
+            finance_settlementManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_settlementManagementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_settlement_receiptPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_settlementManagementLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(finance_settlement_checkReceiptPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        finance_mainPanel.add(finance_settlementManagement, "card2");
+
+        finance_cost_paymentPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Payment List"));
+
+        finance_cost_payment_payee1.setText("xxx-xxx-xx");
+
+        finance_cost_payment_label_day1.setText("Day");
+
+        finance_cost_payment_day1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        finance_cost_payment_label_date1.setText("Collect Date:");
+
+        finance_cost_payment_label_payee1.setText("Payee :");
+
+        finance_cost_payment_label_month1.setText("Month");
+
+        finance_cost_payment_year1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        finance_cost_payment_label_year1.setText("Year");
+
+        finance_cost_payment_month1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        finance_cost_payment_month1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_cost_payment_month1ActionPerformed(evt);
+            }
+        });
+
+        finance_cost_payment_label_yuan1.setText("yuan");
+
+        finance_cost_payment_label_amount1.setText("Amount:");
+
+        finance_cost_payment_amount1.setText("123456");
+
+        finance_cost_payment_label_account1.setText("Account:");
+
+        finance_cost_payment_account1.setText("xxx-xxxxxxxxxx");
+
+        finance_cost_payment_entry_rent1.setText("Rent");
+
+        finance_cost_payment_entry_freight1.setText("Freight");
+
+        finance_cost_payment_entry_salary1.setText("Salary");
+
+        finance_cost_payment_entry_bonus1.setText("bonus");
+
+        finance_cost_label_entry1.setText("Entry:");
+
+        finance_cost_payment_label_remark1.setText("Remark:");
+
+        finance_cost_payment_remark1.setColumns(20);
+        finance_cost_payment_remark1.setRows(5);
+        finance_cost_payment_remarkPanel.setViewportView(finance_cost_payment_remark1);
+
+        finance_cost_payment_button_reset1.setText("Reset");
+
+        finance_cost_payment_button_save1.setText("Save");
+
+        javax.swing.GroupLayout finance_cost_paymentPanel1Layout = new javax.swing.GroupLayout(finance_cost_paymentPanel1);
+        finance_cost_paymentPanel1.setLayout(finance_cost_paymentPanel1Layout);
+        finance_cost_paymentPanel1Layout.setHorizontalGroup(
+            finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_cost_label_entry1)
+                    .addComponent(finance_cost_payment_label_date1)
+                    .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                        .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                                .addComponent(finance_cost_payment_label_amount1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_payment_amount1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                                .addComponent(finance_cost_payment_label_payee1)
+                                .addGap(18, 18, 18)
+                                .addComponent(finance_cost_payment_payee1)))
+                        .addGap(12, 12, 12)
+                        .addComponent(finance_cost_payment_label_yuan1))
+                    .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                        .addComponent(finance_cost_payment_label_account1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finance_cost_payment_entry_bonus1)
+                            .addComponent(finance_cost_payment_entry_salary1)
+                            .addComponent(finance_cost_payment_entry_freight1)
+                            .addComponent(finance_cost_payment_entry_rent1)
+                            .addComponent(finance_cost_payment_account1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                        .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                                .addComponent(finance_cost_payment_label_remark1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(finance_cost_payment_remarkPanel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, finance_cost_paymentPanel1Layout.createSequentialGroup()
+                                .addComponent(finance_cost_payment_year1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_payment_label_year1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_payment_month1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_payment_label_month1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_payment_day1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_payment_label_day1)))
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_cost_paymentPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(finance_cost_payment_button_reset1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finance_cost_payment_button_save1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        finance_cost_paymentPanel1Layout.setVerticalGroup(
+            finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_cost_payment_label_date1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_cost_payment_year1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_payment_label_year1)
+                    .addComponent(finance_cost_payment_month1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_payment_label_month1)
+                    .addComponent(finance_cost_payment_day1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_payment_label_day1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_cost_payment_label_payee1)
+                    .addComponent(finance_cost_payment_payee1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_cost_payment_label_amount1)
+                    .addComponent(finance_cost_payment_amount1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_payment_label_yuan1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_cost_payment_label_account1)
+                    .addComponent(finance_cost_payment_account1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_cost_label_entry1)
+                    .addGroup(finance_cost_paymentPanel1Layout.createSequentialGroup()
+                        .addComponent(finance_cost_payment_entry_rent1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_payment_entry_freight1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_payment_entry_salary1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_payment_entry_bonus1)))
+                .addGap(11, 11, 11)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_cost_payment_label_remark1)
+                    .addComponent(finance_cost_payment_remarkPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(finance_cost_paymentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_cost_payment_button_save1)
+                    .addComponent(finance_cost_payment_button_reset1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        finance_cost_costAndIncomePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Cost&Income"));
+
+        finance_cost_costAndIncomePanel_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        finance_cost_costAndIncomePanel_label_day.setText("Day");
+
+        finance_cost_costAndIncomePanel_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        finance_cost_costAndIncomePanel_label_endDate.setText("End Date:");
+
+        finance_cost_costAndIncomePanel_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        finance_cost_costAndIncomePanel_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_cost_costAndIncomePanel_monthActionPerformed(evt);
+            }
+        });
+
+        finance_cost_costAndIncomePanel_label_year.setText("Year");
+
+        finance_cost_costAndIncomePanel_label_month.setText("Month");
+
+        finance_cost_costAndIncomePanel_result_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Total Income", "Total Cost", "Total Gain"
+            }
+        ));
+        finance_cost_costAndIncomePanel_result_tablePanel.setViewportView(finance_cost_costAndIncomePanel_result_table);
+
+        finance_cost_costAndIncomePanel_button_export.setText("Export");
+
+        javax.swing.GroupLayout finance_cost_costAndIncomePanel_resultPanelLayout = new javax.swing.GroupLayout(finance_cost_costAndIncomePanel_resultPanel);
+        finance_cost_costAndIncomePanel_resultPanel.setLayout(finance_cost_costAndIncomePanel_resultPanelLayout);
+        finance_cost_costAndIncomePanel_resultPanelLayout.setHorizontalGroup(
+            finance_cost_costAndIncomePanel_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_cost_costAndIncomePanel_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_cost_costAndIncomePanel_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_cost_costAndIncomePanel_result_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_cost_costAndIncomePanel_resultPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(finance_cost_costAndIncomePanel_button_export)))
+                .addContainerGap())
+        );
+        finance_cost_costAndIncomePanel_resultPanelLayout.setVerticalGroup(
+            finance_cost_costAndIncomePanel_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_cost_costAndIncomePanel_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_cost_costAndIncomePanel_result_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(finance_cost_costAndIncomePanel_button_export)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout finance_cost_costAndIncomePanelLayout = new javax.swing.GroupLayout(finance_cost_costAndIncomePanel);
+        finance_cost_costAndIncomePanel.setLayout(finance_cost_costAndIncomePanelLayout);
+        finance_cost_costAndIncomePanelLayout.setHorizontalGroup(
+            finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_cost_costAndIncomePanel_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                        .addGroup(finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finance_cost_costAndIncomePanel_label_endDate)
+                            .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                                .addComponent(finance_cost_costAndIncomePanel_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_costAndIncomePanel_label_year)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_costAndIncomePanel_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_costAndIncomePanel_label_month)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_costAndIncomePanel_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(finance_cost_costAndIncomePanel_label_day)))
+                        .addGap(0, 74, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        finance_cost_costAndIncomePanelLayout.setVerticalGroup(
+            finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(finance_cost_costAndIncomePanel_label_endDate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_cost_costAndIncomePanel_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_costAndIncomePanel_label_year)
+                    .addComponent(finance_cost_costAndIncomePanel_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_costAndIncomePanel_label_month)
+                    .addComponent(finance_cost_costAndIncomePanel_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_costAndIncomePanel_label_day))
+                .addGap(18, 18, 18)
+                .addComponent(finance_cost_costAndIncomePanel_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout finance_costManagementLayout = new javax.swing.GroupLayout(finance_costManagement);
+        finance_costManagement.setLayout(finance_costManagementLayout);
+        finance_costManagementLayout.setHorizontalGroup(
+            finance_costManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_costManagementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_cost_paymentPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(finance_cost_costAndIncomePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+        );
+        finance_costManagementLayout.setVerticalGroup(
+            finance_costManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_costManagementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_costManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_cost_paymentPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_cost_costAndIncomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        finance_mainPanel.add(finance_costManagement, "card3");
+
+        finance_numerical_label_from_date.setText("From:");
+
+        finance_numerical_from_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        finance_numerical_label_from_year.setText("Year");
+
+        finance_numerical_from_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        finance_numerical_from_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_numerical_from_monthActionPerformed(evt);
+            }
+        });
+
+        finance_numerical_label_from_month.setText("Month");
+
+        finance_numerical_from_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        finance_numerical_label_from_day.setText("Day");
+
+        finance_numerical_label_to.setText("To:");
+
+        finance_numerical_to_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        finance_numerical_label_to_year.setText("Year");
+
+        finance_numerical_to_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        finance_numerical_to_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_numerical_to_monthActionPerformed(evt);
+            }
+        });
+
+        finance_numerical_label_to_month.setText("Month");
+
+        finance_numerical_to_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        finance_numerical_label_to_day.setText("Day");
+
+        finance_numerical_button_check.setText("Check");
+
+        finance_numerical_resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Statement"));
+
+        finance_numerical_receipt.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        finance_numerical_receiptPanel.setViewportView(finance_numerical_receipt);
+
+        finance_numerical_payment.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        finance_numerical_paymentPanel.setViewportView(finance_numerical_payment);
+
+        javax.swing.GroupLayout finance_numerical_resultPanelLayout = new javax.swing.GroupLayout(finance_numerical_resultPanel);
+        finance_numerical_resultPanel.setLayout(finance_numerical_resultPanelLayout);
+        finance_numerical_resultPanelLayout.setHorizontalGroup(
+            finance_numerical_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_numerical_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_numerical_receiptPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(finance_numerical_paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        finance_numerical_resultPanelLayout.setVerticalGroup(
+            finance_numerical_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_numerical_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_numerical_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(finance_numerical_paymentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                    .addComponent(finance_numerical_receiptPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        finance_numerical_button_export_payment.setText("Export");
+
+        finance_numerical_button_export_receipt.setText("Export");
+
+        javax.swing.GroupLayout finance_numericalStatementLayout = new javax.swing.GroupLayout(finance_numericalStatement);
+        finance_numericalStatement.setLayout(finance_numericalStatementLayout);
+        finance_numericalStatementLayout.setHorizontalGroup(
+            finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_numericalStatementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_numerical_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(finance_numericalStatementLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(finance_numerical_from_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_label_from_year)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_from_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_label_from_month)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_from_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_label_from_day)
+                        .addGap(60, 60, 60)
+                        .addComponent(finance_numerical_to_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_label_to_year)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_to_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_label_to_month)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_to_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_numerical_label_to_day)
+                        .addGap(18, 18, 18)
+                        .addComponent(finance_numerical_button_check, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                    .addGroup(finance_numericalStatementLayout.createSequentialGroup()
+                        .addComponent(finance_numerical_label_from_date)
+                        .addGap(391, 391, 391)
+                        .addComponent(finance_numerical_label_to)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_numericalStatementLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(finance_numerical_button_export_receipt)
+                .addGap(395, 395, 395)
+                .addComponent(finance_numerical_button_export_payment)
+                .addGap(17, 17, 17))
+        );
+        finance_numericalStatementLayout.setVerticalGroup(
+            finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_numericalStatementLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(finance_numericalStatementLayout.createSequentialGroup()
+                        .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(finance_numerical_label_from_date)
+                            .addComponent(finance_numerical_label_to))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(finance_numerical_from_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(finance_numerical_label_from_year)
+                            .addComponent(finance_numerical_from_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(finance_numerical_label_from_month)
+                            .addComponent(finance_numerical_from_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(finance_numerical_label_from_day)))
+                    .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(finance_numerical_to_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(finance_numerical_label_to_year)
+                        .addComponent(finance_numerical_to_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(finance_numerical_label_to_month)
+                        .addComponent(finance_numerical_to_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(finance_numerical_label_to_day)
+                        .addComponent(finance_numerical_button_check)))
+                .addGap(18, 18, 18)
+                .addComponent(finance_numerical_resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_numerical_button_export_payment)
+                    .addComponent(finance_numerical_button_export_receipt))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        finance_mainPanel.add(finance_numericalStatement, "card4");
+
+        finance_account_accountListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Account List"));
+
+        finance_account_accountList_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Account", "Amount"
+            }
+        ));
+        finance_account_accountList_listPanel.setViewportView(finance_account_accountList_list);
+
+        javax.swing.GroupLayout finance_account_accountListPanelLayout = new javax.swing.GroupLayout(finance_account_accountListPanel);
+        finance_account_accountListPanel.setLayout(finance_account_accountListPanelLayout);
+        finance_account_accountListPanelLayout.setHorizontalGroup(
+            finance_account_accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_accountListPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_account_accountList_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        finance_account_accountListPanelLayout.setVerticalGroup(
+            finance_account_accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_accountListPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_account_accountList_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        finance_account_addPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Add Account"));
+
+        finance_account_add_label_name.setText("Account Name:");
+
+        finance_account_add_name.setText("// Name");
+
+        finance_account_add_button_add.setText("Add");
+
+        javax.swing.GroupLayout finance_account_addPanelLayout = new javax.swing.GroupLayout(finance_account_addPanel);
+        finance_account_addPanel.setLayout(finance_account_addPanelLayout);
+        finance_account_addPanelLayout.setHorizontalGroup(
+            finance_account_addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_addPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(finance_account_add_label_name)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finance_account_add_name, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(finance_account_add_button_add, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        finance_account_addPanelLayout.setVerticalGroup(
+            finance_account_addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_addPanelLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(finance_account_addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_account_add_label_name)
+                    .addComponent(finance_account_add_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_account_add_button_add))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        finance_account_searchAndDeletePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search&Delete"));
+
+        finance_account_searchAndDelete_name.setText("// Name");
+
+        finance_account_searchAndDelete_button_search.setText("Search");
+
+        finance_account_searchAndDelete_detail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Date", "Change"
+            }
+        ));
+        finance_account_searchAndDelete_detailPanel.setViewportView(finance_account_searchAndDelete_detail);
+
+        javax.swing.GroupLayout finance_account_searchAndDelete_resultPanelLayout = new javax.swing.GroupLayout(finance_account_searchAndDelete_resultPanel);
+        finance_account_searchAndDelete_resultPanel.setLayout(finance_account_searchAndDelete_resultPanelLayout);
+        finance_account_searchAndDelete_resultPanelLayout.setHorizontalGroup(
+            finance_account_searchAndDelete_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(finance_account_searchAndDelete_detailPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+        );
+        finance_account_searchAndDelete_resultPanelLayout.setVerticalGroup(
+            finance_account_searchAndDelete_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(finance_account_searchAndDelete_detailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+
+        finance_account_searchAndDelete_delete.setText("Delete");
+
+        javax.swing.GroupLayout finance_account_searchAndDeletePanelLayout = new javax.swing.GroupLayout(finance_account_searchAndDeletePanel);
+        finance_account_searchAndDeletePanel.setLayout(finance_account_searchAndDeletePanelLayout);
+        finance_account_searchAndDeletePanelLayout.setHorizontalGroup(
+            finance_account_searchAndDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_account_searchAndDeletePanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(finance_account_searchAndDelete_resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(finance_account_searchAndDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finance_account_searchAndDeletePanelLayout.createSequentialGroup()
+                        .addComponent(finance_account_searchAndDelete_name, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(finance_account_searchAndDelete_button_search))
+                    .addComponent(finance_account_searchAndDelete_delete))
+                .addGap(28, 28, 28))
+        );
+        finance_account_searchAndDeletePanelLayout.setVerticalGroup(
+            finance_account_searchAndDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_searchAndDeletePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_account_searchAndDelete_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(finance_account_searchAndDeletePanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(finance_account_searchAndDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_account_searchAndDelete_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_account_searchAndDelete_button_search))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(finance_account_searchAndDelete_delete)
+                .addGap(14, 14, 14))
+        );
+
+        finance_account_initPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Init Account"));
+
+        finance_account_init_name.setText("// Name");
+
+        finance_account_init_label_accountName.setText("Account Name:");
+
+        finance_account_init_button_check.setText("Check");
+
+        finance_account_init_result_staff.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Staff"
+            }
+        ));
+        finance_account_init_result_staffPanel.setViewportView(finance_account_init_result_staff);
+
+        finance_account_init_result_cars.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Cars"
+            }
+        ));
+        finance_account_init_result_carsPanel.setViewportView(finance_account_init_result_cars);
+
+        finance_account_init_result_label_departent.setText("Department");
+
+        finance_account_init_result_department.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        finance_account_init_result_department.setText("Some department");
+
+        finance_account_init_result_amount.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        finance_account_init_result_amount.setText("99999");
+
+        finance_account_init_result_label_Amount.setText("Amount");
+
+        finance_account_init_result_label_yuan.setText("yuan");
+
+        javax.swing.GroupLayout finance_account_init_resultPanelLayout = new javax.swing.GroupLayout(finance_account_init_resultPanel);
+        finance_account_init_resultPanel.setLayout(finance_account_init_resultPanelLayout);
+        finance_account_init_resultPanelLayout.setHorizontalGroup(
+            finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_init_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_account_init_result_staffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(finance_account_init_result_carsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finance_account_init_resultPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finance_account_init_result_label_Amount)
+                            .addComponent(finance_account_init_result_label_departent))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_account_init_resultPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGroup(finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(finance_account_init_resultPanelLayout.createSequentialGroup()
+                                .addComponent(finance_account_init_result_amount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(finance_account_init_result_label_yuan))
+                            .addComponent(finance_account_init_result_department))
+                        .addGap(36, 36, 36))))
+        );
+        finance_account_init_resultPanelLayout.setVerticalGroup(
+            finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_init_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_account_init_result_carsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_account_init_result_staffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(finance_account_init_resultPanelLayout.createSequentialGroup()
+                        .addComponent(finance_account_init_result_label_departent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(finance_account_init_result_department)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_account_init_result_label_Amount)
+                        .addGap(11, 11, 11)
+                        .addGroup(finance_account_init_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(finance_account_init_result_amount)
+                            .addComponent(finance_account_init_result_label_yuan))))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
+        finance_account_init_button_init.setText("Init Account");
+
+        javax.swing.GroupLayout finance_account_initPanelLayout = new javax.swing.GroupLayout(finance_account_initPanel);
+        finance_account_initPanel.setLayout(finance_account_initPanelLayout);
+        finance_account_initPanelLayout.setHorizontalGroup(
+            finance_account_initPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_account_initPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(finance_account_initPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finance_account_initPanelLayout.createSequentialGroup()
+                        .addComponent(finance_account_init_label_accountName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_account_init_name, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(finance_account_init_button_check)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(finance_account_init_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(finance_account_init_button_init)
+                .addGap(30, 30, 30))
+        );
+        finance_account_initPanelLayout.setVerticalGroup(
+            finance_account_initPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_account_initPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_account_initPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finance_account_init_label_accountName)
+                    .addComponent(finance_account_init_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finance_account_init_button_check))
+                .addGroup(finance_account_initPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finance_account_initPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_account_init_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_account_initPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(finance_account_init_button_init)
+                        .addGap(18, 18, 18))))
+        );
+
+        javax.swing.GroupLayout finance_accountManagementLayout = new javax.swing.GroupLayout(finance_accountManagement);
+        finance_accountManagement.setLayout(finance_accountManagementLayout);
+        finance_accountManagementLayout.setHorizontalGroup(
+            finance_accountManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_accountManagementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_accountManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(finance_account_addPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finance_account_searchAndDeletePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finance_account_initPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(finance_account_accountListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        finance_accountManagementLayout.setVerticalGroup(
+            finance_accountManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finance_accountManagementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(finance_accountManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finance_accountManagementLayout.createSequentialGroup()
+                        .addComponent(finance_account_addPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_account_searchAndDeletePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_account_initPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(finance_account_accountListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        finance_mainPanel.add(finance_accountManagement, "card5");
 
         javax.swing.GroupLayout financePanelLayout = new javax.swing.GroupLayout(financePanel);
         financePanel.setLayout(financePanelLayout);
         financePanelLayout.setHorizontalGroup(
             financePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, financePanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(financePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(finance_button_account, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finance_button_numerical, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finance_button_cost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finance_button_settelement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(finance_mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         financePanelLayout.setVerticalGroup(
             financePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(financePanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(financePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finance_mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(financePanelLayout.createSequentialGroup()
+                        .addComponent(finance_button_settelement)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(finance_button_cost)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(finance_button_numerical)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(finance_button_account)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         cardPanel.add(financePanel, "card5");
+
+        manager_button_staff.setText("Staff Management");
+        manager_button_staff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_button_staffActionPerformed(evt);
+            }
+        });
+
+        manager_button_department.setText("Department Management");
+        manager_button_department.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_button_departmentActionPerformed(evt);
+            }
+        });
+
+        manager_button_ducument.setText("Document Approval");
+        manager_button_ducument.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_button_ducumentActionPerformed(evt);
+            }
+        });
+
+        manager_button_statement.setText("Check Statement");
+        manager_button_statement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_button_statementActionPerformed(evt);
+            }
+        });
+
+        manager_mainPanel.setLayout(new java.awt.CardLayout());
+
+        manager_staff_departmentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Departments"));
+
+        manager_staff_departmentTreePanel.setViewportView(manager_staff_departments);
+
+        javax.swing.GroupLayout manager_staff_departmentPanelLayout = new javax.swing.GroupLayout(manager_staff_departmentPanel);
+        manager_staff_departmentPanel.setLayout(manager_staff_departmentPanelLayout);
+        manager_staff_departmentPanelLayout.setHorizontalGroup(
+            manager_staff_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staff_departmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_staff_departmentTreePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        manager_staff_departmentPanelLayout.setVerticalGroup(
+            manager_staff_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staff_departmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_staff_departmentTreePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        manager_staff_stafflistPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("staff list"));
+
+        manager_staff_stafflist.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        manager_staff_listPanel.setViewportView(manager_staff_stafflist);
+
+        javax.swing.GroupLayout manager_staff_stafflistPanelLayout = new javax.swing.GroupLayout(manager_staff_stafflistPanel);
+        manager_staff_stafflistPanel.setLayout(manager_staff_stafflistPanelLayout);
+        manager_staff_stafflistPanelLayout.setHorizontalGroup(
+            manager_staff_stafflistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staff_stafflistPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_staff_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        manager_staff_stafflistPanelLayout.setVerticalGroup(
+            manager_staff_stafflistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staff_stafflistPanelLayout.createSequentialGroup()
+                .addComponent(manager_staff_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        manager_staff_updatePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Update Staff"));
+
+        manager_staff_updatePanel_label_staffId.setText("Staff id:");
+
+        manager_staff_update_id.setText("xxx-xxx");
+
+        manager_staff_update_salary.setText("199999");
+
+        manager_staff_updatePanel_label_salary.setText("Staff salary:");
+
+        manager_staff_update_button_submit.setText("Submit");
+
+        javax.swing.GroupLayout manager_staff_updatePanelLayout = new javax.swing.GroupLayout(manager_staff_updatePanel);
+        manager_staff_updatePanel.setLayout(manager_staff_updatePanelLayout);
+        manager_staff_updatePanelLayout.setHorizontalGroup(
+            manager_staff_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staff_updatePanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(manager_staff_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(manager_staff_updatePanelLayout.createSequentialGroup()
+                        .addComponent(manager_staff_updatePanel_label_salary)
+                        .addGap(26, 26, 26)
+                        .addComponent(manager_staff_update_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(manager_staff_updatePanelLayout.createSequentialGroup()
+                        .addComponent(manager_staff_updatePanel_label_staffId)
+                        .addGap(26, 26, 26)
+                        .addComponent(manager_staff_update_id, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_staff_updatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(manager_staff_update_button_submit)
+                .addGap(222, 222, 222))
+        );
+        manager_staff_updatePanelLayout.setVerticalGroup(
+            manager_staff_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staff_updatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(manager_staff_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_staff_updatePanel_label_staffId)
+                    .addComponent(manager_staff_update_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manager_staff_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_staff_updatePanel_label_salary)
+                    .addComponent(manager_staff_update_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(manager_staff_update_button_submit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout manager_staffPanelLayout = new javax.swing.GroupLayout(manager_staffPanel);
+        manager_staffPanel.setLayout(manager_staffPanelLayout);
+        manager_staffPanelLayout.setHorizontalGroup(
+            manager_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_staffPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(manager_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manager_staff_stafflistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_staff_updatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manager_staff_departmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        manager_staffPanelLayout.setVerticalGroup(
+            manager_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_staffPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(manager_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(manager_staff_departmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(manager_staffPanelLayout.createSequentialGroup()
+                        .addComponent(manager_staff_stafflistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manager_staff_updatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        manager_mainPanel.add(manager_staffPanel, "card2");
+
+        manager_department_departmentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Departments"));
+
+        manager_department_departmentTreePanel.setViewportView(manager_department_departments);
+
+        javax.swing.GroupLayout manager_department_departmentPanelLayout = new javax.swing.GroupLayout(manager_department_departmentPanel);
+        manager_department_departmentPanel.setLayout(manager_department_departmentPanelLayout);
+        manager_department_departmentPanelLayout.setHorizontalGroup(
+            manager_department_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_department_departmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_department_departmentTreePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        manager_department_departmentPanelLayout.setVerticalGroup(
+            manager_department_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_department_departmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_department_departmentTreePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        manager_department_staffPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("staff list"));
+
+        manager_department_stafflist.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        manager_department_stafflistPanel.setViewportView(manager_department_stafflist);
+
+        manager_department_staff_label_move.setText("Move staff:");
+
+        manager_department_staff_label_id.setText("id:");
+
+        manager_department_staff_id.setText("xxx-xxx");
+
+        manager_department_staff_from.setText("department id");
+
+        manager_department_staff_label_from.setText("from:");
+
+        manager_department_staff_to.setText("department id");
+
+        manager_department_staff_label_to.setText("to:");
+
+        manager_department_staff_button_save.setText("Save");
+
+        javax.swing.GroupLayout manager_department_staffPanelLayout = new javax.swing.GroupLayout(manager_department_staffPanel);
+        manager_department_staffPanel.setLayout(manager_department_staffPanelLayout);
+        manager_department_staffPanelLayout.setHorizontalGroup(
+            manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_department_stafflistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
+                        .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(manager_department_staff_label_move))
+                            .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(manager_department_staff_label_to)
+                                    .addComponent(manager_department_staff_label_from)
+                                    .addComponent(manager_department_staff_label_id))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(manager_department_staff_id)
+                                    .addComponent(manager_department_staff_from, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(manager_department_staff_to))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_department_staffPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(manager_department_staff_button_save)
+                        .addGap(62, 62, 62))))
+        );
+        manager_department_staffPanelLayout.setVerticalGroup(
+            manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
+                .addComponent(manager_department_stafflistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(manager_department_staff_label_move)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_department_staff_label_id)
+                    .addComponent(manager_department_staff_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_department_staff_label_from)
+                    .addComponent(manager_department_staff_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_department_staff_label_to)
+                    .addComponent(manager_department_staff_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(manager_department_staff_button_save)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        manager_department_updatePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("department Update"));
+
+        manager_department_updatePanel_label_id.setText("department id:");
+
+        manager_department_updatePanel_id.setText("xxx");
+
+        manager_department_updatePanel_name.setText("xxx");
+
+        manager_department_updatePanel_label_name.setText("new name:");
+
+        manager_department_updatePanel_manager.setText("xxx-xxx");
+        manager_department_updatePanel_manager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_department_updatePanel_managerActionPerformed(evt);
+            }
+        });
+
+        manager_department_updatePanel_label_manager.setText("new manager:");
+
+        manager_department_updatePanel_parent.setText("xxx");
+
+        manager_department_updatePanel_label_parent.setText("new parent:");
+
+        manager_department_updatePanel_button_save.setText("Save");
+
+        javax.swing.GroupLayout manager_department_updatePanelLayout = new javax.swing.GroupLayout(manager_department_updatePanel);
+        manager_department_updatePanel.setLayout(manager_department_updatePanelLayout);
+        manager_department_updatePanelLayout.setHorizontalGroup(
+            manager_department_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_department_updatePanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(manager_department_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(manager_department_updatePanelLayout.createSequentialGroup()
+                        .addComponent(manager_department_updatePanel_label_manager)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manager_department_updatePanel_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(manager_department_updatePanelLayout.createSequentialGroup()
+                        .addComponent(manager_department_updatePanel_label_name)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manager_department_updatePanel_name, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(manager_department_updatePanelLayout.createSequentialGroup()
+                        .addComponent(manager_department_updatePanel_label_id)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manager_department_updatePanel_id, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
+                .addComponent(manager_department_updatePanel_label_parent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manager_department_updatePanel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_department_updatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(manager_department_updatePanel_button_save)
+                .addGap(58, 58, 58))
+        );
+        manager_department_updatePanelLayout.setVerticalGroup(
+            manager_department_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_department_updatePanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(manager_department_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_department_updatePanel_label_id)
+                    .addComponent(manager_department_updatePanel_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manager_department_updatePanel_label_parent)
+                    .addComponent(manager_department_updatePanel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manager_department_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_department_updatePanel_label_name)
+                    .addComponent(manager_department_updatePanel_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manager_department_updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manager_department_updatePanel_label_manager)
+                    .addComponent(manager_department_updatePanel_manager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manager_department_updatePanel_button_save)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout manager_departmentPanelLayout = new javax.swing.GroupLayout(manager_departmentPanel);
+        manager_departmentPanel.setLayout(manager_departmentPanelLayout);
+        manager_departmentPanelLayout.setHorizontalGroup(
+            manager_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_departmentPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(manager_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manager_department_staffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_department_updatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manager_department_departmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        manager_departmentPanelLayout.setVerticalGroup(
+            manager_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_departmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(manager_departmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(manager_departmentPanelLayout.createSequentialGroup()
+                        .addComponent(manager_department_staffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manager_department_updatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(manager_department_departmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        manager_mainPanel.add(manager_departmentPanel, "card3");
+
+        manager_document_documentlistPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Document List"));
+
+        manager_document_documentlist.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        manager_document_documentpanel.setViewportView(manager_document_documentlist);
+
+        javax.swing.GroupLayout manager_document_documentlistPanelLayout = new javax.swing.GroupLayout(manager_document_documentlistPanel);
+        manager_document_documentlistPanel.setLayout(manager_document_documentlistPanelLayout);
+        manager_document_documentlistPanelLayout.setHorizontalGroup(
+            manager_document_documentlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_document_documentlistPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_document_documentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        manager_document_documentlistPanelLayout.setVerticalGroup(
+            manager_document_documentlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_document_documentlistPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manager_document_documentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout manager_documentPanelLayout = new javax.swing.GroupLayout(manager_documentPanel);
+        manager_documentPanel.setLayout(manager_documentPanelLayout);
+        manager_documentPanelLayout.setHorizontalGroup(
+            manager_documentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_documentPanelLayout.createSequentialGroup()
+                .addContainerGap(672, Short.MAX_VALUE)
+                .addComponent(manager_document_documentlistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        manager_documentPanelLayout.setVerticalGroup(
+            manager_documentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_documentPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(manager_document_documentlistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        manager_mainPanel.add(manager_documentPanel, "card4");
+
+        manager_button_numercial.setText("Check Numercial");
+        manager_button_numercial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_button_numercialActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout managerPanelLayout = new javax.swing.GroupLayout(managerPanel);
         managerPanel.setLayout(managerPanelLayout);
         managerPanelLayout.setHorizontalGroup(
             managerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, managerPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(managerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(manager_button_statement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_button_ducument, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(manager_button_department, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(manager_button_staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_button_numercial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(manager_mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         managerPanelLayout.setVerticalGroup(
             managerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(managerPanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(managerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manager_mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(managerPanelLayout.createSequentialGroup()
+                        .addComponent(manager_button_staff)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manager_button_department)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_button_ducument)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_button_statement)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_button_numercial)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         cardPanel.add(managerPanel, "card6");
@@ -2898,20 +4766,932 @@ public class MainFrame extends javax.swing.JFrame {
         );
         curtomerPanelLayout.setVerticalGroup(
             curtomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGap(0, 560, Short.MAX_VALUE)
         );
 
         cardPanel.add(curtomerPanel, "card8");
+
+        stock_button_inwarehouse.setText("In-warehouse");
+        stock_button_inwarehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_button_inwarehouseActionPerformed(evt);
+            }
+        });
+
+        stock_button_exwarehouse.setText("Ex-warehouse");
+        stock_button_exwarehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_button_exwarehouseActionPerformed(evt);
+            }
+        });
+
+        stock_button_inventoryCheck.setText("Inventory Check");
+        stock_button_inventoryCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_button_inventoryCheckActionPerformed(evt);
+            }
+        });
+
+        stock_button_inventoryCounts.setText("Inventory Counts");
+
+        stock_button_inventoryAdjustments.setText("Inventory Adjustments");
+
+        stock_realtimePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Real-time inventory"));
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Stock xx-xx");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Airline");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
+        javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row II");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row III");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row IV");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Trainline");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row II");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row III");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row IV");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Vehicle");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row II");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row III");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row IV");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        stock_realtime_tree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        stock_realtime_treePanel.setViewportView(stock_realtime_tree);
+
+        stock_realtime_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "position", "goods No"
+            }
+        ));
+        stock_realtime_listPanel.setViewportView(stock_realtime_list);
+
+        javax.swing.GroupLayout stock_realtimePanelLayout = new javax.swing.GroupLayout(stock_realtimePanel);
+        stock_realtimePanel.setLayout(stock_realtimePanelLayout);
+        stock_realtimePanelLayout.setHorizontalGroup(
+            stock_realtimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_realtimePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(stock_realtime_treePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_realtime_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        stock_realtimePanelLayout.setVerticalGroup(
+            stock_realtimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_realtimePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(stock_realtimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stock_realtime_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_realtime_treePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        stock_mainPanel.setLayout(new java.awt.CardLayout());
+
+        stock_inwarehouse_label_date.setText("In-warehouse Date:");
+
+        stock_inwarehouse_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        stock_inwarehouse_label_year.setText("Year");
+
+        stock_inwarehouse_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_inwarehouse_label_month.setText("Month");
+
+        stock_inwarehouse_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_inwarehouse_label_day.setText("Day");
+
+        stock_inwarehouse_label_goodsNo.setText("Goods No. :");
+
+        stock_inwarehouse_goodsNo.setText("xxxx-xxxx");
+
+        stock_inwarehouse_label_destination.setText("Destination:");
+
+        stock_inwarehouse_label_province.setText("Province");
+
+        stock_inwarehouse_label_city.setText("City");
+
+        stock_inwarehouse_address.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inwarehouse_addressActionPerformed(evt);
+            }
+        });
+
+        stock_inwarehouse_label_position.setText("Position:");
+
+        stock_inwarehouse_label_unit.setText("Unit:");
+
+        stock_inwarehouse_unit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Airline", "Trainline", "Vehicle" }));
+
+        stock_inwarehouse_label_row.setText("Row:");
+
+        stock_inwarehouse_row.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "I", "II", "III", "IV" }));
+
+        stock_inwarehouse_label_line.setText("Line:");
+
+        stock_inwarehouse_line.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+
+        stock_inwarehouse_button_inwarehouse.setText("In-warehouse");
+
+        javax.swing.GroupLayout stock_inwarehouseLayout = new javax.swing.GroupLayout(stock_inwarehouse);
+        stock_inwarehouse.setLayout(stock_inwarehouseLayout);
+        stock_inwarehouseLayout.setHorizontalGroup(
+            stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                        .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stock_inwarehouse_label_date)
+                            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(stock_inwarehouse_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inwarehouse_label_year)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inwarehouse_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inwarehouse_label_month)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inwarehouse_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inwarehouse_label_day))
+                            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(stock_inwarehouse_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(stock_inwarehouse_label_goodsNo)
+                            .addComponent(stock_inwarehouse_label_destination)
+                            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(stock_inwarehouse_address)
+                                    .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                                        .addComponent(stock_inwarehouse_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(stock_inwarehouse_label_province)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(stock_inwarehouse_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(stock_inwarehouse_label_city)))))
+                        .addContainerGap(115, Short.MAX_VALUE))
+                    .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                        .addComponent(stock_inwarehouse_label_position)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                        .addComponent(stock_inwarehouse_label_line)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stock_inwarehouse_line, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                        .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stock_inwarehouseLayout.createSequentialGroup()
+                                .addComponent(stock_inwarehouse_label_unit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                                .addComponent(stock_inwarehouse_label_row)
+                                .addGap(12, 12, 12)))
+                        .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stock_inwarehouse_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stock_inwarehouse_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stock_inwarehouseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(stock_inwarehouse_button_inwarehouse)
+                .addGap(45, 45, 45))
+        );
+        stock_inwarehouseLayout.setVerticalGroup(
+            stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inwarehouseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(stock_inwarehouse_label_goodsNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stock_inwarehouse_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_inwarehouse_label_date)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inwarehouse_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inwarehouse_label_year)
+                    .addComponent(stock_inwarehouse_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inwarehouse_label_month)
+                    .addComponent(stock_inwarehouse_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inwarehouse_label_day))
+                .addGap(18, 18, 18)
+                .addComponent(stock_inwarehouse_label_destination)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(stock_inwarehouse_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_inwarehouse_label_city))
+                    .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(stock_inwarehouse_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_inwarehouse_label_province)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stock_inwarehouse_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_inwarehouse_label_position)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inwarehouse_label_unit)
+                    .addComponent(stock_inwarehouse_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inwarehouse_label_row)
+                    .addComponent(stock_inwarehouse_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inwarehouse_label_line)
+                    .addComponent(stock_inwarehouse_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(stock_inwarehouse_button_inwarehouse)
+                .addGap(48, 48, 48))
+        );
+
+        stock_mainPanel.add(stock_inwarehouse, "card2");
+
+        stock_exwarehouse_label_goodsNo.setText("Goods No. :");
+
+        stock_exwarehouse_goodsNo.setText("xxxx-xxxx");
+
+        stock_exwarehouse_label_date.setText("In-warehouse Date:");
+
+        stock_exwarehouse_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        stock_exwarehouse_label_year.setText("Year");
+
+        stock_exwarehouse_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_exwarehouse_label_month.setText("Month");
+
+        stock_exwarehouse_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_exwarehouse_label_day.setText("Day");
+
+        stock_exwarehouse_label_destination.setText("Destination:");
+
+        stock_exwarehouse_label_province.setText("Province");
+
+        stock_exwarehouse_label_city.setText("City");
+
+        stock_exwarehouse_address.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_exwarehouse_addressActionPerformed(evt);
+            }
+        });
+
+        stock_exwarehouse_label_position.setText("Position:");
+
+        stock_exwarehouse_label_unit.setText("Unit:");
+
+        stock_exwarehouse_unit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Airline", "Trainline", "Vehicle" }));
+
+        stock_exwarehouse_label_row.setText("Row:");
+
+        stock_exwarehouse_row.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "I", "II", "III", "IV" }));
+
+        stock_exwarehouse_label_line.setText("Line:");
+
+        stock_exwarehouse_line.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+
+        stock_exwarehouse_label_exactposition.setText("position:");
+
+        stock_exwarehouse_exactposition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+
+        stock_exwarehouse_label_transportNo.setText("Transport No:");
+
+        stock_exwarehouse_transportNo.setText("xxxx-xxxx");
+
+        stock_exwarehouse_button_exwarehouse.setText("Ex-warehouse");
+
+        javax.swing.GroupLayout stock_exwarehouseLayout = new javax.swing.GroupLayout(stock_exwarehouse);
+        stock_exwarehouse.setLayout(stock_exwarehouseLayout);
+        stock_exwarehouseLayout.setHorizontalGroup(
+            stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                        .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                .addComponent(stock_exwarehouse_label_transportNo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(stock_exwarehouse_label_date)
+                                        .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                            .addGap(39, 39, 39)
+                                            .addComponent(stock_exwarehouse_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(stock_exwarehouse_label_year)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(stock_exwarehouse_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(stock_exwarehouse_label_month)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(stock_exwarehouse_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(stock_exwarehouse_label_day))
+                                        .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                            .addGap(71, 71, 71)
+                                            .addComponent(stock_exwarehouse_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(stock_exwarehouse_label_goodsNo)
+                                        .addComponent(stock_exwarehouse_label_destination)
+                                        .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                            .addGap(45, 45, 45)
+                                            .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(stock_exwarehouse_address)
+                                                .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                                    .addComponent(stock_exwarehouse_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(stock_exwarehouse_label_province)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(stock_exwarehouse_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(stock_exwarehouse_label_city)))))
+                                    .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                        .addComponent(stock_exwarehouse_label_position)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                    .addGap(48, 48, 48)
+                                    .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                            .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(stock_exwarehouse_label_row)
+                                                .addComponent(stock_exwarehouse_label_unit))
+                                            .addGap(38, 38, 38)
+                                            .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(stock_exwarehouse_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(stock_exwarehouse_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                                .addComponent(stock_exwarehouse_label_exactposition)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(stock_exwarehouse_exactposition, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                                                .addComponent(stock_exwarehouse_label_line)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(stock_exwarehouse_line, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGap(157, 157, 157))))
+                        .addGap(99, 99, 99))
+                    .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(stock_exwarehouse_transportNo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(stock_exwarehouse_button_exwarehouse)
+                        .addGap(29, 29, 29))))
+        );
+        stock_exwarehouseLayout.setVerticalGroup(
+            stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_exwarehouseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(stock_exwarehouse_label_goodsNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stock_exwarehouse_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_exwarehouse_label_date)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_exwarehouse_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_exwarehouse_label_year)
+                    .addComponent(stock_exwarehouse_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_exwarehouse_label_month)
+                    .addComponent(stock_exwarehouse_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_exwarehouse_label_day))
+                .addGap(18, 18, 18)
+                .addComponent(stock_exwarehouse_label_destination)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(stock_exwarehouse_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_exwarehouse_label_city))
+                    .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(stock_exwarehouse_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_exwarehouse_label_province)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stock_exwarehouse_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_exwarehouse_label_position)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_exwarehouse_label_unit)
+                    .addComponent(stock_exwarehouse_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_exwarehouse_label_row)
+                    .addComponent(stock_exwarehouse_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_exwarehouse_label_line)
+                    .addComponent(stock_exwarehouse_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_exwarehouse_label_exactposition)
+                    .addComponent(stock_exwarehouse_exactposition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(stock_exwarehouse_label_transportNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_exwarehouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_exwarehouse_transportNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_exwarehouse_button_exwarehouse))
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        stock_mainPanel.add(stock_exwarehouse, "card3");
+
+        stock_inventoryCheck_label_front.setText("Front Date:");
+
+        stock_inventoryCheck_front_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        stock_inventoryCheck_label_front_year.setText("Year");
+
+        stock_inventoryCheck_front_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_inventoryCheck_label_front_month.setText("Month");
+
+        stock_inventoryCheck_front_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_inventoryCheck_label_front_day.setText("Day");
+
+        stock_inventoryCheck_label_end.setText("End Date:");
+
+        stock_inventoryCheck_end_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        stock_inventoryCheck_label_end_year.setText("Year");
+
+        stock_inventoryCheck_end_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_inventoryCheck_label_end_month.setText("Month");
+
+        stock_inventoryCheck_end_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        stock_inventoryCheck_label_end_day.setText("Day");
+
+        stock_inventoryCheck_button_check.setText("Check");
+
+        stock_inventoryCheck_button_reset.setText("Reset");
+
+        stock_inventoryCheck_label_inwarehouse.setText("In-warehouse:");
+
+        stock_inventoryCheck_result_exwarehouse.setText("A number");
+
+        stock_inventoryCheck_result_inSubex.setText("A number");
+
+        stock_inventoryCheck_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date", "in/out", "position", "amount"
+            }
+        ));
+        stock_inventoryCheck_listPanel.setViewportView(stock_inventoryCheck_list);
+
+        stock_inventoryCheck_label_exwarehouse.setText("Ex-warehouse:");
+
+        stock_inventoryCheck_label_inSubex.setText("In-Ex:");
+
+        stock_inventoryCheck_label_total.setText("Total:");
+
+        stock_inventoryCheck_result_inwarehouse.setText("A number");
+
+        javax.swing.GroupLayout stock_inventoryCheck_resultPanelLayout = new javax.swing.GroupLayout(stock_inventoryCheck_resultPanel);
+        stock_inventoryCheck_resultPanel.setLayout(stock_inventoryCheck_resultPanelLayout);
+        stock_inventoryCheck_resultPanelLayout.setHorizontalGroup(
+            stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                                .addComponent(stock_inventoryCheck_label_total)
+                                .addGap(168, 168, 168))
+                            .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                                        .addComponent(stock_inventoryCheck_label_inwarehouse)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(stock_inventoryCheck_result_inwarehouse))
+                                    .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                                        .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(stock_inventoryCheck_label_exwarehouse)
+                                            .addComponent(stock_inventoryCheck_label_inSubex))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(stock_inventoryCheck_result_inSubex)
+                                            .addComponent(stock_inventoryCheck_result_exwarehouse)))))))
+                    .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(stock_inventoryCheck_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        stock_inventoryCheck_resultPanelLayout.setVerticalGroup(
+            stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryCheck_resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(stock_inventoryCheck_listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_inventoryCheck_label_total)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCheck_label_inwarehouse)
+                    .addComponent(stock_inventoryCheck_result_inwarehouse))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCheck_label_exwarehouse)
+                    .addComponent(stock_inventoryCheck_result_exwarehouse))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryCheck_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCheck_label_inSubex)
+                    .addComponent(stock_inventoryCheck_result_inSubex))
+                .addGap(31, 31, 31))
+        );
+
+        javax.swing.GroupLayout stock_inventoryCheckLayout = new javax.swing.GroupLayout(stock_inventoryCheck);
+        stock_inventoryCheck.setLayout(stock_inventoryCheckLayout);
+        stock_inventoryCheckLayout.setHorizontalGroup(
+            stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stock_inventoryCheckLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(stock_inventoryCheck_button_reset)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stock_inventoryCheck_button_check)
+                .addGap(54, 54, 54))
+            .addGroup(stock_inventoryCheckLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(stock_inventoryCheck_label_end)
+                        .addGroup(stock_inventoryCheckLayout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addComponent(stock_inventoryCheck_end_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_label_end_year)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_end_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_label_end_month)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_end_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_label_end_day)))
+                    .addGroup(stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(stock_inventoryCheck_label_front)
+                        .addGroup(stock_inventoryCheckLayout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addComponent(stock_inventoryCheck_front_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_label_front_year)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_front_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_label_front_month)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_front_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(stock_inventoryCheck_label_front_day))))
+                .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(stock_inventoryCheckLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(stock_inventoryCheck_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        stock_inventoryCheckLayout.setVerticalGroup(
+            stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryCheckLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(stock_inventoryCheck_label_front)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCheck_front_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryCheck_label_front_year)
+                    .addComponent(stock_inventoryCheck_front_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryCheck_label_front_month)
+                    .addComponent(stock_inventoryCheck_front_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryCheck_label_front_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stock_inventoryCheck_label_end)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCheck_end_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryCheck_label_end_year)
+                    .addComponent(stock_inventoryCheck_end_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryCheck_label_end_month)
+                    .addComponent(stock_inventoryCheck_end_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryCheck_label_end_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(stock_inventoryCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCheck_button_check)
+                    .addComponent(stock_inventoryCheck_button_reset))
+                .addGap(18, 18, 18)
+                .addComponent(stock_inventoryCheck_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        stock_mainPanel.add(stock_inventoryCheck, "card4");
+
+        stock_inventoryCounts_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Unit", "Row", "Line", "Position", "GoodsNo", "In-Date", "Destination"
+            }
+        ));
+        stock_inventoryCounts_tablePanel.setViewportView(stock_inventoryCounts_table);
+
+        stock_inventoryCounts_label_time.setText("Snapshot Time:");
+
+        stock_inventoryCounts_snaptime.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        stock_inventoryCounts_snaptime.setText("2015/12/14/19:45:11");
+
+        stock_inventoryCounts_button_export.setText("Export");
+
+        javax.swing.GroupLayout stock_inventoryyCountsLayout = new javax.swing.GroupLayout(stock_inventoryyCounts);
+        stock_inventoryyCounts.setLayout(stock_inventoryyCountsLayout);
+        stock_inventoryyCountsLayout.setHorizontalGroup(
+            stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+                .addGroup(stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(stock_inventoryCounts_tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
+                    .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(stock_inventoryCounts_label_time)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(stock_inventoryCounts_snaptime)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(stock_inventoryCounts_button_export, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+        stock_inventoryyCountsLayout.setVerticalGroup(
+            stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(stock_inventoryCounts_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_inventoryCounts_label_time)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryCounts_snaptime)
+                    .addComponent(stock_inventoryCounts_button_export))
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        stock_mainPanel.add(stock_inventoryyCounts, "card5");
+
+        stock_inventoryAdjust_label_warningPercent.setText("Warning Percent:");
+
+        stock_inventoryAdjust_warningPercent.setEditable(true);
+        stock_inventoryAdjust_warningPercent.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10", "20", "30", "40", "50", "60", "70", "80", "90" }));
+
+        stock_inventoryAdjust_button_check.setText("Check");
+
+        stock_inventoryAdjust_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "unit", "row", "line", "saturation"
+            }
+        ));
+        stock_inventoryAdjust_tablePanel.setViewportView(stock_inventoryAdjust_table);
+
+        stock_inventoryAdjust_label_Adjust.setText("Adjust:");
+
+        stock_inventoryAdjust_label_from.setText("from:");
+
+        stock_inventoryAdjust_from_unit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "airline", "trainline", "vehicle" }));
+
+        stock_inventoryAdjust_label_unit.setText("Unit");
+
+        stock_inventoryAdjust_from_row.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "I", "II", "III", "IV" }));
+
+        stock_inventoryAdjust_label_fromRow.setText("Row");
+
+        stock_inventoryAdjust_from_line.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+
+        stock_inventoryAdjust_label_fromLine.setText("Line");
+
+        stock_inventoryAdjust_label_to.setText("to:");
+
+        stock_inventoryAdjust_to_row.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "I", "II", "III", "IV" }));
+
+        stock_inventoryAdjust_label_toRow.setText("Row");
+
+        stock_inventoryAdjust_to_line.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+
+        stock_inventoryAdjust_label_toLine.setText("Line");
+
+        stock_inventoryAdjust_button_Save.setText("Save");
+
+        javax.swing.GroupLayout stock_inventoryAdjustmentsLayout = new javax.swing.GroupLayout(stock_inventoryAdjustments);
+        stock_inventoryAdjustments.setLayout(stock_inventoryAdjustmentsLayout);
+        stock_inventoryAdjustmentsLayout.setHorizontalGroup(
+            stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(stock_inventoryAdjust_label_warningPercent)
+                .addGap(26, 26, 26)
+                .addComponent(stock_inventoryAdjust_warningPercent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(stock_inventoryAdjust_button_check)
+                .addGap(72, 72, 72))
+            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stock_inventoryAdjust_label_Adjust)
+                    .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stock_inventoryAdjust_label_from)
+                            .addComponent(stock_inventoryAdjust_label_to))
+                        .addGap(18, 18, 18)
+                        .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                                .addComponent(stock_inventoryAdjust_to_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_toRow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_to_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_toLine))
+                            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                                .addComponent(stock_inventoryAdjust_from_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_unit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_from_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(stock_inventoryAdjust_label_fromRow)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(stock_inventoryAdjust_from_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(stock_inventoryAdjust_label_fromLine))
+                                    .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(stock_inventoryAdjust_button_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(stock_inventoryAdjust_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        stock_inventoryAdjustmentsLayout.setVerticalGroup(
+            stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryAdjust_label_warningPercent)
+                    .addComponent(stock_inventoryAdjust_warningPercent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryAdjust_button_check))
+                .addGap(18, 18, 18)
+                .addComponent(stock_inventoryAdjust_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(stock_inventoryAdjust_label_Adjust)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_inventoryAdjust_label_from)
+                    .addComponent(stock_inventoryAdjust_from_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryAdjust_label_unit)
+                    .addComponent(stock_inventoryAdjust_from_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryAdjust_label_fromRow)
+                    .addComponent(stock_inventoryAdjust_from_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_inventoryAdjust_label_fromLine))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stock_inventoryAdjust_label_to)
+                    .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(stock_inventoryAdjust_to_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_inventoryAdjust_label_toRow)
+                        .addComponent(stock_inventoryAdjust_to_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_inventoryAdjust_label_toLine)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(stock_inventoryAdjust_button_Save)
+                .addGap(23, 23, 23))
+        );
+
+        stock_mainPanel.add(stock_inventoryAdjustments, "card6");
 
         javax.swing.GroupLayout centerStockPanelLayout = new javax.swing.GroupLayout(centerStockPanel);
         centerStockPanel.setLayout(centerStockPanelLayout);
         centerStockPanelLayout.setHorizontalGroup(
             centerStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGroup(centerStockPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(centerStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stock_button_inventoryAdjustments, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_button_inventoryCounts, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_button_exwarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_button_inwarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_button_inventoryCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(stock_mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(stock_realtimePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         centerStockPanelLayout.setVerticalGroup(
             centerStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(centerStockPanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(centerStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(centerStockPanelLayout.createSequentialGroup()
+                        .addComponent(stock_button_inwarehouse)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stock_button_exwarehouse)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stock_button_inventoryCheck)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stock_button_inventoryCounts)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stock_button_inventoryAdjustments))
+                    .addComponent(stock_mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stock_realtimePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         cardPanel.add(centerStockPanel, "card9");
@@ -2950,8 +5730,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(mainPanel_userName)
                     .addComponent(mainPanel_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -3160,6 +5939,90 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                             
 
+    private void stock_button_inwarehouseActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void stock_button_exwarehouseActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void stock_button_inventoryCheckActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        // TODO add your handling code here:
+    }                                                           
+
+    private void stock_inwarehouse_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        // TODO add your handling code here:
+    }                                                         
+
+    private void stock_exwarehouse_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        // TODO add your handling code here:
+    }                                                         
+
+    private void finance_button_settelementActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        // TODO add your handling code here:
+    }                                                          
+
+    private void finance_button_costActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        // TODO add your handling code here:
+    }                                                   
+
+    private void finance_button_numericalActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void finance_button_accountActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        // TODO add your handling code here:
+    }                                                      
+
+    private void finance_settlement_receipt_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        // TODO add your handling code here:
+    }                                                                
+
+    private void finance_cost_payment_month1ActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        // TODO add your handling code here:
+    }                                                           
+
+    private void finance_settlement_checkReceipt_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                                      
+        // TODO add your handling code here:
+    }                                                                     
+
+    private void finance_cost_costAndIncomePanel_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                                      
+        // TODO add your handling code here:
+    }                                                                     
+
+    private void finance_numerical_from_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                             
+        // TODO add your handling code here:
+    }                                                            
+
+    private void finance_numerical_to_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        // TODO add your handling code here:
+    }                                                          
+
+    private void manager_button_staffActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        // TODO add your handling code here:
+    }                                                    
+
+    private void manager_button_departmentActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        // TODO add your handling code here:
+    }                                                         
+
+    private void manager_button_ducumentActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        // TODO add your handling code here:
+    }                                                       
+
+    private void manager_button_statementActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void manager_department_updatePanel_managerActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
+        // TODO add your handling code here:
+    }                                                                      
+
+    private void manager_button_numercialActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
     /**
      * @param args the command line arguments
      */
@@ -3337,6 +6200,145 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox center_vehicle_year;
     private javax.swing.JPanel curtomerPanel;
     private javax.swing.JPanel financePanel;
+    private javax.swing.JPanel finance_accountManagement;
+    private javax.swing.JPanel finance_account_accountListPanel;
+    private javax.swing.JTable finance_account_accountList_list;
+    private javax.swing.JScrollPane finance_account_accountList_listPanel;
+    private javax.swing.JPanel finance_account_addPanel;
+    private javax.swing.JButton finance_account_add_button_add;
+    private javax.swing.JLabel finance_account_add_label_name;
+    private javax.swing.JTextField finance_account_add_name;
+    private javax.swing.JPanel finance_account_initPanel;
+    private javax.swing.JButton finance_account_init_button_check;
+    private javax.swing.JButton finance_account_init_button_init;
+    private javax.swing.JLabel finance_account_init_label_accountName;
+    private javax.swing.JTextField finance_account_init_name;
+    private javax.swing.JPanel finance_account_init_resultPanel;
+    private javax.swing.JLabel finance_account_init_result_amount;
+    private javax.swing.JTable finance_account_init_result_cars;
+    private javax.swing.JScrollPane finance_account_init_result_carsPanel;
+    private javax.swing.JLabel finance_account_init_result_department;
+    private javax.swing.JLabel finance_account_init_result_label_Amount;
+    private javax.swing.JLabel finance_account_init_result_label_departent;
+    private javax.swing.JLabel finance_account_init_result_label_yuan;
+    private javax.swing.JTable finance_account_init_result_staff;
+    private javax.swing.JScrollPane finance_account_init_result_staffPanel;
+    private javax.swing.JPanel finance_account_searchAndDeletePanel;
+    private javax.swing.JButton finance_account_searchAndDelete_button_search;
+    private javax.swing.JButton finance_account_searchAndDelete_delete;
+    private javax.swing.JTable finance_account_searchAndDelete_detail;
+    private javax.swing.JScrollPane finance_account_searchAndDelete_detailPanel;
+    private javax.swing.JTextField finance_account_searchAndDelete_name;
+    private javax.swing.JPanel finance_account_searchAndDelete_resultPanel;
+    private javax.swing.JButton finance_button_account;
+    private javax.swing.JButton finance_button_cost;
+    private javax.swing.JButton finance_button_numerical;
+    private javax.swing.JButton finance_button_settelement;
+    private javax.swing.JPanel finance_costManagement;
+    private javax.swing.JPanel finance_cost_costAndIncomePanel;
+    private javax.swing.JButton finance_cost_costAndIncomePanel_button_export;
+    private javax.swing.JComboBox finance_cost_costAndIncomePanel_day;
+    private javax.swing.JLabel finance_cost_costAndIncomePanel_label_day;
+    private javax.swing.JLabel finance_cost_costAndIncomePanel_label_endDate;
+    private javax.swing.JLabel finance_cost_costAndIncomePanel_label_month;
+    private javax.swing.JLabel finance_cost_costAndIncomePanel_label_year;
+    private javax.swing.JComboBox finance_cost_costAndIncomePanel_month;
+    private javax.swing.JPanel finance_cost_costAndIncomePanel_resultPanel;
+    private javax.swing.JTable finance_cost_costAndIncomePanel_result_table;
+    private javax.swing.JScrollPane finance_cost_costAndIncomePanel_result_tablePanel;
+    private javax.swing.JComboBox finance_cost_costAndIncomePanel_year;
+    private javax.swing.JLabel finance_cost_label_entry1;
+    private javax.swing.JPanel finance_cost_paymentPanel1;
+    private javax.swing.JTextField finance_cost_payment_account1;
+    private javax.swing.JTextField finance_cost_payment_amount1;
+    private javax.swing.JButton finance_cost_payment_button_reset1;
+    private javax.swing.JButton finance_cost_payment_button_save1;
+    private javax.swing.JComboBox finance_cost_payment_day1;
+    private javax.swing.JRadioButton finance_cost_payment_entry_bonus1;
+    private javax.swing.JRadioButton finance_cost_payment_entry_freight1;
+    private javax.swing.JRadioButton finance_cost_payment_entry_rent1;
+    private javax.swing.JRadioButton finance_cost_payment_entry_salary1;
+    private javax.swing.JLabel finance_cost_payment_label_account1;
+    private javax.swing.JLabel finance_cost_payment_label_amount1;
+    private javax.swing.JLabel finance_cost_payment_label_date1;
+    private javax.swing.JLabel finance_cost_payment_label_day1;
+    private javax.swing.JLabel finance_cost_payment_label_month1;
+    private javax.swing.JLabel finance_cost_payment_label_payee1;
+    private javax.swing.JLabel finance_cost_payment_label_remark1;
+    private javax.swing.JLabel finance_cost_payment_label_year1;
+    private javax.swing.JLabel finance_cost_payment_label_yuan1;
+    private javax.swing.JComboBox finance_cost_payment_month1;
+    private javax.swing.JTextField finance_cost_payment_payee1;
+    private javax.swing.JTextArea finance_cost_payment_remark1;
+    private javax.swing.JScrollPane finance_cost_payment_remarkPanel;
+    private javax.swing.JComboBox finance_cost_payment_year1;
+    private javax.swing.JPanel finance_mainPanel;
+    private javax.swing.JPanel finance_numericalStatement;
+    private javax.swing.JButton finance_numerical_button_check;
+    private javax.swing.JButton finance_numerical_button_export_payment;
+    private javax.swing.JButton finance_numerical_button_export_receipt;
+    private javax.swing.JComboBox finance_numerical_from_day;
+    private javax.swing.JComboBox finance_numerical_from_month;
+    private javax.swing.JComboBox finance_numerical_from_year;
+    private javax.swing.JLabel finance_numerical_label_from_date;
+    private javax.swing.JLabel finance_numerical_label_from_day;
+    private javax.swing.JLabel finance_numerical_label_from_month;
+    private javax.swing.JLabel finance_numerical_label_from_year;
+    private javax.swing.JLabel finance_numerical_label_to;
+    private javax.swing.JLabel finance_numerical_label_to_day;
+    private javax.swing.JLabel finance_numerical_label_to_month;
+    private javax.swing.JLabel finance_numerical_label_to_year;
+    private javax.swing.JTable finance_numerical_payment;
+    private javax.swing.JScrollPane finance_numerical_paymentPanel;
+    private javax.swing.JTable finance_numerical_receipt;
+    private javax.swing.JScrollPane finance_numerical_receiptPanel;
+    private javax.swing.JPanel finance_numerical_resultPanel;
+    private javax.swing.JComboBox finance_numerical_to_day;
+    private javax.swing.JComboBox finance_numerical_to_month;
+    private javax.swing.JComboBox finance_numerical_to_year;
+    private javax.swing.JPanel finance_settlementManagement;
+    private javax.swing.JPanel finance_settlement_checkReceiptPanel;
+    private javax.swing.JButton finance_settlement_checkReceipt_button_check;
+    private javax.swing.JComboBox finance_settlement_checkReceipt_day;
+    private javax.swing.JTextField finance_settlement_checkReceipt_hall;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_date;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_day;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_month;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_receiptHall;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_totalPrice;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_year;
+    private javax.swing.JLabel finance_settlement_checkReceipt_label_yuan;
+    private javax.swing.JComboBox finance_settlement_checkReceipt_month;
+    private javax.swing.JPanel finance_settlement_checkReceipt_resultPanel;
+    private javax.swing.JTable finance_settlement_checkReceipt_result_list;
+    private javax.swing.JScrollPane finance_settlement_checkReceipt_result_listPanel;
+    private javax.swing.JLabel finance_settlement_checkReceipt_result_totalPrice;
+    private javax.swing.JComboBox finance_settlement_checkReceipt_year;
+    private javax.swing.JPanel finance_settlement_receiptPanel;
+    private javax.swing.JTextField finance_settlement_receipt_address;
+    private javax.swing.JTextField finance_settlement_receipt_amount;
+    private javax.swing.JButton finance_settlement_receipt_button_reset;
+    private javax.swing.JButton finance_settlement_receipt_button_save;
+    private javax.swing.JTextField finance_settlement_receipt_city;
+    private javax.swing.JComboBox finance_settlement_receipt_day;
+    private javax.swing.JTextField finance_settlement_receipt_department;
+    private javax.swing.JLabel finance_settlement_receipt_label_amount;
+    private javax.swing.JLabel finance_settlement_receipt_label_city;
+    private javax.swing.JLabel finance_settlement_receipt_label_date;
+    private javax.swing.JLabel finance_settlement_receipt_label_day;
+    private javax.swing.JLabel finance_settlement_receipt_label_department;
+    private javax.swing.JLabel finance_settlement_receipt_label_month;
+    private javax.swing.JLabel finance_settlement_receipt_label_party;
+    private javax.swing.JLabel finance_settlement_receipt_label_payee;
+    private javax.swing.JLabel finance_settlement_receipt_label_place;
+    private javax.swing.JLabel finance_settlement_receipt_label_province;
+    private javax.swing.JLabel finance_settlement_receipt_label_year;
+    private javax.swing.JLabel finance_settlement_receipt_label_yuan;
+    private javax.swing.JComboBox finance_settlement_receipt_month;
+    private javax.swing.JTextField finance_settlement_receipt_party;
+    private javax.swing.JTextField finance_settlement_receipt_payee;
+    private javax.swing.JTextField finance_settlement_receipt_province;
+    private javax.swing.JComboBox finance_settlement_receipt_year;
     private javax.swing.JPanel hallPanel;
     private javax.swing.JButton hall_acceptanceAndDistributionManagement;
     private javax.swing.JPanel hall_acceptanceAndDistributionManagementPanel;
@@ -3439,11 +6441,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField hall_vehiclesManagement_SearchName;
     private javax.swing.JButton hall_vehiclesManagement_UpdateButton;
     private javax.swing.JLabel hall_vehiclesManagement_carImage;
-    private javax.swing.JLabel hall_vehiclesManagement_carImage1;
-    private javax.swing.JLabel hall_vehiclesManagement_carImage2;
     private javax.swing.JPanel hall_vehiclesManagement_carImagePanel;
-    private javax.swing.JPanel hall_vehiclesManagement_carImagePanel1;
-    private javax.swing.JPanel hall_vehiclesManagement_carImagePanel2;
     private javax.swing.JTable hall_vehiclesManagement_carList;
     private javax.swing.JScrollPane hall_vehiclesManagement_tablePanel;
     private javax.swing.JScrollPane jScrollPane1;
@@ -3465,6 +6463,54 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton mainPanel_logout;
     private javax.swing.JLabel mainPanel_userName;
     private javax.swing.JPanel managerPanel;
+    private javax.swing.JButton manager_button_department;
+    private javax.swing.JButton manager_button_ducument;
+    private javax.swing.JButton manager_button_numercial;
+    private javax.swing.JButton manager_button_staff;
+    private javax.swing.JButton manager_button_statement;
+    private javax.swing.JPanel manager_departmentPanel;
+    private javax.swing.JPanel manager_department_departmentPanel;
+    private javax.swing.JScrollPane manager_department_departmentTreePanel;
+    private javax.swing.JTree manager_department_departments;
+    private javax.swing.JPanel manager_department_staffPanel;
+    private javax.swing.JButton manager_department_staff_button_save;
+    private javax.swing.JTextField manager_department_staff_from;
+    private javax.swing.JTextField manager_department_staff_id;
+    private javax.swing.JLabel manager_department_staff_label_from;
+    private javax.swing.JLabel manager_department_staff_label_id;
+    private javax.swing.JLabel manager_department_staff_label_move;
+    private javax.swing.JLabel manager_department_staff_label_to;
+    private javax.swing.JTextField manager_department_staff_to;
+    private javax.swing.JTable manager_department_stafflist;
+    private javax.swing.JScrollPane manager_department_stafflistPanel;
+    private javax.swing.JPanel manager_department_updatePanel;
+    private javax.swing.JButton manager_department_updatePanel_button_save;
+    private javax.swing.JTextField manager_department_updatePanel_id;
+    private javax.swing.JLabel manager_department_updatePanel_label_id;
+    private javax.swing.JLabel manager_department_updatePanel_label_manager;
+    private javax.swing.JLabel manager_department_updatePanel_label_name;
+    private javax.swing.JLabel manager_department_updatePanel_label_parent;
+    private javax.swing.JTextField manager_department_updatePanel_manager;
+    private javax.swing.JTextField manager_department_updatePanel_name;
+    private javax.swing.JTextField manager_department_updatePanel_parent;
+    private javax.swing.JPanel manager_documentPanel;
+    private javax.swing.JTable manager_document_documentlist;
+    private javax.swing.JPanel manager_document_documentlistPanel;
+    private javax.swing.JScrollPane manager_document_documentpanel;
+    private javax.swing.JPanel manager_mainPanel;
+    private javax.swing.JPanel manager_staffPanel;
+    private javax.swing.JPanel manager_staff_departmentPanel;
+    private javax.swing.JScrollPane manager_staff_departmentTreePanel;
+    private javax.swing.JTree manager_staff_departments;
+    private javax.swing.JScrollPane manager_staff_listPanel;
+    private javax.swing.JTable manager_staff_stafflist;
+    private javax.swing.JPanel manager_staff_stafflistPanel;
+    private javax.swing.JPanel manager_staff_updatePanel;
+    private javax.swing.JLabel manager_staff_updatePanel_label_salary;
+    private javax.swing.JLabel manager_staff_updatePanel_label_staffId;
+    private javax.swing.JButton manager_staff_update_button_submit;
+    private javax.swing.JTextField manager_staff_update_id;
+    private javax.swing.JTextField manager_staff_update_salary;
     private javax.swing.JPanel postmanPanel;
     private javax.swing.JDialog postman_arriveDialog;
     private javax.swing.JLabel postman_arriveDialog_departureLabel;
@@ -3536,5 +6582,121 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel postman_totalPriceLabel;
     private javax.swing.JLabel postman_totalPriceNumberLabel;
     private javax.swing.JLabel postman_totalPriceUnitLabel;
+    private javax.swing.JButton stock_button_exwarehouse;
+    private javax.swing.JButton stock_button_inventoryAdjustments;
+    private javax.swing.JButton stock_button_inventoryCheck;
+    private javax.swing.JButton stock_button_inventoryCounts;
+    private javax.swing.JButton stock_button_inwarehouse;
+    private javax.swing.JPanel stock_exwarehouse;
+    private javax.swing.JTextField stock_exwarehouse_address;
+    private javax.swing.JButton stock_exwarehouse_button_exwarehouse;
+    private javax.swing.JTextField stock_exwarehouse_city;
+    private javax.swing.JComboBox stock_exwarehouse_day;
+    private javax.swing.JComboBox stock_exwarehouse_exactposition;
+    private javax.swing.JTextField stock_exwarehouse_goodsNo;
+    private javax.swing.JLabel stock_exwarehouse_label_city;
+    private javax.swing.JLabel stock_exwarehouse_label_date;
+    private javax.swing.JLabel stock_exwarehouse_label_day;
+    private javax.swing.JLabel stock_exwarehouse_label_destination;
+    private javax.swing.JLabel stock_exwarehouse_label_exactposition;
+    private javax.swing.JLabel stock_exwarehouse_label_goodsNo;
+    private javax.swing.JLabel stock_exwarehouse_label_line;
+    private javax.swing.JLabel stock_exwarehouse_label_month;
+    private javax.swing.JLabel stock_exwarehouse_label_position;
+    private javax.swing.JLabel stock_exwarehouse_label_province;
+    private javax.swing.JLabel stock_exwarehouse_label_row;
+    private javax.swing.JLabel stock_exwarehouse_label_transportNo;
+    private javax.swing.JLabel stock_exwarehouse_label_unit;
+    private javax.swing.JLabel stock_exwarehouse_label_year;
+    private javax.swing.JComboBox stock_exwarehouse_line;
+    private javax.swing.JComboBox stock_exwarehouse_month;
+    private javax.swing.JTextField stock_exwarehouse_province;
+    private javax.swing.JComboBox stock_exwarehouse_row;
+    private javax.swing.JTextField stock_exwarehouse_transportNo;
+    private javax.swing.JComboBox stock_exwarehouse_unit;
+    private javax.swing.JComboBox stock_exwarehouse_year;
+    private javax.swing.JButton stock_inventoryAdjust_button_Save;
+    private javax.swing.JButton stock_inventoryAdjust_button_check;
+    private javax.swing.JComboBox stock_inventoryAdjust_from_line;
+    private javax.swing.JComboBox stock_inventoryAdjust_from_row;
+    private javax.swing.JComboBox stock_inventoryAdjust_from_unit;
+    private javax.swing.JLabel stock_inventoryAdjust_label_Adjust;
+    private javax.swing.JLabel stock_inventoryAdjust_label_from;
+    private javax.swing.JLabel stock_inventoryAdjust_label_fromLine;
+    private javax.swing.JLabel stock_inventoryAdjust_label_fromRow;
+    private javax.swing.JLabel stock_inventoryAdjust_label_to;
+    private javax.swing.JLabel stock_inventoryAdjust_label_toLine;
+    private javax.swing.JLabel stock_inventoryAdjust_label_toRow;
+    private javax.swing.JLabel stock_inventoryAdjust_label_unit;
+    private javax.swing.JLabel stock_inventoryAdjust_label_warningPercent;
+    private javax.swing.JTable stock_inventoryAdjust_table;
+    private javax.swing.JScrollPane stock_inventoryAdjust_tablePanel;
+    private javax.swing.JComboBox stock_inventoryAdjust_to_line;
+    private javax.swing.JComboBox stock_inventoryAdjust_to_row;
+    private javax.swing.JComboBox stock_inventoryAdjust_warningPercent;
+    private javax.swing.JPanel stock_inventoryAdjustments;
+    private javax.swing.JPanel stock_inventoryCheck;
+    private javax.swing.JButton stock_inventoryCheck_button_check;
+    private javax.swing.JButton stock_inventoryCheck_button_reset;
+    private javax.swing.JComboBox stock_inventoryCheck_end_day;
+    private javax.swing.JComboBox stock_inventoryCheck_end_month;
+    private javax.swing.JComboBox stock_inventoryCheck_end_year;
+    private javax.swing.JComboBox stock_inventoryCheck_front_day;
+    private javax.swing.JComboBox stock_inventoryCheck_front_month;
+    private javax.swing.JComboBox stock_inventoryCheck_front_year;
+    private javax.swing.JLabel stock_inventoryCheck_label_end;
+    private javax.swing.JLabel stock_inventoryCheck_label_end_day;
+    private javax.swing.JLabel stock_inventoryCheck_label_end_month;
+    private javax.swing.JLabel stock_inventoryCheck_label_end_year;
+    private javax.swing.JLabel stock_inventoryCheck_label_exwarehouse;
+    private javax.swing.JLabel stock_inventoryCheck_label_front;
+    private javax.swing.JLabel stock_inventoryCheck_label_front_day;
+    private javax.swing.JLabel stock_inventoryCheck_label_front_month;
+    private javax.swing.JLabel stock_inventoryCheck_label_front_year;
+    private javax.swing.JLabel stock_inventoryCheck_label_inSubex;
+    private javax.swing.JLabel stock_inventoryCheck_label_inwarehouse;
+    private javax.swing.JLabel stock_inventoryCheck_label_total;
+    private javax.swing.JTable stock_inventoryCheck_list;
+    private javax.swing.JScrollPane stock_inventoryCheck_listPanel;
+    private javax.swing.JPanel stock_inventoryCheck_resultPanel;
+    private javax.swing.JLabel stock_inventoryCheck_result_exwarehouse;
+    private javax.swing.JLabel stock_inventoryCheck_result_inSubex;
+    private javax.swing.JLabel stock_inventoryCheck_result_inwarehouse;
+    private javax.swing.JButton stock_inventoryCounts_button_export;
+    private javax.swing.JLabel stock_inventoryCounts_label_time;
+    private javax.swing.JLabel stock_inventoryCounts_snaptime;
+    private javax.swing.JTable stock_inventoryCounts_table;
+    private javax.swing.JScrollPane stock_inventoryCounts_tablePanel;
+    private javax.swing.JPanel stock_inventoryyCounts;
+    private javax.swing.JPanel stock_inwarehouse;
+    private javax.swing.JTextField stock_inwarehouse_address;
+    private javax.swing.JButton stock_inwarehouse_button_inwarehouse;
+    private javax.swing.JTextField stock_inwarehouse_city;
+    private javax.swing.JComboBox stock_inwarehouse_day;
+    private javax.swing.JTextField stock_inwarehouse_goodsNo;
+    private javax.swing.JLabel stock_inwarehouse_label_city;
+    private javax.swing.JLabel stock_inwarehouse_label_date;
+    private javax.swing.JLabel stock_inwarehouse_label_day;
+    private javax.swing.JLabel stock_inwarehouse_label_destination;
+    private javax.swing.JLabel stock_inwarehouse_label_goodsNo;
+    private javax.swing.JLabel stock_inwarehouse_label_line;
+    private javax.swing.JLabel stock_inwarehouse_label_month;
+    private javax.swing.JLabel stock_inwarehouse_label_position;
+    private javax.swing.JLabel stock_inwarehouse_label_province;
+    private javax.swing.JLabel stock_inwarehouse_label_row;
+    private javax.swing.JLabel stock_inwarehouse_label_unit;
+    private javax.swing.JLabel stock_inwarehouse_label_year;
+    private javax.swing.JComboBox stock_inwarehouse_line;
+    private javax.swing.JComboBox stock_inwarehouse_month;
+    private javax.swing.JTextField stock_inwarehouse_province;
+    private javax.swing.JComboBox stock_inwarehouse_row;
+    private javax.swing.JComboBox stock_inwarehouse_unit;
+    private javax.swing.JComboBox stock_inwarehouse_year;
+    private javax.swing.JPanel stock_mainPanel;
+    private javax.swing.JPanel stock_realtimePanel;
+    private javax.swing.JTable stock_realtime_list;
+    private javax.swing.JScrollPane stock_realtime_listPanel;
+    private javax.swing.JTree stock_realtime_tree;
+    private javax.swing.JScrollPane stock_realtime_treePanel;
     // End of variables declaration                   
 }
