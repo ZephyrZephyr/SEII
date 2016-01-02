@@ -1,4 +1,4 @@
-package systemBL;
+package words;
 
 public enum UserType {
 	

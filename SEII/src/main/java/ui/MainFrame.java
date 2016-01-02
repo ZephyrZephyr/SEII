@@ -5,16 +5,41 @@
  */
 package ui;
 
+import java.sql.SQLException;
+
+import data.PostmanData;
+import dataService.PostmanDataService;
+import postManBL.Customer;
+import postManBL.PostmanBLController;
+import postManBL.Ticket;
+import systemBL.SystemBLController;
+import words.Address;
+import words.DeliveryType;
+import words.Login;
+import words.PacketType;
+import BLService.PostmanBLService;
+import BLService.SystemBLService;
+
 /**
  *
  * @author zephyr
  */
 public class MainFrame extends javax.swing.JFrame {
-
+	private SystemBLService systemBL; //= new SystemBLController();
+	private PostmanBLService postmanBL; //= new PostmanBLController();
+	private PostmanDataService postmanData; // = new PostmanData();
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+    	systemBL = new SystemBLController();
+    	postmanBL = new PostmanBLController();
+    	try {
+			postmanData = new PostmanData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         initComponents();
     }
 
@@ -25,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+   private void initComponents() {
 
         postman_arriveDialog = new javax.swing.JDialog();
         postman_arriveDialog_departureLabel = new javax.swing.JLabel();
@@ -44,112 +69,6 @@ public class MainFrame extends javax.swing.JFrame {
         login_keywrongDialoglabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         cardPanel = new javax.swing.JPanel();
-        hallPanel = new javax.swing.JPanel();
-        hall_vehicleLoadingManagement = new javax.swing.JButton();
-        hall_acceptanceAndDistributionManagement = new javax.swing.JButton();
-        hall_vehiclesManagement = new javax.swing.JButton();
-        hall_driversManagement = new javax.swing.JButton();
-        hall_collectionNote = new javax.swing.JButton();
-        hall_mainPanel = new javax.swing.JPanel();
-        hall_acceptanceAndDistributionManagementPanel = new javax.swing.JPanel();
-        hall_acceptanceAndDistribution_Arrival = new javax.swing.JPanel();
-        hall_acceptanceAndDistribution_Arrival_label_arrivalDate = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_day = new javax.swing.JComboBox();
-        hall_acceptanceAndDistribution_Arrival_label_month = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_label_year = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_label_day = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_year = new javax.swing.JComboBox();
-        hall_acceptanceAndDistribution_Arrival_month = new javax.swing.JComboBox();
-        hall_acceptanceAndDistribution_Arrival_label_freightNo = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_freightNo = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Arrival_label_departure = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_label_city = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_province = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Arrival_label_province = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_city = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Arrival_address = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Arrival_label_goodsState = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Arrival_state_intact = new javax.swing.JRadioButton();
-        hall_acceptanceAndDistribution_Arrival_state_damaged = new javax.swing.JRadioButton();
-        hall_acceptanceAndDistribution_Arrival_state_losed = new javax.swing.JRadioButton();
-        hall_acceptanceAndDistribution_Arrival_Submit = new javax.swing.JButton();
-        hall_acceptanceAndDistribution_Send = new javax.swing.JPanel();
-        hall_acceptanceAndDistribution_Send_label_day = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_label_month = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_label_arriveDate = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_month = new javax.swing.JComboBox();
-        hall_acceptanceAndDistribution_Send_label_year = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_year = new javax.swing.JComboBox();
-        hall_acceptanceAndDistribution_Send_day = new javax.swing.JComboBox();
-        hall_acceptanceAndDistribution_Send_goodsNo = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Send_label_goodsNo = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_province = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Send_label_departure = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_city = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Send_label_city = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_address = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Send_label_province = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_label_postmanNo = new javax.swing.JLabel();
-        hall_acceptanceAndDistribution_Send_postmanNo = new javax.swing.JTextField();
-        hall_acceptanceAndDistribution_Send_Submit = new javax.swing.JButton();
-        hall_vehiclesManagementPanel = new javax.swing.JPanel();
-        hall_vehiclesManagement_tablePanel = new javax.swing.JScrollPane();
-        hall_vehiclesManagement_carList = new javax.swing.JTable();
-        hall_vehiclesManagement_carImagePanel = new javax.swing.JPanel();
-        hall_vehiclesManagement_carImage = new javax.swing.JLabel();
-        hall_vehiclesManagement_AddButton = new javax.swing.JButton();
-        hall_vehiclesManagementPanel_SearchButton = new javax.swing.JButton();
-        hall_vehiclesManagement_UpdateButton = new javax.swing.JButton();
-        hall_vehiclesManagement_SearchName = new javax.swing.JTextField();
-        hall_driversManagementPanel = new javax.swing.JPanel();
-        hall_driversManagement_tablePanel = new javax.swing.JScrollPane();
-        hall_driversManagementPanel_driverList = new javax.swing.JTable();
-        hall_driversManagement_driverImagePanel = new javax.swing.JPanel();
-        hall_driversManagement_driverImage = new javax.swing.JLabel();
-        hall_driversManagement_AddButton = new javax.swing.JButton();
-        hall_driversManagement_UpdateButton = new javax.swing.JButton();
-        hall_driversManagement_SearchName = new javax.swing.JTextField();
-        hall_driversManagement_SearchButton = new javax.swing.JButton();
-        hall_vehicleLoadingManagementPanel = new javax.swing.JPanel();
-        hall_vehicleLoading_label_loadingDate = new javax.swing.JLabel();
-        hall_vehicleLoading_year = new javax.swing.JComboBox();
-        hall_vehicleLoading_label_year = new javax.swing.JLabel();
-        hall_vehicleLoading_month = new javax.swing.JComboBox();
-        hall_vehicleLoading_label_month = new javax.swing.JLabel();
-        hall_vehicleLoading_day = new javax.swing.JComboBox();
-        hall_vehicleLoading_label_day = new javax.swing.JLabel();
-        hall_vehicleLoading_label_hallNo = new javax.swing.JLabel();
-        hall_vehicleLoading_hallNo = new javax.swing.JTextField();
-        hall_vehicleLoading_button_hallNoDefault = new javax.swing.JButton();
-        hall_vehicleLoading_label_departure = new javax.swing.JLabel();
-        hall_vehicleLoading_departure_province = new javax.swing.JTextField();
-        hall_vehicleLoading_label_departure_province = new javax.swing.JLabel();
-        hall_vehicleLoading_departure_city = new javax.swing.JTextField();
-        hall_vehicleLoading_label_departure_city = new javax.swing.JLabel();
-        hall_vehicleLoading_departure_address = new javax.swing.JTextField();
-        hall_vehicleLoading_label_destination = new javax.swing.JLabel();
-        hall_vehicleLoading_destination_province = new javax.swing.JTextField();
-        hall_vehicleLoading_label_destination_province = new javax.swing.JLabel();
-        hall_vehicleLoading_destination_city = new javax.swing.JTextField();
-        hall_vehicleLoading_label_destination_city = new javax.swing.JLabel();
-        hall_vehicleLoading_destination_address = new javax.swing.JTextField();
-        hall_vehicleLoading_label_supervisor = new javax.swing.JLabel();
-        hall_vehicleLoading_supervisor = new javax.swing.JTextField();
-        hall_vehicleLoading_label_supercargo = new javax.swing.JLabel();
-        hall_vehicleLoading_supercargo = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        hall_vehicleLoading_goodsNoTable = new javax.swing.JTable();
-        hall_vehicleLoading_label_transportationExpense = new javax.swing.JLabel();
-        hall_vehicleLoading_transportationExpense = new javax.swing.JTextField();
-        hall_vehicleLoading_button_submit = new javax.swing.JButton();
-        hall_vehicleLoading_button_cancel = new javax.swing.JButton();
-        hall_collectionNotePanel = new javax.swing.JPanel();
-        hall_collectionNote_listPanel = new javax.swing.JScrollPane();
-        hall_collectionNote_dateList = new javax.swing.JList();
-        hall_collectionNote_tablePanel = new javax.swing.JScrollPane();
-        hall_collectionNote_dailyCollection = new javax.swing.JTable();
-        hall_collectionNote_SaveButton = new javax.swing.JButton();
-        hall_collectionNote_CancelButton = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         login_nameLabel = new javax.swing.JLabel();
         login_nameText = new javax.swing.JTextField();
@@ -217,6 +136,135 @@ public class MainFrame extends javax.swing.JFrame {
         postman_getPriceButton = new javax.swing.JButton();
         postman_ticketNO = new javax.swing.JLabel();
         postman_getArriveTimeButton = new javax.swing.JButton();
+        hallPanel = new javax.swing.JPanel();
+        hall_vehicleLoadingManagement = new javax.swing.JButton();
+        hall_acceptanceAndDistributionManagement = new javax.swing.JButton();
+        hall_vehiclesManagement = new javax.swing.JButton();
+        hall_driversManagement = new javax.swing.JButton();
+        hall_collectionNote = new javax.swing.JButton();
+        hall_mainPanel = new javax.swing.JPanel();
+        hall_acceptanceAndDistributionManagementPanel = new javax.swing.JPanel();
+        hall_acceptanceAndDistribution_Arrival = new javax.swing.JPanel();
+        hall_acceptanceAndDistribution_Arrival_label_arrivalDate = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_day = new javax.swing.JComboBox();
+        hall_acceptanceAndDistribution_Arrival_label_month = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_label_year = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_label_day = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_year = new javax.swing.JComboBox();
+        hall_acceptanceAndDistribution_Arrival_month = new javax.swing.JComboBox();
+        hall_acceptanceAndDistribution_Arrival_label_freightNo = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_freightNo = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Arrival_label_departure = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_label_city = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_province = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Arrival_label_province = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_city = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Arrival_address = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Arrival_label_goodsState = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Arrival_state_intact = new javax.swing.JRadioButton();
+        hall_acceptanceAndDistribution_Arrival_state_damaged = new javax.swing.JRadioButton();
+        hall_acceptanceAndDistribution_Arrival_state_losed = new javax.swing.JRadioButton();
+        hall_acceptanceAndDistribution_Arrival_Submit = new javax.swing.JButton();
+        hall_acceptanceAndDistribution_Send = new javax.swing.JPanel();
+        hall_acceptanceAndDistribution_Send_label_day = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_label_month = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_label_arriveDate = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_month = new javax.swing.JComboBox();
+        hall_acceptanceAndDistribution_Send_label_year = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_year = new javax.swing.JComboBox();
+        hall_acceptanceAndDistribution_Send_day = new javax.swing.JComboBox();
+        hall_acceptanceAndDistribution_Send_goodsNo = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Send_label_goodsNo = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_province = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Send_label_departure = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_city = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Send_label_city = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_address = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Send_label_province = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_label_postmanNo = new javax.swing.JLabel();
+        hall_acceptanceAndDistribution_Send_postmanNo = new javax.swing.JTextField();
+        hall_acceptanceAndDistribution_Send_Submit = new javax.swing.JButton();
+        hall_vehiclesManagementPanel = new javax.swing.JPanel();
+        hall_vehiclesManagement_tablePanel = new javax.swing.JScrollPane();
+        hall_vehiclesManagement_carList = new javax.swing.JTable();
+        hall_vehiclesManagement_carImagePanel = new javax.swing.JPanel();
+        hall_vehiclesManagement_carImage = new javax.swing.JLabel();
+        hall_vehiclesManagement_AddButton = new javax.swing.JButton();
+        hall_vehiclesManagementPanel_SearchButton = new javax.swing.JButton();
+        hall_vehiclesManagement_UpdateButton = new javax.swing.JButton();
+        hall_vehiclesManagement_SearchName = new javax.swing.JTextField();
+        hall_vehiclesManagement_label_name = new javax.swing.JLabel();
+        hall_vehiclesManagement_name = new javax.swing.JTextField();
+        hall_vehiclesManagement_label_engine = new javax.swing.JLabel();
+        hall_vehiclesManagement_engine = new javax.swing.JTextField();
+        hall_vehiclesManagement_label_chassis = new javax.swing.JLabel();
+        hall_vehiclesManagement_chassis = new javax.swing.JTextField();
+        hall_vehiclesManagement_label_join = new javax.swing.JLabel();
+        hall_vehiclesManagement_jointime = new javax.swing.JTextField();
+        hall_vehiclesManagement_label_no = new javax.swing.JLabel();
+        hall_vehiclesManagement_no = new javax.swing.JTextField();
+        hall_driversManagementPanel = new javax.swing.JPanel();
+        hall_driversManagement_tablePanel = new javax.swing.JScrollPane();
+        hall_driversManagementPanel_driverList = new javax.swing.JTable();
+        hall_driversManagement_driverImagePanel = new javax.swing.JPanel();
+        hall_driversManagement_driverImage = new javax.swing.JLabel();
+        hall_driversManagement_AddButton = new javax.swing.JButton();
+        hall_driversManagement_SearchName = new javax.swing.JTextField();
+        hall_driversManagement_SearchButton = new javax.swing.JButton();
+        hall_driverManagement_label_no = new javax.swing.JLabel();
+        hall_driverManagement_no = new javax.swing.JTextField();
+        hall_driverManagement_label_name = new javax.swing.JLabel();
+        hall_driverManagement_name = new javax.swing.JTextField();
+        hall_driverManagement_label_birthday = new javax.swing.JLabel();
+        hall_driverManagement_birthday = new javax.swing.JTextField();
+        hall_driverManagement_label_indentity = new javax.swing.JLabel();
+        hall_driverManagement_indentity = new javax.swing.JTextField();
+        hall_driverManagement_label_phone = new javax.swing.JLabel();
+        hall_driverManagement_phone = new javax.swing.JTextField();
+        hall_driverManagement_label_unit = new javax.swing.JLabel();
+        hall_driverManagement_unit = new javax.swing.JTextField();
+        hall_driverManagement_label_sex = new javax.swing.JLabel();
+        hall_driverManagement_sex = new javax.swing.JTextField();
+        hall_vehicleLoadingManagementPanel = new javax.swing.JPanel();
+        hall_vehicleLoading_label_loadingDate = new javax.swing.JLabel();
+        hall_vehicleLoading_year = new javax.swing.JComboBox();
+        hall_vehicleLoading_label_year = new javax.swing.JLabel();
+        hall_vehicleLoading_month = new javax.swing.JComboBox();
+        hall_vehicleLoading_label_month = new javax.swing.JLabel();
+        hall_vehicleLoading_day = new javax.swing.JComboBox();
+        hall_vehicleLoading_label_day = new javax.swing.JLabel();
+        hall_vehicleLoading_label_hallNo = new javax.swing.JLabel();
+        hall_vehicleLoading_hallNo = new javax.swing.JTextField();
+        hall_vehicleLoading_button_hallNoDefault = new javax.swing.JButton();
+        hall_vehicleLoading_label_departure = new javax.swing.JLabel();
+        hall_vehicleLoading_departure_province = new javax.swing.JTextField();
+        hall_vehicleLoading_label_departure_province = new javax.swing.JLabel();
+        hall_vehicleLoading_departure_city = new javax.swing.JTextField();
+        hall_vehicleLoading_label_departure_city = new javax.swing.JLabel();
+        hall_vehicleLoading_label_destination = new javax.swing.JLabel();
+        hall_vehicleLoading_destination_province = new javax.swing.JTextField();
+        hall_vehicleLoading_label_destination_province = new javax.swing.JLabel();
+        hall_vehicleLoading_destination_city = new javax.swing.JTextField();
+        hall_vehicleLoading_label_destination_city = new javax.swing.JLabel();
+        hall_vehicleLoading_label_supervisor = new javax.swing.JLabel();
+        hall_vehicleLoading_supervisor = new javax.swing.JTextField();
+        hall_vehicleLoading_label_supercargo = new javax.swing.JLabel();
+        hall_vehicleLoading_supercargo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        hall_vehicleLoading_goodsNoTable = new javax.swing.JTable();
+        hall_vehicleLoading_label_transportationExpense = new javax.swing.JLabel();
+        hall_vehicleLoading_transportationExpense = new javax.swing.JTextField();
+        hall_vehicleLoading_button_submit = new javax.swing.JButton();
+        hall_vehicleLoading_button_cancel = new javax.swing.JButton();
+        hall_vehicleLoading_label_transportNo = new javax.swing.JLabel();
+        hall_vehicleLoading_tansportNo = new javax.swing.JTextField();
+        hall_collectionNotePanel = new javax.swing.JPanel();
+        hall_collectionNote_listPanel = new javax.swing.JScrollPane();
+        hall_collectionNote_dateList = new javax.swing.JList();
+        hall_collectionNote_tablePanel = new javax.swing.JScrollPane();
+        hall_collectionNote_dailyCollection = new javax.swing.JTable();
+        hall_collectionNote_SaveButton = new javax.swing.JButton();
+        hall_collectionNote_CancelButton = new javax.swing.JButton();
         centerPanel = new javax.swing.JPanel();
         center_button_airline = new javax.swing.JButton();
         center_button_trainline = new javax.swing.JButton();
@@ -240,8 +288,6 @@ public class MainFrame extends javax.swing.JFrame {
         center_airline_label_departure_province = new javax.swing.JLabel();
         center_airline_departure_city = new javax.swing.JTextField();
         center_airline_label_departure_city = new javax.swing.JLabel();
-        center_airline_departure_address = new javax.swing.JTextField();
-        center_airline_destination_address = new javax.swing.JTextField();
         center_airline_label_destination_city = new javax.swing.JLabel();
         center_airline_destination_city = new javax.swing.JTextField();
         center_airline_label_destination_province = new javax.swing.JLabel();
@@ -274,8 +320,6 @@ public class MainFrame extends javax.swing.JFrame {
         center_train_label_departure_province = new javax.swing.JLabel();
         center_train_departure_city = new javax.swing.JTextField();
         center_train_label_departure_city = new javax.swing.JLabel();
-        center_train_departure_address = new javax.swing.JTextField();
-        center_train_destination_address = new javax.swing.JTextField();
         center_train_label_destination_city = new javax.swing.JLabel();
         center_train_destination_city = new javax.swing.JTextField();
         center_train_label_destination_province = new javax.swing.JLabel();
@@ -308,8 +352,6 @@ public class MainFrame extends javax.swing.JFrame {
         center_vehicle_label_departure_province = new javax.swing.JLabel();
         center_vehicle_departure_city = new javax.swing.JTextField();
         center_vehicle_label_departure_city = new javax.swing.JLabel();
-        center_vehicle_departure_address = new javax.swing.JTextField();
-        center_vehicle_destination_address = new javax.swing.JTextField();
         center_vehicle_label_destination_city = new javax.swing.JLabel();
         center_vehicle_destination_city = new javax.swing.JTextField();
         center_vehicle_label_destination_province = new javax.swing.JLabel();
@@ -352,11 +394,6 @@ public class MainFrame extends javax.swing.JFrame {
         center_transfer_transferPanel = new javax.swing.JPanel();
         center_transfer_transfer_stocklistPanel = new javax.swing.JScrollPane();
         center_transfer_transfer_stockList = new javax.swing.JTable();
-        center_transfer_transfer_label_transferLine = new javax.swing.JLabel();
-        center_transfer_transfer_line_train = new javax.swing.JRadioButton();
-        center_transfer_transfer_line_airline = new javax.swing.JRadioButton();
-        center_transfer_transfer_line_vehicle = new javax.swing.JRadioButton();
-        center_transfer_transfer_submit = new javax.swing.JButton();
         financePanel = new javax.swing.JPanel();
         finance_button_settelement = new javax.swing.JButton();
         finance_button_cost = new javax.swing.JButton();
@@ -526,8 +563,6 @@ public class MainFrame extends javax.swing.JFrame {
         manager_department_staff_label_move = new javax.swing.JLabel();
         manager_department_staff_label_id = new javax.swing.JLabel();
         manager_department_staff_id = new javax.swing.JTextField();
-        manager_department_staff_from = new javax.swing.JTextField();
-        manager_department_staff_label_from = new javax.swing.JLabel();
         manager_department_staff_to = new javax.swing.JTextField();
         manager_department_staff_label_to = new javax.swing.JLabel();
         manager_department_staff_button_save = new javax.swing.JButton();
@@ -541,10 +576,6 @@ public class MainFrame extends javax.swing.JFrame {
         manager_department_updatePanel_parent = new javax.swing.JTextField();
         manager_department_updatePanel_label_parent = new javax.swing.JLabel();
         manager_department_updatePanel_button_save = new javax.swing.JButton();
-        manager_documentPanel = new javax.swing.JPanel();
-        manager_document_documentlistPanel = new javax.swing.JPanel();
-        manager_document_documentpanel = new javax.swing.JScrollPane();
-        manager_document_documentlist = new javax.swing.JTable();
         manager_button_numercial = new javax.swing.JButton();
         curtomerPanel = new javax.swing.JPanel();
         centerStockPanel = new javax.swing.JPanel();
@@ -664,6 +695,10 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inventoryAdjust_to_line = new javax.swing.JComboBox();
         stock_inventoryAdjust_label_toLine = new javax.swing.JLabel();
         stock_inventoryAdjust_button_Save = new javax.swing.JButton();
+        stock_inventoryAdjust_from_position = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_fromPos = new javax.swing.JLabel();
+        stock_inventoryAdjust_to_position = new javax.swing.JComboBox();
+        stock_inventoryAdjust_label_toPos = new javax.swing.JLabel();
         mainPanel_userName = new javax.swing.JLabel();
         mainPanel_logout = new javax.swing.JButton();
 
@@ -804,6 +839,535 @@ public class MainFrame extends javax.swing.JFrame {
 
         cardPanel.setBackground(new java.awt.Color(255, 255, 255));
         cardPanel.setLayout(new java.awt.CardLayout());
+
+        login_nameLabel.setText("Name");
+
+        login_nameText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_nameTextActionPerformed(evt);
+            }
+        });
+
+        login_keyLabel.setText("Key");
+
+        login_loginButton.setText("login");
+        login_loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_loginButtonActionPerformed(evt);
+            }
+        });
+
+        login_inquiryButton.setText("inquiry");
+
+        login_aboutButton.setText("about us");
+        login_aboutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_aboutButtonActionPerformed(evt);
+            }
+        });
+
+        login_registerButton.setText("register");
+        login_registerButton.setBorderPainted(false);
+        login_registerButton.setContentAreaFilled(false);
+        login_registerButton.setPreferredSize(new java.awt.Dimension(97, 29));
+        login_registerButton.setSize(new java.awt.Dimension(97, 29));
+        login_registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_registerButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
+        loginPanel.setLayout(loginPanelLayout);
+        loginPanelLayout.setHorizontalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
+                .addContainerGap(465, Short.MAX_VALUE)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addComponent(login_registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(login_loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(login_nameLabel)
+                            .addComponent(login_keyLabel))
+                        .addGap(38, 38, 38)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(login_keyText)
+                            .addComponent(login_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(462, 462, 462))
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(login_aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(login_inquiryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        loginPanelLayout.setVerticalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(login_inquiryButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(login_aboutButton)
+                .addGap(72, 72, 72)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(login_nameLabel)
+                    .addComponent(login_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(login_keyLabel)
+                    .addComponent(login_keyText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(login_loginButton)
+                    .addComponent(login_registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(268, Short.MAX_VALUE))
+        );
+
+        cardPanel.add(loginPanel, "card1");
+
+        postman_resetbutton.setText("Reset");
+        postman_resetbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_resetbuttonActionPerformed(evt);
+            }
+        });
+
+        postman_submitbutton.setText("Submit");
+        postman_submitbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_submitbuttonActionPerformed(evt);
+            }
+        });
+
+        postman_senderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sender"));
+
+        postman_sender_nameLabel.setText("Name");
+
+        postman_sender_addressLabel.setText("Address");
+
+        postman_sender_cellLabel.setText("Cell Phone");
+
+        postman_sender_unitLabel.setText("Unit");
+
+        postman_sender_telephoneLabel.setText("Telephone");
+
+        postman_sender_address_provinceLabel.setText("Province");
+
+        postman_sender_address_cityLabel.setText("City");
+
+        javax.swing.GroupLayout postman_senderPanelLayout = new javax.swing.GroupLayout(postman_senderPanel);
+        postman_senderPanel.setLayout(postman_senderPanelLayout);
+        postman_senderPanelLayout.setHorizontalGroup(
+            postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postman_senderPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(postman_sender_addressLabel)
+                    .addComponent(postman_sender_unitLabel)
+                    .addComponent(postman_sender_nameLabel))
+                .addGap(18, 18, 18)
+                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postman_senderPanelLayout.createSequentialGroup()
+                        .addComponent(postman_sender_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(postman_sender_cellLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(postman_sender_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_senderPanelLayout.createSequentialGroup()
+                        .addComponent(postman_sender_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(postman_sender_telephoneLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(postman_sender_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_senderPanelLayout.createSequentialGroup()
+                        .addComponent(postman_sender_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_sender_address_provinceLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_sender_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_sender_address_cityLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_sender_address_detailText)))
+                .addGap(33, 33, 33))
+        );
+        postman_senderPanelLayout.setVerticalGroup(
+            postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postman_senderPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_sender_nameLabel)
+                    .addComponent(postman_sender_cellLabel)
+                    .addComponent(postman_sender_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_sender_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(postman_sender_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(postman_sender_address_cityLabel)
+                        .addComponent(postman_sender_address_detailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(postman_sender_addressLabel)
+                        .addComponent(postman_sender_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(postman_sender_address_provinceLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(postman_sender_telephoneLabel)
+                        .addComponent(postman_sender_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(postman_sender_unitLabel)
+                        .addComponent(postman_sender_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        postman_recipientPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Recipient"));
+
+        postman_recipient_nameLabel.setText("Name");
+
+        postman_recipient_addressLabel.setText("Address");
+
+        postman_recipient_address_provinceText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_recipient_address_provinceTextActionPerformed(evt);
+            }
+        });
+
+        postman_recipient_cellLabel.setText("Cell Phone");
+
+        postman_recipient_unitLabel.setText("Unit");
+
+        postman_recipient_telephoneLabel.setText("Telephone");
+
+        postman_recipient_telephoneText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_recipient_telephoneTextActionPerformed(evt);
+            }
+        });
+
+        postman_recipient_address_provinceLabel.setText("Province");
+
+        postman_recipient_address_cityLabel.setText("City");
+
+        javax.swing.GroupLayout postman_recipientPanelLayout = new javax.swing.GroupLayout(postman_recipientPanel);
+        postman_recipientPanel.setLayout(postman_recipientPanelLayout);
+        postman_recipientPanelLayout.setHorizontalGroup(
+            postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postman_recipientPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(postman_recipient_addressLabel)
+                    .addComponent(postman_recipient_unitLabel)
+                    .addComponent(postman_recipient_nameLabel))
+                .addGap(18, 18, 18)
+                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postman_recipientPanelLayout.createSequentialGroup()
+                        .addComponent(postman_recipient_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(postman_recipient_telephoneLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(postman_recipient_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_recipientPanelLayout.createSequentialGroup()
+                        .addComponent(postman_recipient_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(postman_recipient_cellLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(postman_recipient_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_recipientPanelLayout.createSequentialGroup()
+                        .addComponent(postman_recipient_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_recipient_address_provinceLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_recipient_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_recipient_address_cityLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postman_recipient_address_detailText)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        postman_recipientPanelLayout.setVerticalGroup(
+            postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postman_recipientPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_recipient_nameLabel)
+                    .addComponent(postman_recipient_cellLabel)
+                    .addComponent(postman_recipient_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_recipient_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(postman_recipient_address_provinceLabel)
+                        .addComponent(postman_recipient_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(postman_recipient_address_cityLabel)
+                        .addComponent(postman_recipient_address_detailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(postman_recipient_addressLabel)
+                        .addComponent(postman_recipient_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_recipient_unitLabel)
+                    .addComponent(postman_recipient_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_recipient_telephoneLabel)
+                    .addComponent(postman_recipient_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        postman_consighmentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Consighment"));
+
+        postman_consighment_scriptLabel.setText("Script Number");
+
+        postman_consighment_weightLabel.setText("Weight");
+
+        postman_consighment_scriptText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_scriptTextActionPerformed(evt);
+            }
+        });
+
+        postman_consighment_weightText.setText("kg");
+        postman_consighment_weightText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_weightTextActionPerformed(evt);
+            }
+        });
+
+        postman_consighment_heightLabel.setText("Height");
+
+        postman_consighment_widthLabel.setText("Width");
+
+        postman_consighment_depthLabel.setText("Depth");
+
+        postman_consighment_heightText.setText("mm");
+        postman_consighment_heightText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_heightTextActionPerformed(evt);
+            }
+        });
+
+        postman_consighment_widthText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_widthTextActionPerformed(evt);
+            }
+        });
+
+        postman_consighment_depthText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_depthTextActionPerformed(evt);
+            }
+        });
+
+        postman_consighment_internalLabel.setText("Internal");
+
+        postman_consighment_internalText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_internalTextActionPerformed(evt);
+            }
+        });
+
+        postman_consighment_depthLabel1.setText("Volume");
+
+        postman_consighment_depthText1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_consighment_depthText1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout postman_consighmentPanelLayout = new javax.swing.GroupLayout(postman_consighmentPanel);
+        postman_consighmentPanel.setLayout(postman_consighmentPanelLayout);
+        postman_consighmentPanelLayout.setHorizontalGroup(
+            postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
+                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postman_consighmentPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(postman_consighment_depthLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(postman_consighment_depthText1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(postman_consighment_weightText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
+                                .addComponent(postman_consighment_scriptLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(postman_consighment_scriptText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(postman_consighment_weightLabel)
+                                .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
+                                    .addComponent(postman_consighment_internalLabel)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(postman_consighment_internalText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(65, 65, 65)
+                        .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(postman_consighment_heightLabel)
+                            .addComponent(postman_consighment_widthLabel)
+                            .addComponent(postman_consighment_depthLabel))
+                        .addGap(23, 23, 23)
+                        .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(postman_consighment_depthText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postman_consighment_widthText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postman_consighment_heightText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        postman_consighmentPanelLayout.setVerticalGroup(
+            postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_consighment_scriptLabel)
+                    .addComponent(postman_consighment_scriptText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_consighment_heightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postman_consighment_heightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_consighment_weightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_consighment_weightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postman_consighment_widthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postman_consighment_widthText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_consighment_depthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postman_consighment_depthText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_consighment_internalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postman_consighment_internalText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_consighment_depthText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_consighment_depthLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        postman_deliveryTypeLabel.setText("Delivery Type");
+
+        postman_deliveryTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Economy", "Standard", "Express" }));
+
+        postman_packetTypeLabel.setText("Packet Type");
+
+        postman_packetTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Carton", "Wood Case", "Poly Mailer" }));
+
+        postman_totalPriceLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        postman_totalPriceLabel.setText("Total Price");
+
+        postman_totalPriceNumberLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        postman_totalPriceNumberLabel.setText("//number");
+
+        postman_totalPriceUnitLabel.setText("yuan");
+
+        postman_getPriceButton.setText("Get Price");
+        postman_getPriceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_getPriceButtonActionPerformed(evt);
+            }
+        });
+
+        postman_ticketNO.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        postman_ticketNO.setText("//ticket no.(auto)");
+
+        postman_getArriveTimeButton.setText("Arrive Time");
+
+        javax.swing.GroupLayout postmanPanelLayout = new javax.swing.GroupLayout(postmanPanel);
+        postmanPanel.setLayout(postmanPanelLayout);
+        postmanPanelLayout.setHorizontalGroup(
+            postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(postman_senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(postmanPanelLayout.createSequentialGroup()
+                                .addComponent(postman_resetbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(postman_submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(postman_recipientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(postmanPanelLayout.createSequentialGroup()
+                                .addComponent(postman_ticketNO)
+                                .addGap(325, 325, 325)
+                                .addComponent(postman_getArriveTimeButton)))
+                        .addGap(101, 101, 101)))
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(postmanPanelLayout.createSequentialGroup()
+                                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
+                                        .addComponent(postman_packetTypeLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(postman_packetTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
+                                        .addComponent(postman_deliveryTypeLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(postman_deliveryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(postmanPanelLayout.createSequentialGroup()
+                                .addComponent(postman_totalPriceLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(postman_totalPriceNumberLabel)
+                                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(postman_totalPriceUnitLabel))
+                                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                                        .addGap(95, 95, 95)
+                                        .addComponent(postman_getPriceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGap(39, 39, 39))
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addComponent(postman_consighmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        postmanPanelLayout.setVerticalGroup(
+            postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postmanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postman_resetbutton)
+                    .addComponent(postman_submitbutton))
+                .addGap(18, 18, 18)
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(postman_senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postman_consighmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addComponent(postman_recipientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(postman_ticketNO)
+                            .addComponent(postman_getArriveTimeButton)))
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(postman_deliveryTypeLabel)
+                            .addComponent(postman_deliveryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(postman_packetTypeLabel)
+                            .addComponent(postman_packetTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(postmanPanelLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(postman_totalPriceLabel)
+                                .addGap(45, 45, 45))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(postman_totalPriceNumberLabel)
+                                    .addComponent(postman_totalPriceUnitLabel))
+                                .addGap(28, 28, 28))))
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(postman_getPriceButton)))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+
+        cardPanel.add(postmanPanel, "card2");
 
         hall_vehicleLoadingManagement.setText("Vehicle Loading");
         hall_vehicleLoadingManagement.addActionListener(new java.awt.event.ActionListener() {
@@ -1148,50 +1712,96 @@ public class MainFrame extends javax.swing.JFrame {
 
         hall_vehiclesManagement_SearchName.setText("carName");
 
+        hall_vehiclesManagement_label_name.setText("Name");
+
+        hall_vehiclesManagement_label_engine.setText("Engine");
+
+        hall_vehiclesManagement_label_chassis.setText("Chassis");
+
+        hall_vehiclesManagement_label_join.setText("Join Time");
+
+        hall_vehiclesManagement_jointime.setText("xxxx-xx-xx");
+
+        hall_vehiclesManagement_label_no.setText("No");
+
         javax.swing.GroupLayout hall_vehiclesManagementPanelLayout = new javax.swing.GroupLayout(hall_vehiclesManagementPanel);
         hall_vehiclesManagementPanel.setLayout(hall_vehiclesManagementPanelLayout);
         hall_vehiclesManagementPanelLayout.setHorizontalGroup(
             hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_vehiclesManagement_label_name)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_vehiclesManagement_label_engine)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_engine, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_vehiclesManagement_label_no)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_vehiclesManagement_label_chassis)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_chassis, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(hall_vehiclesManagement_label_join)
+                                .addGap(18, 18, 18)
+                                .addComponent(hall_vehiclesManagement_jointime, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hall_vehiclesManagement_UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehiclesManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)))
                 .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
                         .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(hall_vehiclesManagement_carImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                                    .addGap(29, 29, 29)
-                                    .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(hall_vehiclesManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(hall_vehiclesManagement_UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())
+                            .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_vehiclesManagementPanelLayout.createSequentialGroup()
                         .addComponent(hall_vehiclesManagementPanel_SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                        .addGap(25, 25, 25))))
         );
         hall_vehiclesManagementPanelLayout.setVerticalGroup(
             hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addComponent(hall_vehiclesManagement_tablePanel)
-                        .addContainerGap())
-                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
                         .addComponent(hall_vehiclesManagement_carImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(hall_vehiclesManagement_AddButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehiclesManagement_UpdateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(hall_vehiclesManagementPanel_SearchButton)
-                        .addGap(62, 62, 62))))
+                        .addGap(26, 26, 26)
+                        .addComponent(hall_vehiclesManagementPanel_SearchButton))
+                    .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_vehiclesManagement_AddButton)
+                    .addComponent(hall_vehiclesManagement_label_name)
+                    .addComponent(hall_vehiclesManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_vehiclesManagement_label_engine)
+                    .addComponent(hall_vehiclesManagement_engine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_vehiclesManagement_label_no)
+                        .addComponent(hall_vehiclesManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_vehiclesManagement_UpdateButton)
+                    .addComponent(hall_vehiclesManagement_label_chassis)
+                    .addComponent(hall_vehiclesManagement_chassis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_vehiclesManagement_label_join)
+                    .addComponent(hall_vehiclesManagement_jointime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 49, Short.MAX_VALUE))
         );
 
         hall_mainPanel.add(hall_vehiclesManagementPanel, "card3");
@@ -1237,11 +1847,28 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        hall_driversManagement_UpdateButton.setText("Update");
-
         hall_driversManagement_SearchName.setText("driverName");
 
         hall_driversManagement_SearchButton.setText("Search");
+        hall_driversManagement_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_driversManagement_SearchButtonActionPerformed(evt);
+            }
+        });
+
+        hall_driverManagement_label_no.setText("Date");
+
+        hall_driverManagement_label_name.setText("Name");
+
+        hall_driverManagement_label_birthday.setText("Birthday");
+
+        hall_driverManagement_label_indentity.setText("Indentity");
+
+        hall_driverManagement_label_phone.setText("Phone");
+
+        hall_driverManagement_label_unit.setText("Unit");
+
+        hall_driverManagement_label_sex.setText("Sex");
 
         javax.swing.GroupLayout hall_driversManagementPanelLayout = new javax.swing.GroupLayout(hall_driversManagementPanel);
         hall_driversManagementPanel.setLayout(hall_driversManagementPanelLayout);
@@ -1249,42 +1876,95 @@ public class MainFrame extends javax.swing.JFrame {
             hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_label_no)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(hall_driverManagement_label_name)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_label_phone)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_label_birthday)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_birthday, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_label_unit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_label_sex)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_label_indentity)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_indentity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hall_driversManagementPanelLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(hall_driversManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(hall_driversManagement_UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(hall_driversManagement_SearchButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(hall_driversManagement_SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hall_driversManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65))))
         );
         hall_driversManagementPanelLayout.setVerticalGroup(
             hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
                         .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_driversManagement_AddButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_driversManagement_UpdateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(82, 82, 82)
                         .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(hall_driversManagement_SearchButton)
-                        .addGap(22, 22, 22))
-                    .addComponent(hall_driversManagement_tablePanel))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_driversManagement_SearchButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_driverManagement_label_no)
+                            .addComponent(hall_driverManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_driverManagement_label_name)
+                            .addComponent(hall_driverManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_driverManagement_label_birthday)
+                            .addComponent(hall_driverManagement_birthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_driverManagement_label_indentity)
+                            .addComponent(hall_driverManagement_indentity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_driverManagement_label_phone)
+                            .addComponent(hall_driverManagement_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_driverManagement_label_unit)
+                            .addComponent(hall_driverManagement_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_driverManagement_label_sex)
+                            .addComponent(hall_driverManagement_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(hall_driversManagement_AddButton))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         hall_mainPanel.add(hall_driversManagementPanel, "card4");
@@ -1330,6 +2010,22 @@ public class MainFrame extends javax.swing.JFrame {
                 {null},
                 {null},
                 {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
                 {null}
             },
             new String [] {
@@ -1349,6 +2045,8 @@ public class MainFrame extends javax.swing.JFrame {
         hall_vehicleLoading_button_submit.setText("Submit");
 
         hall_vehicleLoading_button_cancel.setText("Cancel");
+
+        hall_vehicleLoading_label_transportNo.setText("transport no:");
 
         javax.swing.GroupLayout hall_vehicleLoadingManagementPanelLayout = new javax.swing.GroupLayout(hall_vehicleLoadingManagementPanel);
         hall_vehicleLoadingManagementPanel.setLayout(hall_vehicleLoadingManagementPanelLayout);
@@ -1377,44 +2075,47 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hall_vehicleLoading_label_destination)
-                                    .addComponent(hall_vehicleLoading_label_hallNo)
-                                    .addComponent(hall_vehicleLoading_label_loadingDate)
-                                    .addComponent(hall_vehicleLoading_label_departure)
-                                    .addComponent(hall_vehicleLoading_label_supervisor)
-                                    .addComponent(hall_vehicleLoading_label_supercargo)
-                                    .addComponent(hall_vehicleLoading_label_transportationExpense))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                        .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_label_departure_province)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_label_departure_city)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_departure_address, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
-                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                                .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hall_vehicleLoading_label_destination_province))
-                                            .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_label_destination_city)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_vehicleLoading_destination_address)))))))
+                            .addComponent(hall_vehicleLoading_label_destination)
+                            .addComponent(hall_vehicleLoading_label_hallNo)
+                            .addComponent(hall_vehicleLoading_label_loadingDate)
+                            .addComponent(hall_vehicleLoading_label_departure)
+                            .addComponent(hall_vehicleLoading_label_supervisor)
+                            .addComponent(hall_vehicleLoading_label_transportationExpense)
+                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(hall_vehicleLoading_label_supercargo, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                    .addGap(75, 75, 75)
+                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                            .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_vehicleLoading_label_departure_province)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_vehicleLoading_label_departure_city))
+                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                    .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(hall_vehicleLoading_label_destination_province))
+                                                .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(hall_vehicleLoading_label_transportNo)
+                                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                            .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(hall_vehicleLoading_label_destination_city))))
+                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                    .addGap(107, 107, 107)
+                                                    .addComponent(hall_vehicleLoading_tansportNo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
+                .addGap(0, 75, Short.MAX_VALUE)
                 .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
@@ -1455,8 +2156,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(hall_vehicleLoading_label_departure_city)
-                                .addComponent(hall_vehicleLoading_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(hall_vehicleLoading_label_departure_city))
                             .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(hall_vehicleLoading_label_departure_province)))
@@ -1466,8 +2166,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(hall_vehicleLoading_label_destination_city)
-                                .addComponent(hall_vehicleLoading_destination_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(hall_vehicleLoading_label_destination_city))
                             .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(hall_vehicleLoading_label_destination_province)))
@@ -1476,9 +2175,13 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_vehicleLoading_label_supercargo)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_vehicleLoading_label_supercargo)
+                            .addComponent(hall_vehicleLoading_label_transportNo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehicleLoading_tansportNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(hall_vehicleLoading_label_transportationExpense)
                 .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1601,531 +2304,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         cardPanel.add(hallPanel, "card3");
 
-        login_nameLabel.setText("Name");
-
-        login_nameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_nameTextActionPerformed(evt);
-            }
-        });
-
-        login_keyLabel.setText("Key");
-
-        login_loginButton.setText("login");
-        login_loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_loginButtonActionPerformed(evt);
-            }
-        });
-
-        login_inquiryButton.setText("inquiry");
-
-        login_aboutButton.setText("about us");
-        login_aboutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_aboutButtonActionPerformed(evt);
-            }
-        });
-
-        login_registerButton.setText("register");
-        login_registerButton.setBorderPainted(false);
-        login_registerButton.setContentAreaFilled(false);
-        login_registerButton.setPreferredSize(new java.awt.Dimension(97, 29));
-        login_registerButton.setSize(new java.awt.Dimension(97, 29));
-        login_registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_registerButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
-        loginPanel.setLayout(loginPanelLayout);
-        loginPanelLayout.setHorizontalGroup(
-            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                .addContainerGap(465, Short.MAX_VALUE)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(login_registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(login_loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(login_nameLabel)
-                            .addComponent(login_keyLabel))
-                        .addGap(38, 38, 38)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(login_keyText)
-                            .addComponent(login_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(462, 462, 462))
-            .addGroup(loginPanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(login_aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(login_inquiryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        loginPanelLayout.setVerticalGroup(
-            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(login_inquiryButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(login_aboutButton)
-                .addGap(72, 72, 72)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(login_nameLabel)
-                    .addComponent(login_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(login_keyLabel)
-                    .addComponent(login_keyText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(login_loginButton)
-                    .addComponent(login_registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(268, Short.MAX_VALUE))
-        );
-
-        cardPanel.add(loginPanel, "card1");
-
-        postman_resetbutton.setText("Reset");
-        postman_resetbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_resetbuttonActionPerformed(evt);
-            }
-        });
-
-        postman_submitbutton.setText("Submit");
-        postman_submitbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_submitbuttonActionPerformed(evt);
-            }
-        });
-
-        postman_senderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Sender"));
-
-        postman_sender_nameLabel.setText("Name");
-
-        postman_sender_addressLabel.setText("Address");
-
-        postman_sender_cellLabel.setText("Cell Phone");
-
-        postman_sender_unitLabel.setText("Unit");
-
-        postman_sender_telephoneLabel.setText("Telephone");
-
-        postman_sender_address_provinceLabel.setText("Province");
-
-        postman_sender_address_cityLabel.setText("City");
-
-        javax.swing.GroupLayout postman_senderPanelLayout = new javax.swing.GroupLayout(postman_senderPanel);
-        postman_senderPanel.setLayout(postman_senderPanelLayout);
-        postman_senderPanelLayout.setHorizontalGroup(
-            postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postman_senderPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(postman_sender_addressLabel)
-                    .addComponent(postman_sender_unitLabel)
-                    .addComponent(postman_sender_nameLabel))
-                .addGap(18, 18, 18)
-                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postman_senderPanelLayout.createSequentialGroup()
-                        .addComponent(postman_sender_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(postman_sender_cellLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(postman_sender_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_senderPanelLayout.createSequentialGroup()
-                        .addComponent(postman_sender_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(postman_sender_telephoneLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(postman_sender_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_senderPanelLayout.createSequentialGroup()
-                        .addComponent(postman_sender_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_sender_address_provinceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_sender_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_sender_address_cityLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_sender_address_detailText)))
-                .addGap(33, 33, 33))
-        );
-        postman_senderPanelLayout.setVerticalGroup(
-            postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postman_senderPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_sender_nameLabel)
-                    .addComponent(postman_sender_cellLabel)
-                    .addComponent(postman_sender_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_sender_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postman_sender_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(postman_sender_address_cityLabel)
-                        .addComponent(postman_sender_address_detailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postman_sender_addressLabel)
-                        .addComponent(postman_sender_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(postman_sender_address_provinceLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postman_sender_telephoneLabel)
-                        .addComponent(postman_sender_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_senderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postman_sender_unitLabel)
-                        .addComponent(postman_sender_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        postman_recipientPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Recipient"));
-
-        postman_recipient_nameLabel.setText("Name");
-
-        postman_recipient_addressLabel.setText("Address");
-
-        postman_recipient_address_provinceText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_recipient_address_provinceTextActionPerformed(evt);
-            }
-        });
-
-        postman_recipient_cellLabel.setText("Cell Phone");
-
-        postman_recipient_unitLabel.setText("Unit");
-
-        postman_recipient_telephoneLabel.setText("Telephone");
-
-        postman_recipient_telephoneText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_recipient_telephoneTextActionPerformed(evt);
-            }
-        });
-
-        postman_recipient_address_provinceLabel.setText("Province");
-
-        postman_recipient_address_cityLabel.setText("City");
-
-        javax.swing.GroupLayout postman_recipientPanelLayout = new javax.swing.GroupLayout(postman_recipientPanel);
-        postman_recipientPanel.setLayout(postman_recipientPanelLayout);
-        postman_recipientPanelLayout.setHorizontalGroup(
-            postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postman_recipientPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(postman_recipient_addressLabel)
-                    .addComponent(postman_recipient_unitLabel)
-                    .addComponent(postman_recipient_nameLabel))
-                .addGap(18, 18, 18)
-                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postman_recipientPanelLayout.createSequentialGroup()
-                        .addComponent(postman_recipient_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(postman_recipient_telephoneLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(postman_recipient_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_recipientPanelLayout.createSequentialGroup()
-                        .addComponent(postman_recipient_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(postman_recipient_cellLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(postman_recipient_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_recipientPanelLayout.createSequentialGroup()
-                        .addComponent(postman_recipient_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_recipient_address_provinceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_recipient_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_recipient_address_cityLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postman_recipient_address_detailText)))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        postman_recipientPanelLayout.setVerticalGroup(
-            postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postman_recipientPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_recipient_nameLabel)
-                    .addComponent(postman_recipient_cellLabel)
-                    .addComponent(postman_recipient_cellText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_recipient_nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postman_recipient_address_provinceLabel)
-                        .addComponent(postman_recipient_address_cityText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(postman_recipient_address_cityLabel)
-                        .addComponent(postman_recipient_address_detailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postman_recipient_addressLabel)
-                        .addComponent(postman_recipient_address_provinceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_recipientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_recipient_unitLabel)
-                    .addComponent(postman_recipient_unitText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_recipient_telephoneLabel)
-                    .addComponent(postman_recipient_telephoneText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        postman_consighmentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Consighment"));
-
-        postman_consighment_scriptLabel.setText("Script Number");
-
-        postman_consighment_weightLabel.setText("Weight");
-
-        postman_consighment_scriptText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_scriptTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_weightText.setText("kg");
-        postman_consighment_weightText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_weightTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_heightLabel.setText("Height");
-
-        postman_consighment_widthLabel.setText("Width");
-
-        postman_consighment_depthLabel.setText("Depth");
-
-        postman_consighment_heightText.setText("mm");
-        postman_consighment_heightText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_heightTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_widthText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_widthTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_depthText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_depthTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_internalLabel.setText("Internal");
-
-        postman_consighment_internalText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_internalTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_depthLabel1.setText("Volume");
-
-        postman_consighment_depthText1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_depthText1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout postman_consighmentPanelLayout = new javax.swing.GroupLayout(postman_consighmentPanel);
-        postman_consighmentPanel.setLayout(postman_consighmentPanelLayout);
-        postman_consighmentPanelLayout.setHorizontalGroup(
-            postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
-                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postman_consighmentPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(postman_consighment_depthLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(postman_consighment_depthText1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(postman_consighment_weightText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
-                                .addComponent(postman_consighment_scriptLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(postman_consighment_scriptText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(postman_consighment_weightLabel)
-                                .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
-                                    .addComponent(postman_consighment_internalLabel)
-                                    .addGap(38, 38, 38)
-                                    .addComponent(postman_consighment_internalText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(65, 65, 65)
-                        .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postman_consighment_heightLabel)
-                            .addComponent(postman_consighment_widthLabel)
-                            .addComponent(postman_consighment_depthLabel))
-                        .addGap(23, 23, 23)
-                        .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postman_consighment_depthText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postman_consighment_widthText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postman_consighment_heightText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        postman_consighmentPanelLayout.setVerticalGroup(
-            postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postman_consighmentPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_consighment_scriptLabel)
-                    .addComponent(postman_consighment_scriptText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_consighment_heightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(postman_consighment_heightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_consighment_weightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_consighment_weightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(postman_consighment_widthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(postman_consighment_widthText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_consighment_depthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(postman_consighment_depthText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_consighment_internalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(postman_consighment_internalText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(postman_consighmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_consighment_depthText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postman_consighment_depthLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        postman_deliveryTypeLabel.setText("Delivery Type");
-
-        postman_deliveryTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Economy", "Standard", "Express" }));
-
-        postman_packetTypeLabel.setText("Packet Type");
-
-        postman_packetTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Carton", "Wood Case", "Poly Mailer" }));
-
-        postman_totalPriceLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        postman_totalPriceLabel.setText("Total Price");
-
-        postman_totalPriceNumberLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        postman_totalPriceNumberLabel.setText("//number");
-
-        postman_totalPriceUnitLabel.setText("yuan");
-
-        postman_getPriceButton.setText("Get Price");
-        postman_getPriceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_getPriceButtonActionPerformed(evt);
-            }
-        });
-
-        postman_ticketNO.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        postman_ticketNO.setText("//ticket no.(auto)");
-
-        postman_getArriveTimeButton.setText("Arrive Time");
-
-        javax.swing.GroupLayout postmanPanelLayout = new javax.swing.GroupLayout(postmanPanel);
-        postmanPanel.setLayout(postmanPanelLayout);
-        postmanPanelLayout.setHorizontalGroup(
-            postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postmanPanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(postman_senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                        .addComponent(postman_resetbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(postman_submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(postman_recipientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(postmanPanelLayout.createSequentialGroup()
-                                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
-                                        .addComponent(postman_packetTypeLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(postman_packetTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
-                                        .addComponent(postman_deliveryTypeLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(postman_deliveryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(postmanPanelLayout.createSequentialGroup()
-                                .addComponent(postman_totalPriceLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(postman_totalPriceNumberLabel)
-                                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(postman_totalPriceUnitLabel))
-                                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                                        .addGap(95, 95, 95)
-                                        .addComponent(postman_getPriceButton, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))))
-                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(postman_consighmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52))
-            .addGroup(postmanPanelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(postman_ticketNO)
-                .addGap(325, 325, 325)
-                .addComponent(postman_getArriveTimeButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        postmanPanelLayout.setVerticalGroup(
-            postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postmanPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postman_resetbutton)
-                    .addComponent(postman_submitbutton))
-                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(postman_deliveryTypeLabel)
-                            .addComponent(postman_deliveryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(postman_packetTypeLabel)
-                            .addComponent(postman_packetTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(postmanPanelLayout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(postman_totalPriceLabel)
-                                .addGap(73, 73, 73))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postmanPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(postman_totalPriceNumberLabel)
-                                    .addComponent(postman_totalPriceUnitLabel))
-                                .addGap(56, 56, 56))))
-                    .addGroup(postmanPanelLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postman_senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postman_consighmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addComponent(postman_recipientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                        .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(postman_ticketNO)
-                            .addComponent(postman_getArriveTimeButton)
-                            .addComponent(postman_getPriceButton))
-                        .addGap(28, 28, 28))))
-        );
-
-        cardPanel.add(postmanPanel, "card2");
-
         center_button_airline.setText("Airline Loading");
         center_button_airline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2184,18 +2362,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_airline_label_departure_city.setText("City");
-
-        center_airline_departure_address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_airline_departure_addressActionPerformed(evt);
-            }
-        });
-
-        center_airline_destination_address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_airline_destination_addressActionPerformed(evt);
-            }
-        });
 
         center_airline_label_destination_city.setText("City");
 
@@ -2260,7 +2426,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(center_airline_label_loadingDate)
                     .addGroup(center_airlinePanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_airlinePanelLayout.createSequentialGroup()
                                 .addComponent(center_airline_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2268,9 +2434,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(center_airline_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_airline_label_departure_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_airline_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_airline_label_departure_city))
                             .addGroup(center_airlinePanelLayout.createSequentialGroup()
                                 .addComponent(center_airline_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2278,9 +2442,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(center_airline_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_airline_label_destination_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_airline_destination_address))))
+                                .addComponent(center_airline_label_destination_city))))
                     .addGroup(center_airlinePanelLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(center_airline_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2316,6 +2478,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(center_airlinePanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(center_airline_transportationExpense, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(143, 143, 143)
                 .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(center_airlinePanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
@@ -2357,8 +2520,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_airline_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_airline_label_departure_city)
-                                .addComponent(center_airline_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_airline_label_departure_city))
                             .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_airline_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(center_airline_label_departure_province)))
@@ -2368,8 +2530,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_airline_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_airline_label_destination_city)
-                                .addComponent(center_airline_destination_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_airline_label_destination_city))
                             .addGroup(center_airlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_airline_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(center_airline_label_destination_province)))
@@ -2432,18 +2593,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_train_label_departure_city.setText("City");
-
-        center_train_departure_address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_train_departure_addressActionPerformed(evt);
-            }
-        });
-
-        center_train_destination_address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_train_destination_addressActionPerformed(evt);
-            }
-        });
 
         center_train_label_destination_city.setText("City");
 
@@ -2508,7 +2657,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(center_train_label_loadingDate)
                     .addGroup(center_trainlinePanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_trainlinePanelLayout.createSequentialGroup()
                                 .addComponent(center_train_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2516,9 +2665,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(center_train_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_train_label_departure_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_train_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_train_label_departure_city))
                             .addGroup(center_trainlinePanelLayout.createSequentialGroup()
                                 .addComponent(center_train_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2526,9 +2673,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(center_train_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_train_label_destination_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_train_destination_address))))
+                                .addComponent(center_train_label_destination_city))))
                     .addGroup(center_trainlinePanelLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(center_train_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2564,6 +2709,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(center_trainlinePanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(center_train_transportationExpense, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(143, 143, 143)
                 .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(center_trainlinePanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
@@ -2605,8 +2751,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_train_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_train_label_departure_city)
-                                .addComponent(center_train_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_train_label_departure_city))
                             .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_train_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(center_train_label_departure_province)))
@@ -2616,8 +2761,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_train_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_train_label_destination_city)
-                                .addComponent(center_train_destination_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_train_label_destination_city))
                             .addGroup(center_trainlinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_train_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(center_train_label_destination_province)))
@@ -2680,18 +2824,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_vehicle_label_departure_city.setText("City");
-
-        center_vehicle_departure_address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_vehicle_departure_addressActionPerformed(evt);
-            }
-        });
-
-        center_vehicle_destination_address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_vehicle_destination_addressActionPerformed(evt);
-            }
-        });
 
         center_vehicle_label_destination_city.setText("City");
 
@@ -2756,7 +2888,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(center_vehicle_label_loadingDate)
                     .addGroup(center_vehiclePanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_vehiclePanelLayout.createSequentialGroup()
                                 .addComponent(center_vehicle_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2764,9 +2896,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(center_vehicle_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_vehicle_label_departure_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_vehicle_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_vehicle_label_departure_city))
                             .addGroup(center_vehiclePanelLayout.createSequentialGroup()
                                 .addComponent(center_vehicle_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2774,9 +2904,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(center_vehicle_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_vehicle_label_destination_city)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_vehicle_destination_address))))
+                                .addComponent(center_vehicle_label_destination_city))))
                     .addGroup(center_vehiclePanelLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(center_vehicle_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2812,6 +2940,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(center_vehiclePanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(center_vehicle_transportationExpense, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(143, 143, 143)
                 .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(center_vehiclePanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
@@ -2853,8 +2982,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_vehicle_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_vehicle_label_departure_city)
-                                .addComponent(center_vehicle_departure_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_vehicle_label_departure_city))
                             .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_vehicle_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(center_vehicle_label_departure_province)))
@@ -2864,8 +2992,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_vehicle_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_vehicle_label_destination_city)
-                                .addComponent(center_vehicle_destination_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(center_vehicle_label_destination_city))
                             .addGroup(center_vehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(center_vehicle_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(center_vehicle_label_destination_province)))
@@ -2993,7 +3120,7 @@ public class MainFrame extends javax.swing.JFrame {
         center_transfer_arrivalLayout.setVerticalGroup(
             center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_arrivalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(center_transfer_arrival_label_arrivalNo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(center_transfer_arrival_arrivalNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3043,68 +3170,32 @@ public class MainFrame extends javax.swing.JFrame {
 
         center_transfer_transfer_stockList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "transport_no", "date", "departure", "destination", "line", "expense"
             }
         ));
         center_transfer_transfer_stocklistPanel.setViewportView(center_transfer_transfer_stockList);
-
-        center_transfer_transfer_label_transferLine.setText("Transfer Line:");
-
-        center_transfer_transfer_line_train.setText("Train");
-
-        center_transfer_transfer_line_airline.setText("AirLine");
-
-        center_transfer_transfer_line_vehicle.setText("Vehicle");
-
-        center_transfer_transfer_submit.setText("Submit");
 
         javax.swing.GroupLayout center_transfer_transferPanelLayout = new javax.swing.GroupLayout(center_transfer_transferPanel);
         center_transfer_transferPanel.setLayout(center_transfer_transferPanelLayout);
         center_transfer_transferPanelLayout.setHorizontalGroup(
             center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_transferPanelLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(center_transfer_transfer_label_transferLine)
-                    .addGroup(center_transfer_transferPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(center_transfer_transfer_line_airline)
-                            .addComponent(center_transfer_transfer_line_train)
-                            .addGroup(center_transfer_transferPanelLayout.createSequentialGroup()
-                                .addComponent(center_transfer_transfer_line_vehicle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(center_transfer_transfer_submit)
-                                .addGap(21, 21, 21))))
-                    .addComponent(center_transfer_transfer_stocklistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(center_transfer_transfer_stocklistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                 .addContainerGap())
         );
         center_transfer_transferPanelLayout.setVerticalGroup(
             center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(center_transfer_transferPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(center_transfer_transfer_stocklistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(center_transfer_transfer_label_transferLine)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(center_transfer_transfer_line_airline)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(center_transfer_transfer_line_train)
-                .addGroup(center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(center_transfer_transferPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_transfer_line_vehicle)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_transferPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(center_transfer_transfer_submit)
-                        .addGap(14, 14, 14))))
+                .addComponent(center_transfer_transfer_stocklistPanel)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout center_transferPanelLayout = new javax.swing.GroupLayout(center_transferPanel);
@@ -3833,26 +3924,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         finance_numerical_receipt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Date", "Department", "Payee", "Beficiary", "Amount", "Collect Place"
             }
         ));
         finance_numerical_receiptPanel.setViewportView(finance_numerical_receipt);
 
         finance_numerical_payment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Date", "Payee", "Amount", "Account", "Entry"
             }
         ));
         finance_numerical_paymentPanel.setViewportView(finance_numerical_payment);
@@ -4044,7 +4135,7 @@ public class MainFrame extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Date", "Change"
+                "Name", "Amount"
             }
         ));
         finance_account_searchAndDelete_detailPanel.setViewportView(finance_account_searchAndDelete_detail);
@@ -4324,6 +4415,46 @@ public class MainFrame extends javax.swing.JFrame {
 
         manager_staff_departmentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Departments"));
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Company");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Beijing");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center_stock");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("hall");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Shanghai");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center_stock");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("hall");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Guangzhou");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center_stock");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("hall");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Nanjing");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("center_stock");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("hall");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("HQ");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("finance");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("manager");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        manager_staff_departments.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         manager_staff_departmentTreePanel.setViewportView(manager_staff_departments);
 
         javax.swing.GroupLayout manager_staff_departmentPanelLayout = new javax.swing.GroupLayout(manager_staff_departmentPanel);
@@ -4347,13 +4478,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         manager_staff_stafflist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "name", "department", "salary", "position"
             }
         ));
         manager_staff_listPanel.setViewportView(manager_staff_stafflist);
@@ -4493,10 +4624,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         manager_department_staff_id.setText("xxx-xxx");
 
-        manager_department_staff_from.setText("department id");
-
-        manager_department_staff_label_from.setText("from:");
-
         manager_department_staff_to.setText("department id");
 
         manager_department_staff_label_to.setText("to:");
@@ -4517,17 +4644,15 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(manager_department_staff_label_move))
                             .addGroup(manager_department_staffPanelLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
+                                .addGap(50, 50, 50)
                                 .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(manager_department_staff_label_to)
-                                    .addComponent(manager_department_staff_label_from)
                                     .addComponent(manager_department_staff_label_id))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(manager_department_staff_id)
-                                    .addComponent(manager_department_staff_from, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                    .addComponent(manager_department_staff_to))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(manager_department_staff_to, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
+                        .addContainerGap(156, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_department_staffPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(manager_department_staff_button_save)
@@ -4545,15 +4670,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(manager_department_staff_label_id)
                     .addComponent(manager_department_staff_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manager_department_staff_label_from)
-                    .addComponent(manager_department_staff_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manager_department_staff_label_to)
-                    .addComponent(manager_department_staff_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(manager_department_staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manager_department_staff_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manager_department_staff_label_to))
+                .addGap(69, 69, 69)
                 .addComponent(manager_department_staff_button_save)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -4662,57 +4783,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         manager_mainPanel.add(manager_departmentPanel, "card3");
 
-        manager_document_documentlistPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Document List"));
-
-        manager_document_documentlist.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        manager_document_documentpanel.setViewportView(manager_document_documentlist);
-
-        javax.swing.GroupLayout manager_document_documentlistPanelLayout = new javax.swing.GroupLayout(manager_document_documentlistPanel);
-        manager_document_documentlistPanel.setLayout(manager_document_documentlistPanelLayout);
-        manager_document_documentlistPanelLayout.setHorizontalGroup(
-            manager_document_documentlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manager_document_documentlistPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manager_document_documentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        manager_document_documentlistPanelLayout.setVerticalGroup(
-            manager_document_documentlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manager_document_documentlistPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manager_document_documentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout manager_documentPanelLayout = new javax.swing.GroupLayout(manager_documentPanel);
-        manager_documentPanel.setLayout(manager_documentPanelLayout);
-        manager_documentPanelLayout.setHorizontalGroup(
-            manager_documentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_documentPanelLayout.createSequentialGroup()
-                .addContainerGap(672, Short.MAX_VALUE)
-                .addComponent(manager_document_documentlistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        manager_documentPanelLayout.setVerticalGroup(
-            manager_documentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manager_documentPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(manager_document_documentlistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        manager_mainPanel.add(manager_documentPanel, "card4");
-
         manager_button_numercial.setText("Check Numercial");
         manager_button_numercial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4798,9 +4868,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         stock_realtimePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Real-time inventory"));
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Stock xx-xx");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Airline");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Stock xx-xx");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Airline");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
         javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
         treeNode3.add(treeNode4);
         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
@@ -4827,10 +4897,10 @@ public class MainFrame extends javax.swing.JFrame {
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Trainline");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row II");
         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
@@ -4853,10 +4923,10 @@ public class MainFrame extends javax.swing.JFrame {
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Vehicle");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row I");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 2");
+        treeNode3.add(treeNode4);
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Row II");
         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Line 1");
@@ -5316,7 +5386,7 @@ public class MainFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Date", "in/out", "position", "amount"
+                "Date", "in/out", "position", "goods_no"
             }
         ));
         stock_inventoryCheck_listPanel.setViewportView(stock_inventoryCheck_list);
@@ -5530,13 +5600,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         stock_inventoryAdjust_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "unit", "row", "line", "saturation"
+                "unit", "row", "line", "saturation", "isWarning"
             }
         ));
         stock_inventoryAdjust_tablePanel.setViewportView(stock_inventoryAdjust_table);
@@ -5545,7 +5615,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         stock_inventoryAdjust_label_from.setText("from:");
 
-        stock_inventoryAdjust_from_unit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "airline", "trainline", "vehicle" }));
+        stock_inventoryAdjust_from_unit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "air", "train", "vehicle" }));
 
         stock_inventoryAdjust_label_unit.setText("Unit");
 
@@ -5569,6 +5639,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         stock_inventoryAdjust_button_Save.setText("Save");
 
+        stock_inventoryAdjust_from_position.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        stock_inventoryAdjust_label_fromPos.setText("Pos.");
+
+        stock_inventoryAdjust_to_position.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        stock_inventoryAdjust_label_toPos.setText("Pos.");
+
         javax.swing.GroupLayout stock_inventoryAdjustmentsLayout = new javax.swing.GroupLayout(stock_inventoryAdjustments);
         stock_inventoryAdjustments.setLayout(stock_inventoryAdjustmentsLayout);
         stock_inventoryAdjustmentsLayout.setHorizontalGroup(
@@ -5586,39 +5664,47 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stock_inventoryAdjust_label_Adjust)
                     .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stock_inventoryAdjust_label_from)
-                            .addComponent(stock_inventoryAdjust_label_to))
-                        .addGap(18, 18, 18)
+                        .addGap(338, 338, 338)
+                        .addComponent(stock_inventoryAdjust_button_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(stock_inventoryAdjust_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                                .addComponent(stock_inventoryAdjust_label_to)
+                                .addGap(35, 35, 35)
+                                .addComponent(stock_inventoryAdjust_to_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
+                                .addComponent(stock_inventoryAdjust_label_from)
+                                .addGap(18, 18, 18)
+                                .addComponent(stock_inventoryAdjust_from_unit, 0, 1, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
-                                .addComponent(stock_inventoryAdjust_to_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(stock_inventoryAdjust_label_toRow)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(stock_inventoryAdjust_to_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(stock_inventoryAdjust_label_toLine))
-                            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
-                                .addComponent(stock_inventoryAdjust_from_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(stock_inventoryAdjust_label_toLine)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(stock_inventoryAdjust_to_position, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_toPos))
+                            .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
                                 .addComponent(stock_inventoryAdjust_label_unit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(stock_inventoryAdjust_from_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(stock_inventoryAdjust_label_fromRow)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(stock_inventoryAdjust_from_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(stock_inventoryAdjust_label_fromLine))
-                                    .addGroup(stock_inventoryAdjustmentsLayout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(stock_inventoryAdjust_button_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addComponent(stock_inventoryAdjust_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_fromRow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_from_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_fromLine)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_from_position, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stock_inventoryAdjust_label_fromPos)))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         stock_inventoryAdjustmentsLayout.setVerticalGroup(
             stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5640,7 +5726,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(stock_inventoryAdjust_from_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stock_inventoryAdjust_label_fromRow)
                     .addComponent(stock_inventoryAdjust_from_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stock_inventoryAdjust_label_fromLine))
+                    .addComponent(stock_inventoryAdjust_label_fromLine)
+                    .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(stock_inventoryAdjust_from_position, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stock_inventoryAdjust_label_fromPos)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stock_inventoryAdjust_label_to)
@@ -5648,7 +5737,10 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(stock_inventoryAdjust_to_row, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(stock_inventoryAdjust_label_toRow)
                         .addComponent(stock_inventoryAdjust_to_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(stock_inventoryAdjust_label_toLine)))
+                        .addComponent(stock_inventoryAdjust_label_toLine)
+                        .addGroup(stock_inventoryAdjustmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(stock_inventoryAdjust_to_position, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stock_inventoryAdjust_label_toPos))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(stock_inventoryAdjust_button_Save)
                 .addGap(23, 23, 23))
@@ -5746,6 +5838,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
+                      
 
     private void mainPanel_logoutActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
@@ -5756,7 +5849,35 @@ public class MainFrame extends javax.swing.JFrame {
     }                                                   
 
     private void postman_submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
+        String sender_name = this.postman_sender_nameText.getText();
+        String sender_cell = this.postman_sender_cellText.getText();
+        String sender_province = this.postman_sender_address_provinceText.getText();
+        String sender_city = this.postman_sender_address_cityText.getText();
+        String sender_add = this.postman_sender_address_detailText.getText();
+        String sender_unit = this.postman_sender_unitText.getText();
+        String sender_tele = this.postman_sender_telephoneText.getText();
+        String receive_name = this.postman_recipient_nameText.getText();
+        String receive_cell = this.postman_recipient_cellText.getText();
+        String receive_province = this.postman_recipient_address_provinceText.getText();
+        String receive_city = this.postman_recipient_address_cityText.getText();
+        String receive_add = this.postman_recipient_address_detailText.getText();
+        String receive_unit = this.postman_recipient_unitText.getText();
+        String receive_tele = this.postman_recipient_telephoneText.getText();
+        String script = this.postman_consighment_scriptText.getText();
+        String height = this.postman_consighment_heightText.getText();
+        String weight = this.postman_consighment_weightText.getText();
+        String width = this.postman_consighment_widthText.getText();
+        String internal = this.postman_consighment_internalText.getText();
+        String depth = this.postman_consighment_depthText.getText();
+        String volume = this.postman_consighment_depthText1.getText();
+        String delivery = (String)this.postman_deliveryTypeComboBox.getSelectedItem();
+        String packet = (String)this.postman_packetTypeComboBox.getSelectedItem();
+        String no = this.postman_ticketNO.getText();
+        Address sen = new Address(sender_province,sender_city,sender_add);
+        Address re = new Address(receive_province,receive_city,receive_add);
+        postmanData.addTicket(new Ticket(new Customer(sender_name,sender_cell,sen,sender_unit,sender_tele),
+        								 new Customer(receive_name,receive_cell,re,receive_unit,receive_tele),
+        								 script,height,weight,width,internal,depth,volume,no,DeliveryType.valueOf(delivery),PacketType.valueOf(packet)));
     }                                                    
 
     private void postman_recipient_telephoneTextActionPerformed(java.awt.event.ActionEvent evt) {                                                                
@@ -5804,7 +5925,13 @@ public class MainFrame extends javax.swing.JFrame {
     }                                              
 
     private void login_loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
+        String id = this.login_nameText.getText();
+        String password = this.login_keyText.getText();
+        Login login = systemBL.judgeLogin(id, password);
+        System.out.println(String.valueOf(login));
+        this.loginPanel.setVisible(false);
+        this.postman_ticketNO.setText(this.postmanBL.getTicketNo());
+        this.postmanPanel.setVisible(true);
     }                                                 
 
     private void login_aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -5867,14 +5994,6 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                        
 
-    private void center_airline_destination_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
-        // TODO add your handling code here:
-    }                                                                  
-
-    private void center_airline_departure_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
     private void center_airline_departure_cityActionPerformed(java.awt.event.ActionEvent evt) {                                                              
         // TODO add your handling code here:
     }                                                             
@@ -5882,14 +6001,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void center_train_departure_cityActionPerformed(java.awt.event.ActionEvent evt) {                                                            
         // TODO add your handling code here:
     }                                                           
-
-    private void center_train_departure_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
-    }                                                              
-
-    private void center_train_destination_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
 
     private void center_train_carriageNoActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         // TODO add your handling code here:
@@ -5910,14 +6021,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void center_vehicle_departure_cityActionPerformed(java.awt.event.ActionEvent evt) {                                                              
         // TODO add your handling code here:
     }                                                             
-
-    private void center_vehicle_departure_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
-    private void center_vehicle_destination_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
-        // TODO add your handling code here:
-    }                                                                  
 
     private void center_vehicle_SupercargoNoActionPerformed(java.awt.event.ActionEvent evt) {                                                            
         // TODO add your handling code here:
@@ -6023,6 +6126,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                        
 
+    private void hall_driversManagement_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
+        // TODO add your handling code here:
+    }                                                                   
+
     /**
      * @param args the command line arguments
      */
@@ -6053,7 +6160,8 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame main = new MainFrame();
+                main.setVisible(true);
             }
         });
     }
@@ -6067,10 +6175,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton center_airline_button_submit;
     private javax.swing.JTextField center_airline_counterNo;
     private javax.swing.JComboBox center_airline_day;
-    private javax.swing.JTextField center_airline_departure_address;
     private javax.swing.JTextField center_airline_departure_city;
     private javax.swing.JTextField center_airline_departure_province;
-    private javax.swing.JTextField center_airline_destination_address;
     private javax.swing.JTextField center_airline_destination_city;
     private javax.swing.JTextField center_airline_destination_province;
     private javax.swing.JTextField center_airline_flightNo;
@@ -6104,10 +6210,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton center_train_button_submit;
     private javax.swing.JTextField center_train_carriageNo;
     private javax.swing.JComboBox center_train_day;
-    private javax.swing.JTextField center_train_departure_address;
     private javax.swing.JTextField center_train_departure_city;
     private javax.swing.JTextField center_train_departure_province;
-    private javax.swing.JTextField center_train_destination_address;
     private javax.swing.JTextField center_train_destination_city;
     private javax.swing.JTextField center_train_destination_province;
     private javax.swing.JTable center_train_goodsNoTable;
@@ -6158,22 +6262,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton center_transfer_arrival_submit;
     private javax.swing.JComboBox center_transfer_arrival_year;
     private javax.swing.JPanel center_transfer_transferPanel;
-    private javax.swing.JLabel center_transfer_transfer_label_transferLine;
-    private javax.swing.JRadioButton center_transfer_transfer_line_airline;
-    private javax.swing.JRadioButton center_transfer_transfer_line_train;
-    private javax.swing.JRadioButton center_transfer_transfer_line_vehicle;
     private javax.swing.JTable center_transfer_transfer_stockList;
     private javax.swing.JScrollPane center_transfer_transfer_stocklistPanel;
-    private javax.swing.JButton center_transfer_transfer_submit;
     private javax.swing.JPanel center_vehiclePanel;
     private javax.swing.JTextField center_vehicle_SupercargoNo;
     private javax.swing.JButton center_vehicle_button_cancel;
     private javax.swing.JButton center_vehicle_button_submit;
     private javax.swing.JComboBox center_vehicle_day;
-    private javax.swing.JTextField center_vehicle_departure_address;
     private javax.swing.JTextField center_vehicle_departure_city;
     private javax.swing.JTextField center_vehicle_departure_province;
-    private javax.swing.JTextField center_vehicle_destination_address;
     private javax.swing.JTextField center_vehicle_destination_city;
     private javax.swing.JTextField center_vehicle_destination_province;
     private javax.swing.JTable center_vehicle_goodsNoTable;
@@ -6390,13 +6487,26 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JList hall_collectionNote_dateList;
     private javax.swing.JScrollPane hall_collectionNote_listPanel;
     private javax.swing.JScrollPane hall_collectionNote_tablePanel;
+    private javax.swing.JTextField hall_driverManagement_birthday;
+    private javax.swing.JTextField hall_driverManagement_indentity;
+    private javax.swing.JLabel hall_driverManagement_label_birthday;
+    private javax.swing.JLabel hall_driverManagement_label_indentity;
+    private javax.swing.JLabel hall_driverManagement_label_name;
+    private javax.swing.JLabel hall_driverManagement_label_no;
+    private javax.swing.JLabel hall_driverManagement_label_phone;
+    private javax.swing.JLabel hall_driverManagement_label_sex;
+    private javax.swing.JLabel hall_driverManagement_label_unit;
+    private javax.swing.JTextField hall_driverManagement_name;
+    private javax.swing.JTextField hall_driverManagement_no;
+    private javax.swing.JTextField hall_driverManagement_phone;
+    private javax.swing.JTextField hall_driverManagement_sex;
+    private javax.swing.JTextField hall_driverManagement_unit;
     private javax.swing.JButton hall_driversManagement;
     private javax.swing.JPanel hall_driversManagementPanel;
     private javax.swing.JTable hall_driversManagementPanel_driverList;
     private javax.swing.JButton hall_driversManagement_AddButton;
     private javax.swing.JButton hall_driversManagement_SearchButton;
     private javax.swing.JTextField hall_driversManagement_SearchName;
-    private javax.swing.JButton hall_driversManagement_UpdateButton;
     private javax.swing.JLabel hall_driversManagement_driverImage;
     private javax.swing.JPanel hall_driversManagement_driverImagePanel;
     private javax.swing.JScrollPane hall_driversManagement_tablePanel;
@@ -6407,10 +6517,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton hall_vehicleLoading_button_hallNoDefault;
     private javax.swing.JButton hall_vehicleLoading_button_submit;
     private javax.swing.JComboBox hall_vehicleLoading_day;
-    private javax.swing.JTextField hall_vehicleLoading_departure_address;
     private javax.swing.JTextField hall_vehicleLoading_departure_city;
     private javax.swing.JTextField hall_vehicleLoading_departure_province;
-    private javax.swing.JTextField hall_vehicleLoading_destination_address;
     private javax.swing.JTextField hall_vehicleLoading_destination_city;
     private javax.swing.JTextField hall_vehicleLoading_destination_province;
     private javax.swing.JTable hall_vehicleLoading_goodsNoTable;
@@ -6427,11 +6535,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hall_vehicleLoading_label_month;
     private javax.swing.JLabel hall_vehicleLoading_label_supercargo;
     private javax.swing.JLabel hall_vehicleLoading_label_supervisor;
+    private javax.swing.JLabel hall_vehicleLoading_label_transportNo;
     private javax.swing.JLabel hall_vehicleLoading_label_transportationExpense;
     private javax.swing.JLabel hall_vehicleLoading_label_year;
     private javax.swing.JComboBox hall_vehicleLoading_month;
     private javax.swing.JTextField hall_vehicleLoading_supercargo;
     private javax.swing.JTextField hall_vehicleLoading_supervisor;
+    private javax.swing.JTextField hall_vehicleLoading_tansportNo;
     private javax.swing.JTextField hall_vehicleLoading_transportationExpense;
     private javax.swing.JComboBox hall_vehicleLoading_year;
     private javax.swing.JButton hall_vehiclesManagement;
@@ -6443,6 +6553,16 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hall_vehiclesManagement_carImage;
     private javax.swing.JPanel hall_vehiclesManagement_carImagePanel;
     private javax.swing.JTable hall_vehiclesManagement_carList;
+    private javax.swing.JTextField hall_vehiclesManagement_chassis;
+    private javax.swing.JTextField hall_vehiclesManagement_engine;
+    private javax.swing.JTextField hall_vehiclesManagement_jointime;
+    private javax.swing.JLabel hall_vehiclesManagement_label_chassis;
+    private javax.swing.JLabel hall_vehiclesManagement_label_engine;
+    private javax.swing.JLabel hall_vehiclesManagement_label_join;
+    private javax.swing.JLabel hall_vehiclesManagement_label_name;
+    private javax.swing.JLabel hall_vehiclesManagement_label_no;
+    private javax.swing.JTextField hall_vehiclesManagement_name;
+    private javax.swing.JTextField hall_vehiclesManagement_no;
     private javax.swing.JScrollPane hall_vehiclesManagement_tablePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -6474,9 +6594,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTree manager_department_departments;
     private javax.swing.JPanel manager_department_staffPanel;
     private javax.swing.JButton manager_department_staff_button_save;
-    private javax.swing.JTextField manager_department_staff_from;
     private javax.swing.JTextField manager_department_staff_id;
-    private javax.swing.JLabel manager_department_staff_label_from;
     private javax.swing.JLabel manager_department_staff_label_id;
     private javax.swing.JLabel manager_department_staff_label_move;
     private javax.swing.JLabel manager_department_staff_label_to;
@@ -6493,10 +6611,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField manager_department_updatePanel_manager;
     private javax.swing.JTextField manager_department_updatePanel_name;
     private javax.swing.JTextField manager_department_updatePanel_parent;
-    private javax.swing.JPanel manager_documentPanel;
-    private javax.swing.JTable manager_document_documentlist;
-    private javax.swing.JPanel manager_document_documentlistPanel;
-    private javax.swing.JScrollPane manager_document_documentpanel;
     private javax.swing.JPanel manager_mainPanel;
     private javax.swing.JPanel manager_staffPanel;
     private javax.swing.JPanel manager_staff_departmentPanel;
@@ -6618,20 +6732,24 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton stock_inventoryAdjust_button_Save;
     private javax.swing.JButton stock_inventoryAdjust_button_check;
     private javax.swing.JComboBox stock_inventoryAdjust_from_line;
+    private javax.swing.JComboBox stock_inventoryAdjust_from_position;
     private javax.swing.JComboBox stock_inventoryAdjust_from_row;
     private javax.swing.JComboBox stock_inventoryAdjust_from_unit;
     private javax.swing.JLabel stock_inventoryAdjust_label_Adjust;
     private javax.swing.JLabel stock_inventoryAdjust_label_from;
     private javax.swing.JLabel stock_inventoryAdjust_label_fromLine;
+    private javax.swing.JLabel stock_inventoryAdjust_label_fromPos;
     private javax.swing.JLabel stock_inventoryAdjust_label_fromRow;
     private javax.swing.JLabel stock_inventoryAdjust_label_to;
     private javax.swing.JLabel stock_inventoryAdjust_label_toLine;
+    private javax.swing.JLabel stock_inventoryAdjust_label_toPos;
     private javax.swing.JLabel stock_inventoryAdjust_label_toRow;
     private javax.swing.JLabel stock_inventoryAdjust_label_unit;
     private javax.swing.JLabel stock_inventoryAdjust_label_warningPercent;
     private javax.swing.JTable stock_inventoryAdjust_table;
     private javax.swing.JScrollPane stock_inventoryAdjust_tablePanel;
     private javax.swing.JComboBox stock_inventoryAdjust_to_line;
+    private javax.swing.JComboBox stock_inventoryAdjust_to_position;
     private javax.swing.JComboBox stock_inventoryAdjust_to_row;
     private javax.swing.JComboBox stock_inventoryAdjust_warningPercent;
     private javax.swing.JPanel stock_inventoryAdjustments;
