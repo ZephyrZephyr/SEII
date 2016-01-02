@@ -19,5 +19,5 @@ public interface CompanyBLService {
 	public abstract void changeSalary(String staffId,String salary);
 	public abstract void moveStaff(String staffId,String newDep);
 	public abstract void updateDepartment(String depId,String newName,String newManager,String newParent);
-	public abstract ArrayList<StaffVO> getStaffByDepartment(String departmentId);
+	public abstract ArrayList<StaffVO> getStaffByDepartment(String departmentName);
 }

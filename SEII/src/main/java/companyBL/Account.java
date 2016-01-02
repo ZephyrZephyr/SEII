@@ -14,6 +14,14 @@ public class Account {
 		this.unit = temp[1];
 		this.department = temp[2];
 	}
+	public Account(String name,String amount){
+		this.name = name;
+		String[] temp = name.split(".");
+		this.company = temp[0];
+		this.unit = temp[1];
+		this.department = temp[2];
+		this.amount = amount;
+	}
 	public String getCompany() {
 		return company;
 	}

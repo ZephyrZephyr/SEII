@@ -1,5 +1,6 @@
 package companyBL;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import data.CompanyData;
@@ -18,7 +19,12 @@ public class CompanyBLController implements CompanyBLService{
 	
 	private CompanyDataService data;
 	public CompanyBLController(){
-		data = new CompanyData();
+		try {
+			data = new CompanyData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getTotalPrice(ArrayList<Receipt_SimpleVO> receiptList) {
@@ -89,7 +95,7 @@ public class CompanyBLController implements CompanyBLService{
 		data.updateDepartment(depId, newName, newManager, newParent);
 	}
 
-	public ArrayList<StaffVO> getStaffByDepartment(String departmentId) {
-		return data.getStaffByDep(departmentId);
+	public ArrayList<StaffVO> getStaffByDepartment(String departmentName) {
+		return data.getStaffByDep(departmentName);
 	}
 }
