@@ -27,10 +27,10 @@ public class CompanyBLController implements CompanyBLService{
 		}
 	}
 
-	public String getTotalPrice(ArrayList<Receipt_SimpleVO> receiptList) {
+	public String getTotalPrice(ArrayList<ReceiptVO> receiptList) {
 		double price = 0;
 		for(int i = 0;i<receiptList.size();i++){
-			price += Double.parseDouble(receiptList.get(i).getPrice());
+			price += Double.parseDouble(receiptList.get(i).getAmount());
 		}
 		return String.valueOf(price);
 	}
@@ -97,5 +97,21 @@ public class CompanyBLController implements CompanyBLService{
 
 	public ArrayList<StaffVO> getStaffByDepartment(String departmentName) {
 		return data.getStaffByDep(departmentName);
+	}
+
+	public void addAmountIntoAccount(String name,String amount) {
+		data.saveAmountIntoAccount(name, String.valueOf(Double.parseDouble(amount)+Double.parseDouble(data.getAmountByExactName(name))));
+	}
+
+	public ArrayList<String> getStaffByAccount(String name) {
+		String[] temps = name.split(".");
+		String dep = temps[2];
+		return data.getStaffByDepartment(dep);
+	}
+
+	public ArrayList<String> getCarsByAccount(String name) {
+		String[] temps = name.split(".");
+		String dep = temps[2];
+		return data.getCarsByDepartment(dep);
 	}
 }

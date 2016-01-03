@@ -5,21 +5,37 @@
  */
 package ui;
 
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
-import data.PostmanData;
-import dataService.PostmanDataService;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
+
+import companyBL.CompanyBLController;
+import po.*;
 import postManBL.Customer;
 import postManBL.PostmanBLController;
 import postManBL.Ticket;
 import systemBL.SystemBLController;
-import words.Address;
-import words.DeliveryType;
-import words.Login;
-import words.PacketType;
-import BLService.PostmanBLService;
-import BLService.SystemBLService;
-
+import transporter.*;
+import ui.mods.*;
+import vo.AlarmVO;
+import vo.CostAndIncome;
+import vo.InventoryCheckVO;
+import vo.InventoryCountVO;
+import vo.TotalWarehouseVO;
+import words.*;
+import BLService.*;
+import data.*;
+import dataService.*;
+import deliveryCenterBL.DeliveryCenterBLController;
+import deliveryCenterStockBL.DeliveryCenterStockBLController;
+import deliveryHallBL.DeliveryHallBLController;
 /**
  *
  * @author zephyr
@@ -28,14 +44,30 @@ public class MainFrame extends javax.swing.JFrame {
 	private SystemBLService systemBL; //= new SystemBLController();
 	private PostmanBLService postmanBL; //= new PostmanBLController();
 	private PostmanDataService postmanData; // = new PostmanData();
+	private DeliveryHallBLService hallBL;
+	private DeliveryHallDataService hallData;
+	private DeliveryCenterBLService centerBL;
+	private DeliveryCenterDataService centerData;
+	private CompanyData companyData;
+	private CompanyBLService companyBL;
+	private DeliveryCenterStockBLService stockBL;
+	private DeliveryCenterStockDataService stockData;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
     	systemBL = new SystemBLController();
     	postmanBL = new PostmanBLController();
+    	hallBL = new DeliveryHallBLController();
+    	centerBL = new DeliveryCenterBLController();
+    	companyBL = new CompanyBLController();
+    	stockBL = new DeliveryCenterStockBLController();
     	try {
 			postmanData = new PostmanData();
+			centerData = new DeliveryCenterData();
+			hallData = new DeliveryHallData();
+			companyData = new CompanyData();
+			stockData = new DeliveryCenterStockData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,64 +110,6 @@ public class MainFrame extends javax.swing.JFrame {
         login_inquiryButton = new javax.swing.JButton();
         login_aboutButton = new javax.swing.JButton();
         login_registerButton = new javax.swing.JButton();
-        postmanPanel = new javax.swing.JPanel();
-        postman_resetbutton = new javax.swing.JButton();
-        postman_submitbutton = new javax.swing.JButton();
-        postman_senderPanel = new javax.swing.JPanel();
-        postman_sender_nameLabel = new javax.swing.JLabel();
-        postman_sender_nameText = new javax.swing.JTextField();
-        postman_sender_addressLabel = new javax.swing.JLabel();
-        postman_sender_address_provinceText = new javax.swing.JTextField();
-        postman_sender_cellLabel = new javax.swing.JLabel();
-        postman_sender_cellText = new javax.swing.JTextField();
-        postman_sender_unitLabel = new javax.swing.JLabel();
-        postman_sender_unitText = new javax.swing.JTextField();
-        postman_sender_telephoneLabel = new javax.swing.JLabel();
-        postman_sender_telephoneText = new javax.swing.JTextField();
-        postman_sender_address_provinceLabel = new javax.swing.JLabel();
-        postman_sender_address_cityText = new javax.swing.JTextField();
-        postman_sender_address_cityLabel = new javax.swing.JLabel();
-        postman_sender_address_detailText = new javax.swing.JTextField();
-        postman_recipientPanel = new javax.swing.JPanel();
-        postman_recipient_nameLabel = new javax.swing.JLabel();
-        postman_recipient_nameText = new javax.swing.JTextField();
-        postman_recipient_addressLabel = new javax.swing.JLabel();
-        postman_recipient_address_provinceText = new javax.swing.JTextField();
-        postman_recipient_cellLabel = new javax.swing.JLabel();
-        postman_recipient_cellText = new javax.swing.JTextField();
-        postman_recipient_unitLabel = new javax.swing.JLabel();
-        postman_recipient_unitText = new javax.swing.JTextField();
-        postman_recipient_telephoneLabel = new javax.swing.JLabel();
-        postman_recipient_telephoneText = new javax.swing.JTextField();
-        postman_recipient_address_detailText = new javax.swing.JTextField();
-        postman_recipient_address_cityText = new javax.swing.JTextField();
-        postman_recipient_address_provinceLabel = new javax.swing.JLabel();
-        postman_recipient_address_cityLabel = new javax.swing.JLabel();
-        postman_consighmentPanel = new javax.swing.JPanel();
-        postman_consighment_scriptLabel = new javax.swing.JLabel();
-        postman_consighment_weightLabel = new javax.swing.JLabel();
-        postman_consighment_scriptText = new javax.swing.JTextField();
-        postman_consighment_weightText = new javax.swing.JTextField();
-        postman_consighment_heightLabel = new javax.swing.JLabel();
-        postman_consighment_widthLabel = new javax.swing.JLabel();
-        postman_consighment_depthLabel = new javax.swing.JLabel();
-        postman_consighment_heightText = new javax.swing.JTextField();
-        postman_consighment_widthText = new javax.swing.JTextField();
-        postman_consighment_depthText = new javax.swing.JTextField();
-        postman_consighment_internalLabel = new javax.swing.JLabel();
-        postman_consighment_internalText = new javax.swing.JTextField();
-        postman_consighment_depthLabel1 = new javax.swing.JLabel();
-        postman_consighment_depthText1 = new javax.swing.JTextField();
-        postman_deliveryTypeLabel = new javax.swing.JLabel();
-        postman_deliveryTypeComboBox = new javax.swing.JComboBox();
-        postman_packetTypeLabel = new javax.swing.JLabel();
-        postman_packetTypeComboBox = new javax.swing.JComboBox();
-        postman_totalPriceLabel = new javax.swing.JLabel();
-        postman_totalPriceNumberLabel = new javax.swing.JLabel();
-        postman_totalPriceUnitLabel = new javax.swing.JLabel();
-        postman_getPriceButton = new javax.swing.JButton();
-        postman_ticketNO = new javax.swing.JLabel();
-        postman_getArriveTimeButton = new javax.swing.JButton();
         hallPanel = new javax.swing.JPanel();
         hall_vehicleLoadingManagement = new javax.swing.JButton();
         hall_acceptanceAndDistributionManagement = new javax.swing.JButton();
@@ -225,6 +199,8 @@ public class MainFrame extends javax.swing.JFrame {
         hall_driverManagement_unit = new javax.swing.JTextField();
         hall_driverManagement_label_sex = new javax.swing.JLabel();
         hall_driverManagement_sex = new javax.swing.JTextField();
+        hall_driverManagement_label_date = new javax.swing.JLabel();
+        hall_driverManagement_date = new javax.swing.JTextField();
         hall_vehicleLoadingManagementPanel = new javax.swing.JPanel();
         hall_vehicleLoading_label_loadingDate = new javax.swing.JLabel();
         hall_vehicleLoading_year = new javax.swing.JComboBox();
@@ -235,7 +211,6 @@ public class MainFrame extends javax.swing.JFrame {
         hall_vehicleLoading_label_day = new javax.swing.JLabel();
         hall_vehicleLoading_label_hallNo = new javax.swing.JLabel();
         hall_vehicleLoading_hallNo = new javax.swing.JTextField();
-        hall_vehicleLoading_button_hallNoDefault = new javax.swing.JButton();
         hall_vehicleLoading_label_departure = new javax.swing.JLabel();
         hall_vehicleLoading_departure_province = new javax.swing.JTextField();
         hall_vehicleLoading_label_departure_province = new javax.swing.JLabel();
@@ -265,12 +240,97 @@ public class MainFrame extends javax.swing.JFrame {
         hall_collectionNote_dailyCollection = new javax.swing.JTable();
         hall_collectionNote_SaveButton = new javax.swing.JButton();
         hall_collectionNote_CancelButton = new javax.swing.JButton();
+        postmanPanel = new javax.swing.JPanel();
+        postman_resetbutton = new javax.swing.JButton();
+        postman_submitbutton = new javax.swing.JButton();
+        postman_senderPanel = new javax.swing.JPanel();
+        postman_sender_nameLabel = new javax.swing.JLabel();
+        postman_sender_nameText = new javax.swing.JTextField();
+        postman_sender_addressLabel = new javax.swing.JLabel();
+        postman_sender_address_provinceText = new javax.swing.JTextField();
+        postman_sender_cellLabel = new javax.swing.JLabel();
+        postman_sender_cellText = new javax.swing.JTextField();
+        postman_sender_unitLabel = new javax.swing.JLabel();
+        postman_sender_unitText = new javax.swing.JTextField();
+        postman_sender_telephoneLabel = new javax.swing.JLabel();
+        postman_sender_telephoneText = new javax.swing.JTextField();
+        postman_sender_address_provinceLabel = new javax.swing.JLabel();
+        postman_sender_address_cityText = new javax.swing.JTextField();
+        postman_sender_address_cityLabel = new javax.swing.JLabel();
+        postman_sender_address_detailText = new javax.swing.JTextField();
+        postman_recipientPanel = new javax.swing.JPanel();
+        postman_recipient_nameLabel = new javax.swing.JLabel();
+        postman_recipient_nameText = new javax.swing.JTextField();
+        postman_recipient_addressLabel = new javax.swing.JLabel();
+        postman_recipient_address_provinceText = new javax.swing.JTextField();
+        postman_recipient_cellLabel = new javax.swing.JLabel();
+        postman_recipient_cellText = new javax.swing.JTextField();
+        postman_recipient_unitLabel = new javax.swing.JLabel();
+        postman_recipient_unitText = new javax.swing.JTextField();
+        postman_recipient_telephoneLabel = new javax.swing.JLabel();
+        postman_recipient_telephoneText = new javax.swing.JTextField();
+        postman_recipient_address_detailText = new javax.swing.JTextField();
+        postman_recipient_address_cityText = new javax.swing.JTextField();
+        postman_recipient_address_provinceLabel = new javax.swing.JLabel();
+        postman_recipient_address_cityLabel = new javax.swing.JLabel();
+        postman_consighmentPanel = new javax.swing.JPanel();
+        postman_consighment_scriptLabel = new javax.swing.JLabel();
+        postman_consighment_weightLabel = new javax.swing.JLabel();
+        postman_consighment_scriptText = new javax.swing.JTextField();
+        postman_consighment_weightText = new javax.swing.JTextField();
+        postman_consighment_heightLabel = new javax.swing.JLabel();
+        postman_consighment_widthLabel = new javax.swing.JLabel();
+        postman_consighment_depthLabel = new javax.swing.JLabel();
+        postman_consighment_heightText = new javax.swing.JTextField();
+        postman_consighment_widthText = new javax.swing.JTextField();
+        postman_consighment_depthText = new javax.swing.JTextField();
+        postman_consighment_internalLabel = new javax.swing.JLabel();
+        postman_consighment_internalText = new javax.swing.JTextField();
+        postman_consighment_depthLabel1 = new javax.swing.JLabel();
+        postman_consighment_depthText1 = new javax.swing.JTextField();
+        postman_deliveryTypeLabel = new javax.swing.JLabel();
+        postman_deliveryTypeComboBox = new javax.swing.JComboBox();
+        postman_packetTypeLabel = new javax.swing.JLabel();
+        postman_packetTypeComboBox = new javax.swing.JComboBox();
+        postman_totalPriceLabel = new javax.swing.JLabel();
+        postman_totalPriceNumberLabel = new javax.swing.JLabel();
+        postman_totalPriceUnitLabel = new javax.swing.JLabel();
+        postman_getPriceButton = new javax.swing.JButton();
+        postman_ticketNO = new javax.swing.JLabel();
+        postman_getArriveTimeButton = new javax.swing.JButton();
         centerPanel = new javax.swing.JPanel();
         center_button_airline = new javax.swing.JButton();
         center_button_trainline = new javax.swing.JButton();
         center_button_vehicle = new javax.swing.JButton();
         center_button_transfer = new javax.swing.JButton();
         center_mainPanel = new javax.swing.JPanel();
+        center_transferPanel = new javax.swing.JPanel();
+        center_transfer_arrival = new javax.swing.JPanel();
+        center_transfer_arrival_address = new javax.swing.JTextField();
+        center_transfer_arrival_day = new javax.swing.JComboBox();
+        center_transfer_arrival_label_goodsState = new javax.swing.JLabel();
+        center_transfer_arrival_label_province = new javax.swing.JLabel();
+        center_transfer_arrival_label_departure = new javax.swing.JLabel();
+        center_transfer_arrival_state_damaged = new javax.swing.JRadioButton();
+        center_transfer_arrival_state_losed = new javax.swing.JRadioButton();
+        center_transfer_arrival_label_year = new javax.swing.JLabel();
+        center_transfer_arrival_state_intact = new javax.swing.JRadioButton();
+        center_transfer_arrival_label_day = new javax.swing.JLabel();
+        center_transfer_arrival_year = new javax.swing.JComboBox();
+        center_transfer_arrival_province = new javax.swing.JTextField();
+        center_transfer_arrival_label_city = new javax.swing.JLabel();
+        center_transfer_arrival_label_month = new javax.swing.JLabel();
+        center_transfer_arrival_freightNo = new javax.swing.JTextField();
+        center_transfer_arrival_label_freightNo = new javax.swing.JLabel();
+        center_transfer_arrival_label_arrivalDate = new javax.swing.JLabel();
+        center_transfer_arrival_month = new javax.swing.JComboBox();
+        center_transfer_arrival_city = new javax.swing.JTextField();
+        center_transfer_arrival_label_arrivalNo = new javax.swing.JLabel();
+        center_transfer_arrival_arrivalNo = new javax.swing.JTextField();
+        center_transfer_arrival_submit = new javax.swing.JButton();
+        center_transfer_transferPanel = new javax.swing.JPanel();
+        center_transfer_transfer_stocklistPanel = new javax.swing.JScrollPane();
+        center_transfer_transfer_stockList = new javax.swing.JTable();
         center_airlinePanel = new javax.swing.JPanel();
         center_airline_label_loadingDate = new javax.swing.JLabel();
         center_airline_year = new javax.swing.JComboBox();
@@ -367,33 +427,6 @@ public class MainFrame extends javax.swing.JFrame {
         center_vehicle_goodsNoTable = new javax.swing.JTable();
         center_vehicle_button_submit = new javax.swing.JButton();
         center_vehicle_button_cancel = new javax.swing.JButton();
-        center_transferPanel = new javax.swing.JPanel();
-        center_transfer_arrival = new javax.swing.JPanel();
-        center_transfer_arrival_address = new javax.swing.JTextField();
-        center_transfer_arrival_day = new javax.swing.JComboBox();
-        center_transfer_arrival_label_goodsState = new javax.swing.JLabel();
-        center_transfer_arrival_label_province = new javax.swing.JLabel();
-        center_transfer_arrival_label_departure = new javax.swing.JLabel();
-        center_transfer_arrival_state_damaged = new javax.swing.JRadioButton();
-        center_transfer_arrival_state_losed = new javax.swing.JRadioButton();
-        center_transfer_arrival_label_year = new javax.swing.JLabel();
-        center_transfer_arrival_state_intact = new javax.swing.JRadioButton();
-        center_transfer_arrival_label_day = new javax.swing.JLabel();
-        center_transfer_arrival_year = new javax.swing.JComboBox();
-        center_transfer_arrival_province = new javax.swing.JTextField();
-        center_transfer_arrival_label_city = new javax.swing.JLabel();
-        center_transfer_arrival_label_month = new javax.swing.JLabel();
-        center_transfer_arrival_freightNo = new javax.swing.JTextField();
-        center_transfer_arrival_label_freightNo = new javax.swing.JLabel();
-        center_transfer_arrival_label_arrivalDate = new javax.swing.JLabel();
-        center_transfer_arrival_month = new javax.swing.JComboBox();
-        center_transfer_arrival_city = new javax.swing.JTextField();
-        center_transfer_arrival_label_arrivalNo = new javax.swing.JLabel();
-        center_transfer_arrival_arrivalNo = new javax.swing.JTextField();
-        center_transfer_arrival_submit = new javax.swing.JButton();
-        center_transfer_transferPanel = new javax.swing.JPanel();
-        center_transfer_transfer_stocklistPanel = new javax.swing.JScrollPane();
-        center_transfer_transfer_stockList = new javax.swing.JTable();
         financePanel = new javax.swing.JPanel();
         finance_button_settelement = new javax.swing.JButton();
         finance_button_cost = new javax.swing.JButton();
@@ -481,6 +514,7 @@ public class MainFrame extends javax.swing.JFrame {
         finance_cost_costAndIncomePanel_result_tablePanel = new javax.swing.JScrollPane();
         finance_cost_costAndIncomePanel_result_table = new javax.swing.JTable();
         finance_cost_costAndIncomePanel_button_export = new javax.swing.JButton();
+        finance_cost_costAndIncomePanel_button_Check = new javax.swing.JButton();
         finance_numericalStatement = new javax.swing.JPanel();
         finance_numerical_label_from_date = new javax.swing.JLabel();
         finance_numerical_from_year = new javax.swing.JComboBox();
@@ -539,6 +573,7 @@ public class MainFrame extends javax.swing.JFrame {
         manager_button_department = new javax.swing.JButton();
         manager_button_ducument = new javax.swing.JButton();
         manager_button_statement = new javax.swing.JButton();
+        manager_button_numercial = new javax.swing.JButton();
         manager_mainPanel = new javax.swing.JPanel();
         manager_staffPanel = new javax.swing.JPanel();
         manager_staff_departmentPanel = new javax.swing.JPanel();
@@ -576,7 +611,24 @@ public class MainFrame extends javax.swing.JFrame {
         manager_department_updatePanel_parent = new javax.swing.JTextField();
         manager_department_updatePanel_label_parent = new javax.swing.JLabel();
         manager_department_updatePanel_button_save = new javax.swing.JButton();
-        manager_button_numercial = new javax.swing.JButton();
+        manager_document = new javax.swing.JPanel();
+        manager_document_button_ticket = new javax.swing.JButton();
+        manager_document_button_air = new javax.swing.JButton();
+        manager_document_button_train = new javax.swing.JButton();
+        manager_document_button_vehicle = new javax.swing.JButton();
+        manager_document_button_hallarrival = new javax.swing.JButton();
+        manager_document_button_halldistribution = new javax.swing.JButton();
+        manager_document_button_receipt = new javax.swing.JButton();
+        manager_document_button_ceterarrival = new javax.swing.JButton();
+        manager_document_button_stockin = new javax.swing.JButton();
+        manager_document_button_transfer = new javax.swing.JButton();
+        manager_document_button_stockex = new javax.swing.JButton();
+        manager_document_button_payment = new javax.swing.JButton();
+        manager_document_listPanel = new javax.swing.JScrollPane();
+        manager_document_list = new javax.swing.JTable();
+        manager_document_button_save = new javax.swing.JButton();
+        manager_checkStatement = new javax.swing.JPanel();
+        manager_checkNumercial = new javax.swing.JPanel();
         curtomerPanel = new javax.swing.JPanel();
         centerStockPanel = new javax.swing.JPanel();
         stock_button_inwarehouse = new javax.swing.JButton();
@@ -669,7 +721,7 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inventoryCheck_label_inSubex = new javax.swing.JLabel();
         stock_inventoryCheck_label_total = new javax.swing.JLabel();
         stock_inventoryCheck_result_inwarehouse = new javax.swing.JLabel();
-        stock_inventoryyCounts = new javax.swing.JPanel();
+        stock_inventoryCounts = new javax.swing.JPanel();
         stock_inventoryCounts_tablePanel = new javax.swing.JScrollPane();
         stock_inventoryCounts_table = new javax.swing.JTable();
         stock_inventoryCounts_label_time = new javax.swing.JLabel();
@@ -840,13 +892,9 @@ public class MainFrame extends javax.swing.JFrame {
         cardPanel.setBackground(new java.awt.Color(255, 255, 255));
         cardPanel.setLayout(new java.awt.CardLayout());
 
-        login_nameLabel.setText("Name");
+        loginPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
-        login_nameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_nameTextActionPerformed(evt);
-            }
-        });
+        login_nameLabel.setText("Name");
 
         login_keyLabel.setText("Key");
 
@@ -927,6 +975,984 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         cardPanel.add(loginPanel, "card1");
+
+        hallPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
+
+        hall_vehicleLoadingManagement.setText("Vehicle Loading");
+        hall_vehicleLoadingManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehicleLoadingManagementActionPerformed(evt);
+            }
+        });
+
+        hall_acceptanceAndDistributionManagement.setText("Acceptance&Distribution");
+        hall_acceptanceAndDistributionManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_acceptanceAndDistributionManagementActionPerformed(evt);
+            }
+        });
+
+        hall_vehiclesManagement.setText("Vehicles Management");
+        hall_vehiclesManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehiclesManagementActionPerformed(evt);
+            }
+        });
+
+        hall_driversManagement.setText("Drivers Management");
+        hall_driversManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_driversManagementActionPerformed(evt);
+            }
+        });
+
+        hall_collectionNote.setText("Collection Note");
+        hall_collectionNote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_collectionNoteActionPerformed(evt);
+            }
+        });
+
+        hall_mainPanel.setPreferredSize(new java.awt.Dimension(900, 560));
+        hall_mainPanel.setLayout(new java.awt.CardLayout());
+
+        hall_acceptanceAndDistribution_Arrival.setBorder(javax.swing.BorderFactory.createTitledBorder("Arrival"));
+
+        hall_acceptanceAndDistribution_Arrival_label_arrivalDate.setText("Arrive Date:");
+
+        hall_acceptanceAndDistribution_Arrival_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        hall_acceptanceAndDistribution_Arrival_label_month.setText("Month");
+
+        hall_acceptanceAndDistribution_Arrival_label_year.setText("Year");
+
+        hall_acceptanceAndDistribution_Arrival_label_day.setText("Day");
+
+        hall_acceptanceAndDistribution_Arrival_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        hall_acceptanceAndDistribution_Arrival_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        hall_acceptanceAndDistribution_Arrival_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_acceptanceAndDistribution_Arrival_monthActionPerformed(evt);
+            }
+        });
+
+        hall_acceptanceAndDistribution_Arrival_label_freightNo.setText("Freight No. :");
+
+        hall_acceptanceAndDistribution_Arrival_freightNo.setText("xxxx-xxxxxx");
+
+        hall_acceptanceAndDistribution_Arrival_label_departure.setText("Departure Place:");
+
+        hall_acceptanceAndDistribution_Arrival_label_city.setText("City");
+
+        hall_acceptanceAndDistribution_Arrival_label_province.setText("Province");
+
+        hall_acceptanceAndDistribution_Arrival_label_goodsState.setText("Goods State:");
+
+        hall_acceptanceAndDistribution_Arrival_state_intact.setText("intact");
+
+        hall_acceptanceAndDistribution_Arrival_state_damaged.setText("damaged");
+
+        hall_acceptanceAndDistribution_Arrival_state_losed.setText("losed");
+
+        hall_acceptanceAndDistribution_Arrival_Submit.setText("Submit");
+        hall_acceptanceAndDistribution_Arrival_Submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_acceptanceAndDistribution_Arrival_SubmitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hall_acceptanceAndDistribution_ArrivalLayout = new javax.swing.GroupLayout(hall_acceptanceAndDistribution_Arrival);
+        hall_acceptanceAndDistribution_Arrival.setLayout(hall_acceptanceAndDistribution_ArrivalLayout);
+        hall_acceptanceAndDistribution_ArrivalLayout.setHorizontalGroup(
+            hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_freightNo)
+                            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                                .addComponent(hall_acceptanceAndDistribution_Arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_acceptanceAndDistribution_Arrival_label_year)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_acceptanceAndDistribution_Arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_acceptanceAndDistribution_Arrival_label_month)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_acceptanceAndDistribution_Arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_acceptanceAndDistribution_Arrival_label_day))
+                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_arrivalDate)
+                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_departure)
+                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_goodsState)
+                            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hall_acceptanceAndDistribution_Arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hall_acceptanceAndDistribution_Arrival_state_intact)
+                                    .addComponent(hall_acceptanceAndDistribution_Arrival_state_damaged)
+                                    .addComponent(hall_acceptanceAndDistribution_Arrival_state_losed)
+                                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                                        .addComponent(hall_acceptanceAndDistribution_Arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_province)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_acceptanceAndDistribution_Arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_city))))))
+                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(hall_acceptanceAndDistribution_Arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_Submit)
+                .addGap(33, 33, 33))
+        );
+        hall_acceptanceAndDistribution_ArrivalLayout.setVerticalGroup(
+            hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_label_arrivalDate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival_label_year)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival_label_month)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival_label_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_label_freightNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_label_departure)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_acceptanceAndDistribution_Arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_city))
+                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_acceptanceAndDistribution_Arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_province)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_label_goodsState)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_state_intact)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_state_damaged)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_state_losed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Arrival_Submit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        hall_acceptanceAndDistribution_Send.setBorder(javax.swing.BorderFactory.createTitledBorder("Send"));
+
+        hall_acceptanceAndDistribution_Send_label_day.setText("Day");
+
+        hall_acceptanceAndDistribution_Send_label_month.setText("Month");
+
+        hall_acceptanceAndDistribution_Send_label_arriveDate.setText("Arrive Date:");
+
+        hall_acceptanceAndDistribution_Send_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        hall_acceptanceAndDistribution_Send_label_year.setText("Year");
+
+        hall_acceptanceAndDistribution_Send_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        hall_acceptanceAndDistribution_Send_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        hall_acceptanceAndDistribution_Send_goodsNo.setText("xxxx-xxxxxx");
+
+        hall_acceptanceAndDistribution_Send_label_goodsNo.setText("Goods No. :");
+
+        hall_acceptanceAndDistribution_Send_label_departure.setText("Departure Place:");
+
+        hall_acceptanceAndDistribution_Send_label_city.setText("City");
+
+        hall_acceptanceAndDistribution_Send_label_province.setText("Province");
+
+        hall_acceptanceAndDistribution_Send_label_postmanNo.setText("Postman No. :");
+
+        hall_acceptanceAndDistribution_Send_postmanNo.setText("xxxx-xxxxxx");
+
+        hall_acceptanceAndDistribution_Send_Submit.setText("Submit");
+        hall_acceptanceAndDistribution_Send_Submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_acceptanceAndDistribution_Send_SubmitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hall_acceptanceAndDistribution_SendLayout = new javax.swing.GroupLayout(hall_acceptanceAndDistribution_Send);
+        hall_acceptanceAndDistribution_Send.setLayout(hall_acceptanceAndDistribution_SendLayout);
+        hall_acceptanceAndDistribution_SendLayout.setHorizontalGroup(
+            hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(hall_acceptanceAndDistribution_Send_postmanNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hall_acceptanceAndDistribution_Send_Submit)
+                            .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(hall_acceptanceAndDistribution_Send_label_departure)
+                                .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(hall_acceptanceAndDistribution_Send_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                                            .addComponent(hall_acceptanceAndDistribution_Send_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_acceptanceAndDistribution_Send_label_province)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_acceptanceAndDistribution_Send_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_acceptanceAndDistribution_Send_label_city))))
+                                .addComponent(hall_acceptanceAndDistribution_Send_label_goodsNo)
+                                .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addComponent(hall_acceptanceAndDistribution_Send_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                                    .addComponent(hall_acceptanceAndDistribution_Send_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hall_acceptanceAndDistribution_Send_label_year)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hall_acceptanceAndDistribution_Send_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hall_acceptanceAndDistribution_Send_label_month)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hall_acceptanceAndDistribution_Send_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hall_acceptanceAndDistribution_Send_label_day))
+                                .addComponent(hall_acceptanceAndDistribution_Send_label_arriveDate)
+                                .addComponent(hall_acceptanceAndDistribution_Send_label_postmanNo)))))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        hall_acceptanceAndDistribution_SendLayout.setVerticalGroup(
+            hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(hall_acceptanceAndDistribution_Send_label_arriveDate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_acceptanceAndDistribution_Send_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_acceptanceAndDistribution_Send_label_year)
+                    .addComponent(hall_acceptanceAndDistribution_Send_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_acceptanceAndDistribution_Send_label_month)
+                    .addComponent(hall_acceptanceAndDistribution_Send_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_acceptanceAndDistribution_Send_label_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Send_label_goodsNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hall_acceptanceAndDistribution_Send_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hall_acceptanceAndDistribution_Send_label_departure)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_acceptanceAndDistribution_Send_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hall_acceptanceAndDistribution_Send_label_city))
+                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_acceptanceAndDistribution_Send_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hall_acceptanceAndDistribution_Send_label_province)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Send_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_acceptanceAndDistribution_Send_label_postmanNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hall_acceptanceAndDistribution_Send_postmanNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hall_acceptanceAndDistribution_Send_Submit)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout hall_acceptanceAndDistributionManagementPanelLayout = new javax.swing.GroupLayout(hall_acceptanceAndDistributionManagementPanel);
+        hall_acceptanceAndDistributionManagementPanel.setLayout(hall_acceptanceAndDistributionManagementPanelLayout);
+        hall_acceptanceAndDistributionManagementPanelLayout.setHorizontalGroup(
+            hall_acceptanceAndDistributionManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_acceptanceAndDistributionManagementPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(hall_acceptanceAndDistribution_Arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(hall_acceptanceAndDistribution_Send, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        hall_acceptanceAndDistributionManagementPanelLayout.setVerticalGroup(
+            hall_acceptanceAndDistributionManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_acceptanceAndDistributionManagementPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(hall_acceptanceAndDistributionManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hall_acceptanceAndDistribution_Send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hall_acceptanceAndDistribution_Arrival, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        hall_mainPanel.add(hall_acceptanceAndDistributionManagementPanel, "card2");
+
+        hall_vehiclesManagement_carList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Engine", "No.", "Chassis", "JoinTime", "Service Time"
+            }
+        ));
+        hall_vehiclesManagement_tablePanel.setViewportView(hall_vehiclesManagement_carList);
+
+        hall_vehiclesManagement_carImagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("//car number"));
+
+        hall_vehiclesManagement_carImage.setText("image");
+
+        javax.swing.GroupLayout hall_vehiclesManagement_carImagePanelLayout = new javax.swing.GroupLayout(hall_vehiclesManagement_carImagePanel);
+        hall_vehiclesManagement_carImagePanel.setLayout(hall_vehiclesManagement_carImagePanelLayout);
+        hall_vehiclesManagement_carImagePanelLayout.setHorizontalGroup(
+            hall_vehiclesManagement_carImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_vehiclesManagement_carImagePanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(hall_vehiclesManagement_carImage, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        hall_vehiclesManagement_carImagePanelLayout.setVerticalGroup(
+            hall_vehiclesManagement_carImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_vehiclesManagement_carImagePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hall_vehiclesManagement_carImage, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        hall_vehiclesManagement_AddButton.setText("Add");
+        hall_vehiclesManagement_AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehiclesManagement_AddButtonActionPerformed(evt);
+            }
+        });
+
+        hall_vehiclesManagementPanel_SearchButton.setText("Search");
+        hall_vehiclesManagementPanel_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehiclesManagementPanel_SearchButtonActionPerformed(evt);
+            }
+        });
+
+        hall_vehiclesManagement_UpdateButton.setText("Update");
+        hall_vehiclesManagement_UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehiclesManagement_UpdateButtonActionPerformed(evt);
+            }
+        });
+
+        hall_vehiclesManagement_SearchName.setText("carName");
+
+        hall_vehiclesManagement_label_name.setText("Name");
+
+        hall_vehiclesManagement_label_engine.setText("Engine");
+
+        hall_vehiclesManagement_label_chassis.setText("Chassis");
+
+        hall_vehiclesManagement_label_join.setText("Join Time");
+
+        hall_vehiclesManagement_jointime.setText("xxxx-xx-xx");
+
+        hall_vehiclesManagement_label_no.setText("No");
+
+        javax.swing.GroupLayout hall_vehiclesManagementPanelLayout = new javax.swing.GroupLayout(hall_vehiclesManagementPanel);
+        hall_vehiclesManagementPanel.setLayout(hall_vehiclesManagementPanelLayout);
+        hall_vehiclesManagementPanelLayout.setHorizontalGroup(
+            hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_vehiclesManagement_label_name)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_vehiclesManagement_label_engine)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_engine, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_vehiclesManagement_label_no)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_vehiclesManagement_label_chassis)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_vehiclesManagement_chassis, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(hall_vehiclesManagement_label_join)
+                                .addGap(18, 18, 18)
+                                .addComponent(hall_vehiclesManagement_jointime, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hall_vehiclesManagement_UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehiclesManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44))
+                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hall_vehiclesManagement_carImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                            .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(89, 89, 89))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                            .addComponent(hall_vehiclesManagementPanel_SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(44, 44, 44)))))
+        );
+        hall_vehiclesManagementPanelLayout.setVerticalGroup(
+            hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(hall_vehiclesManagement_carImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehiclesManagementPanel_SearchButton))
+                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_vehiclesManagement_AddButton)
+                    .addComponent(hall_vehiclesManagement_label_name)
+                    .addComponent(hall_vehiclesManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_vehiclesManagement_label_engine)
+                    .addComponent(hall_vehiclesManagement_engine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_vehiclesManagement_label_no)
+                    .addComponent(hall_vehiclesManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_vehiclesManagement_UpdateButton)
+                    .addComponent(hall_vehiclesManagement_label_chassis)
+                    .addComponent(hall_vehiclesManagement_chassis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_vehiclesManagement_label_join)
+                    .addComponent(hall_vehiclesManagement_jointime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 49, Short.MAX_VALUE))
+        );
+
+        hall_mainPanel.add(hall_vehiclesManagementPanel, "card3");
+
+        hall_driversManagementPanel_driverList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "No.", "Name", "Birthday", "Identity No.", "Phone", "Unit", "Sex", "Service Time"
+            }
+        ));
+        hall_driversManagement_tablePanel.setViewportView(hall_driversManagementPanel_driverList);
+
+        hall_driversManagement_driverImagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("//driver name"));
+
+        hall_driversManagement_driverImage.setText("image");
+
+        javax.swing.GroupLayout hall_driversManagement_driverImagePanelLayout = new javax.swing.GroupLayout(hall_driversManagement_driverImagePanel);
+        hall_driversManagement_driverImagePanel.setLayout(hall_driversManagement_driverImagePanelLayout);
+        hall_driversManagement_driverImagePanelLayout.setHorizontalGroup(
+            hall_driversManagement_driverImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_driversManagement_driverImagePanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(hall_driversManagement_driverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        hall_driversManagement_driverImagePanelLayout.setVerticalGroup(
+            hall_driversManagement_driverImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_driversManagement_driverImagePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(hall_driversManagement_driverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        hall_driversManagement_AddButton.setText("Add");
+        hall_driversManagement_AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_driversManagement_AddButtonActionPerformed(evt);
+            }
+        });
+
+        hall_driversManagement_SearchName.setText("driverName");
+
+        hall_driversManagement_SearchButton.setText("Search");
+        hall_driversManagement_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_driversManagement_SearchButtonActionPerformed(evt);
+            }
+        });
+
+        hall_driverManagement_label_no.setText("No");
+
+        hall_driverManagement_label_name.setText("Name");
+
+        hall_driverManagement_label_birthday.setText("Birthday");
+
+        hall_driverManagement_label_indentity.setText("Indentity");
+
+        hall_driverManagement_label_phone.setText("Phone");
+
+        hall_driverManagement_label_unit.setText("Unit");
+
+        hall_driverManagement_label_sex.setText("Sex");
+
+        hall_driverManagement_label_date.setText("date");
+
+        javax.swing.GroupLayout hall_driversManagementPanelLayout = new javax.swing.GroupLayout(hall_driversManagementPanel);
+        hall_driversManagementPanel.setLayout(hall_driversManagementPanelLayout);
+        hall_driversManagementPanelLayout.setHorizontalGroup(
+            hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hall_driverManagement_label_indentity)
+                            .addComponent(hall_driverManagement_label_phone)
+                            .addComponent(hall_driverManagement_label_no))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addComponent(hall_driverManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_driverManagement_label_name)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_driverManagement_label_birthday)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_birthday, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hall_driverManagement_indentity)
+                                    .addComponent(hall_driverManagement_phone))
+                                .addGap(31, 31, 31)
+                                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                        .addComponent(hall_driverManagement_label_unit)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hall_driverManagement_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                        .addComponent(hall_driverManagement_label_date)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hall_driverManagement_date, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hall_driverManagement_label_sex)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hall_driverManagement_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(hall_driversManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hall_driversManagement_SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        hall_driversManagementPanelLayout.setVerticalGroup(
+            hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
+                        .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_driversManagement_SearchButton))
+                    .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_driverManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_driverManagement_label_name)
+                    .addComponent(hall_driverManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_driverManagement_label_birthday)
+                    .addComponent(hall_driverManagement_birthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_driverManagement_label_sex)
+                    .addComponent(hall_driverManagement_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_driverManagement_label_no))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_driverManagement_label_indentity)
+                    .addComponent(hall_driverManagement_indentity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_driverManagement_label_unit)
+                    .addComponent(hall_driverManagement_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_driverManagement_label_phone)
+                    .addComponent(hall_driverManagement_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hall_driversManagement_AddButton)
+                    .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_driverManagement_label_date)
+                        .addComponent(hall_driverManagement_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        hall_mainPanel.add(hall_driversManagementPanel, "card4");
+
+        hall_vehicleLoading_label_loadingDate.setText("Loading Date:");
+
+        hall_vehicleLoading_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        hall_vehicleLoading_label_year.setText("Year");
+
+        hall_vehicleLoading_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        hall_vehicleLoading_label_month.setText("Month");
+
+        hall_vehicleLoading_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        hall_vehicleLoading_label_day.setText("Day");
+
+        hall_vehicleLoading_label_hallNo.setText("Hall No. :");
+
+        hall_vehicleLoading_hallNo.setText("xxxx-xxxx");
+
+        hall_vehicleLoading_label_departure.setText("Departure place:");
+
+        hall_vehicleLoading_label_departure_province.setText("Province");
+
+        hall_vehicleLoading_label_departure_city.setText("City");
+
+        hall_vehicleLoading_label_destination.setText("Destination:");
+
+        hall_vehicleLoading_label_destination_province.setText("Province");
+
+        hall_vehicleLoading_label_destination_city.setText("City");
+
+        hall_vehicleLoading_label_supervisor.setText("Supervisor's:");
+
+        hall_vehicleLoading_label_supercargo.setText("Supercargo:");
+
+        hall_vehicleLoading_goodsNoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Goods No."
+            }
+        ));
+        jScrollPane1.setViewportView(hall_vehicleLoading_goodsNoTable);
+
+        hall_vehicleLoading_label_transportationExpense.setText("transportation expenses:");
+
+        hall_vehicleLoading_button_submit.setText("Submit");
+        hall_vehicleLoading_button_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehicleLoading_button_submitActionPerformed(evt);
+            }
+        });
+
+        hall_vehicleLoading_button_cancel.setText("Cancel");
+        hall_vehicleLoading_button_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_vehicleLoading_button_cancelActionPerformed(evt);
+            }
+        });
+
+        hall_vehicleLoading_label_transportNo.setText("transport no:");
+
+        javax.swing.GroupLayout hall_vehicleLoadingManagementPanelLayout = new javax.swing.GroupLayout(hall_vehicleLoadingManagementPanel);
+        hall_vehicleLoadingManagementPanel.setLayout(hall_vehicleLoadingManagementPanelLayout);
+        hall_vehicleLoadingManagementPanelLayout.setHorizontalGroup(
+            hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(hall_vehicleLoading_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_label_year)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_label_month)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_label_day))
+                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(hall_vehicleLoading_hallNo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hall_vehicleLoading_label_destination)
+                            .addComponent(hall_vehicleLoading_label_hallNo)
+                            .addComponent(hall_vehicleLoading_label_loadingDate)
+                            .addComponent(hall_vehicleLoading_label_departure)
+                            .addComponent(hall_vehicleLoading_label_supervisor)
+                            .addComponent(hall_vehicleLoading_label_transportationExpense)
+                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(hall_vehicleLoading_label_supercargo, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                    .addGap(75, 75, 75)
+                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                            .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_vehicleLoading_label_departure_province)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hall_vehicleLoading_label_departure_city))
+                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                    .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(hall_vehicleLoading_label_destination_province))
+                                                .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(hall_vehicleLoading_label_transportNo)
+                                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                            .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(hall_vehicleLoading_label_destination_city))))
+                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                                                    .addGap(107, 107, 107)
+                                                    .addComponent(hall_vehicleLoading_tansportNo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
+                .addGap(53, 128, Short.MAX_VALUE)
+                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                        .addComponent(hall_vehicleLoading_button_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hall_vehicleLoading_button_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67))
+        );
+        hall_vehicleLoadingManagementPanelLayout.setVerticalGroup(
+            hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
+                        .addComponent(hall_vehicleLoading_label_loadingDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_vehicleLoading_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehicleLoading_label_year)
+                            .addComponent(hall_vehicleLoading_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehicleLoading_label_month)
+                            .addComponent(hall_vehicleLoading_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehicleLoading_label_day))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_vehicleLoading_label_hallNo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_hallNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_vehicleLoading_label_departure)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hall_vehicleLoading_label_departure_city))
+                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hall_vehicleLoading_label_departure_province)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_vehicleLoading_label_destination)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hall_vehicleLoading_label_destination_city))
+                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hall_vehicleLoading_label_destination_province)))
+                        .addGap(18, 18, 18)
+                        .addComponent(hall_vehicleLoading_label_supervisor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_vehicleLoading_label_supercargo)
+                            .addComponent(hall_vehicleLoading_label_transportNo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_vehicleLoading_tansportNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hall_vehicleLoading_label_transportationExpense)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hall_vehicleLoading_button_submit)
+                        .addComponent(hall_vehicleLoading_button_cancel)))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        hall_mainPanel.add(hall_vehicleLoadingManagementPanel, "card5");
+
+        hall_collectionNote_dateList.setBorder(javax.swing.BorderFactory.createTitledBorder("Date"));
+        hall_collectionNote_dateList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "2015/12/12", "2015/12/11", ".." };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        hall_collectionNote_dateList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                hall_collectionNote_dateListValueChanged(evt);
+            }
+        });
+        hall_collectionNote_listPanel.setViewportView(hall_collectionNote_dateList);
+
+        hall_collectionNote_dailyCollection.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date", "Amount", "Postman", "Collection No."
+            }
+        ));
+        hall_collectionNote_tablePanel.setViewportView(hall_collectionNote_dailyCollection);
+        if (hall_collectionNote_dailyCollection.getColumnModel().getColumnCount() > 0) {
+            hall_collectionNote_dailyCollection.getColumnModel().getColumn(0).setResizable(false);
+            hall_collectionNote_dailyCollection.getColumnModel().getColumn(1).setResizable(false);
+            hall_collectionNote_dailyCollection.getColumnModel().getColumn(2).setResizable(false);
+            hall_collectionNote_dailyCollection.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        hall_collectionNote_SaveButton.setText("Save");
+        hall_collectionNote_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_collectionNote_SaveButtonActionPerformed(evt);
+            }
+        });
+
+        hall_collectionNote_CancelButton.setText("Cancel");
+        hall_collectionNote_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hall_collectionNote_CancelButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hall_collectionNotePanelLayout = new javax.swing.GroupLayout(hall_collectionNotePanel);
+        hall_collectionNotePanel.setLayout(hall_collectionNotePanelLayout);
+        hall_collectionNotePanelLayout.setHorizontalGroup(
+            hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(hall_collectionNote_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(hall_collectionNote_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_collectionNotePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hall_collectionNote_CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hall_collectionNote_SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))))
+        );
+        hall_collectionNotePanelLayout.setVerticalGroup(
+            hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hall_collectionNote_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
+                        .addComponent(hall_collectionNote_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hall_collectionNote_SaveButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_collectionNote_CancelButton)))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+
+        hall_mainPanel.add(hall_collectionNotePanel, "card6");
+
+        javax.swing.GroupLayout hallPanelLayout = new javax.swing.GroupLayout(hallPanel);
+        hallPanel.setLayout(hallPanelLayout);
+        hallPanelLayout.setHorizontalGroup(
+            hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hallPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hall_acceptanceAndDistributionManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hall_vehicleLoadingManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hall_vehiclesManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hall_driversManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hall_collectionNote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hall_mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        hallPanelLayout.setVerticalGroup(
+            hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hallPanelLayout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hall_mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hallPanelLayout.createSequentialGroup()
+                        .addComponent(hall_vehicleLoadingManagement)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_acceptanceAndDistributionManagement)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_vehiclesManagement)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_driversManagement)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hall_collectionNote)))
+                .addGap(28, 28, 28))
+        );
+
+        cardPanel.add(hallPanel, "card3");
+
+        postmanPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
         postman_resetbutton.setText("Reset");
         postman_resetbutton.addActionListener(new java.awt.event.ActionListener() {
@@ -1029,24 +2055,12 @@ public class MainFrame extends javax.swing.JFrame {
         postman_recipient_nameLabel.setText("Name");
 
         postman_recipient_addressLabel.setText("Address");
-
-        postman_recipient_address_provinceText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_recipient_address_provinceTextActionPerformed(evt);
-            }
-        });
-
+        
         postman_recipient_cellLabel.setText("Cell Phone");
 
         postman_recipient_unitLabel.setText("Unit");
 
         postman_recipient_telephoneLabel.setText("Telephone");
-
-        postman_recipient_telephoneText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_recipient_telephoneTextActionPerformed(evt);
-            }
-        });
 
         postman_recipient_address_provinceLabel.setText("Province");
 
@@ -1122,18 +2136,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         postman_consighment_weightLabel.setText("Weight");
 
-        postman_consighment_scriptText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_scriptTextActionPerformed(evt);
-            }
-        });
-
         postman_consighment_weightText.setText("kg");
-        postman_consighment_weightText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_weightTextActionPerformed(evt);
-            }
-        });
 
         postman_consighment_heightLabel.setText("Height");
 
@@ -1142,39 +2145,10 @@ public class MainFrame extends javax.swing.JFrame {
         postman_consighment_depthLabel.setText("Depth");
 
         postman_consighment_heightText.setText("mm");
-        postman_consighment_heightText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_heightTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_widthText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_widthTextActionPerformed(evt);
-            }
-        });
-
-        postman_consighment_depthText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_depthTextActionPerformed(evt);
-            }
-        });
 
         postman_consighment_internalLabel.setText("Internal");
 
-        postman_consighment_internalText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_internalTextActionPerformed(evt);
-            }
-        });
-
         postman_consighment_depthLabel1.setText("Volume");
-
-        postman_consighment_depthText1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postman_consighment_depthText1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout postman_consighmentPanelLayout = new javax.swing.GroupLayout(postman_consighmentPanel);
         postman_consighmentPanel.setLayout(postman_consighmentPanelLayout);
@@ -1269,6 +2243,11 @@ public class MainFrame extends javax.swing.JFrame {
         postman_ticketNO.setText("//ticket no.(auto)");
 
         postman_getArriveTimeButton.setText("Arrive Time");
+        postman_getArriveTimeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postman_getArriveTimeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout postmanPanelLayout = new javax.swing.GroupLayout(postmanPanel);
         postmanPanel.setLayout(postmanPanelLayout);
@@ -1369,940 +2348,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         cardPanel.add(postmanPanel, "card2");
 
-        hall_vehicleLoadingManagement.setText("Vehicle Loading");
-        hall_vehicleLoadingManagement.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_vehicleLoadingManagementActionPerformed(evt);
-            }
-        });
-
-        hall_acceptanceAndDistributionManagement.setText("Acceptance&Distribution");
-        hall_acceptanceAndDistributionManagement.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_acceptanceAndDistributionManagementActionPerformed(evt);
-            }
-        });
-
-        hall_vehiclesManagement.setText("Vehicles Management");
-
-        hall_driversManagement.setText("Drivers Management");
-
-        hall_collectionNote.setText("Collection Note");
-
-        hall_mainPanel.setLayout(new java.awt.CardLayout());
-
-        hall_acceptanceAndDistribution_Arrival.setBorder(javax.swing.BorderFactory.createTitledBorder("Arrival"));
-
-        hall_acceptanceAndDistribution_Arrival_label_arrivalDate.setText("Arrive Date:");
-
-        hall_acceptanceAndDistribution_Arrival_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        hall_acceptanceAndDistribution_Arrival_label_month.setText("Month");
-
-        hall_acceptanceAndDistribution_Arrival_label_year.setText("Year");
-
-        hall_acceptanceAndDistribution_Arrival_label_day.setText("Day");
-
-        hall_acceptanceAndDistribution_Arrival_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
-
-        hall_acceptanceAndDistribution_Arrival_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        hall_acceptanceAndDistribution_Arrival_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_acceptanceAndDistribution_Arrival_monthActionPerformed(evt);
-            }
-        });
-
-        hall_acceptanceAndDistribution_Arrival_label_freightNo.setText("Freight No. :");
-
-        hall_acceptanceAndDistribution_Arrival_freightNo.setText("xxxx-xxxxxx");
-
-        hall_acceptanceAndDistribution_Arrival_label_departure.setText("Departure Place:");
-
-        hall_acceptanceAndDistribution_Arrival_label_city.setText("City");
-
-        hall_acceptanceAndDistribution_Arrival_label_province.setText("Province");
-
-        hall_acceptanceAndDistribution_Arrival_label_goodsState.setText("Goods State:");
-
-        hall_acceptanceAndDistribution_Arrival_state_intact.setText("intact");
-
-        hall_acceptanceAndDistribution_Arrival_state_damaged.setText("damaged");
-
-        hall_acceptanceAndDistribution_Arrival_state_losed.setText("losed");
-
-        hall_acceptanceAndDistribution_Arrival_Submit.setText("Submit");
-
-        javax.swing.GroupLayout hall_acceptanceAndDistribution_ArrivalLayout = new javax.swing.GroupLayout(hall_acceptanceAndDistribution_Arrival);
-        hall_acceptanceAndDistribution_Arrival.setLayout(hall_acceptanceAndDistribution_ArrivalLayout);
-        hall_acceptanceAndDistribution_ArrivalLayout.setHorizontalGroup(
-            hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_freightNo)
-                            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                                .addComponent(hall_acceptanceAndDistribution_Arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Arrival_label_year)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Arrival_label_month)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Arrival_label_day))
-                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_arrivalDate)
-                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_departure)
-                            .addComponent(hall_acceptanceAndDistribution_Arrival_label_goodsState)
-                            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hall_acceptanceAndDistribution_Arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(hall_acceptanceAndDistribution_Arrival_state_intact)
-                                    .addComponent(hall_acceptanceAndDistribution_Arrival_state_damaged)
-                                    .addComponent(hall_acceptanceAndDistribution_Arrival_state_losed)
-                                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                                        .addComponent(hall_acceptanceAndDistribution_Arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_province)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_city))))))
-                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(hall_acceptanceAndDistribution_Arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_Submit)
-                .addGap(49, 49, 49))
-        );
-        hall_acceptanceAndDistribution_ArrivalLayout.setVerticalGroup(
-            hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_label_arrivalDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival_label_year)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival_label_month)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival_label_day))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_label_freightNo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_label_departure)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hall_acceptanceAndDistribution_Arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_city))
-                    .addGroup(hall_acceptanceAndDistribution_ArrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hall_acceptanceAndDistribution_Arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(hall_acceptanceAndDistribution_Arrival_label_province)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_label_goodsState)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_state_intact)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_state_damaged)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_state_losed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(hall_acceptanceAndDistribution_Arrival_Submit)
-                .addGap(23, 23, 23))
-        );
-
-        hall_acceptanceAndDistribution_Send.setBorder(javax.swing.BorderFactory.createTitledBorder("Send"));
-
-        hall_acceptanceAndDistribution_Send_label_day.setText("Day");
-
-        hall_acceptanceAndDistribution_Send_label_month.setText("Month");
-
-        hall_acceptanceAndDistribution_Send_label_arriveDate.setText("Arrive Date:");
-
-        hall_acceptanceAndDistribution_Send_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        hall_acceptanceAndDistribution_Send_label_year.setText("Year");
-
-        hall_acceptanceAndDistribution_Send_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
-
-        hall_acceptanceAndDistribution_Send_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        hall_acceptanceAndDistribution_Send_goodsNo.setText("xxxx-xxxxxx");
-
-        hall_acceptanceAndDistribution_Send_label_goodsNo.setText("Goods No. :");
-
-        hall_acceptanceAndDistribution_Send_label_departure.setText("Departure Place:");
-
-        hall_acceptanceAndDistribution_Send_label_city.setText("City");
-
-        hall_acceptanceAndDistribution_Send_label_province.setText("Province");
-
-        hall_acceptanceAndDistribution_Send_label_postmanNo.setText("Postman No. :");
-
-        hall_acceptanceAndDistribution_Send_postmanNo.setText("xxxx-xxxxxx");
-
-        hall_acceptanceAndDistribution_Send_Submit.setText("Submit");
-
-        javax.swing.GroupLayout hall_acceptanceAndDistribution_SendLayout = new javax.swing.GroupLayout(hall_acceptanceAndDistribution_Send);
-        hall_acceptanceAndDistribution_Send.setLayout(hall_acceptanceAndDistribution_SendLayout);
-        hall_acceptanceAndDistribution_SendLayout.setHorizontalGroup(
-            hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hall_acceptanceAndDistribution_Send_label_departure)
-                            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hall_acceptanceAndDistribution_Send_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                                        .addComponent(hall_acceptanceAndDistribution_Send_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Send_label_province)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Send_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hall_acceptanceAndDistribution_Send_label_city))))
-                            .addComponent(hall_acceptanceAndDistribution_Send_label_goodsNo)
-                            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(hall_acceptanceAndDistribution_Send_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                                .addComponent(hall_acceptanceAndDistribution_Send_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Send_label_year)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Send_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Send_label_month)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Send_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_acceptanceAndDistribution_Send_label_day))
-                            .addComponent(hall_acceptanceAndDistribution_Send_label_arriveDate)
-                            .addComponent(hall_acceptanceAndDistribution_Send_label_postmanNo)))
-                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(hall_acceptanceAndDistribution_Send_postmanNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(hall_acceptanceAndDistribution_Send_Submit)
-                .addGap(49, 49, 49))
-        );
-        hall_acceptanceAndDistribution_SendLayout.setVerticalGroup(
-            hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_acceptanceAndDistribution_SendLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(hall_acceptanceAndDistribution_Send_label_arriveDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hall_acceptanceAndDistribution_Send_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_acceptanceAndDistribution_Send_label_year)
-                    .addComponent(hall_acceptanceAndDistribution_Send_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_acceptanceAndDistribution_Send_label_month)
-                    .addComponent(hall_acceptanceAndDistribution_Send_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_acceptanceAndDistribution_Send_label_day))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Send_label_goodsNo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hall_acceptanceAndDistribution_Send_goodsNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hall_acceptanceAndDistribution_Send_label_departure)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hall_acceptanceAndDistribution_Send_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(hall_acceptanceAndDistribution_Send_label_city))
-                    .addGroup(hall_acceptanceAndDistribution_SendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hall_acceptanceAndDistribution_Send_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(hall_acceptanceAndDistribution_Send_label_province)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Send_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_acceptanceAndDistribution_Send_label_postmanNo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hall_acceptanceAndDistribution_Send_postmanNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(hall_acceptanceAndDistribution_Send_Submit)
-                .addGap(23, 23, 23))
-        );
-
-        javax.swing.GroupLayout hall_acceptanceAndDistributionManagementPanelLayout = new javax.swing.GroupLayout(hall_acceptanceAndDistributionManagementPanel);
-        hall_acceptanceAndDistributionManagementPanel.setLayout(hall_acceptanceAndDistributionManagementPanelLayout);
-        hall_acceptanceAndDistributionManagementPanelLayout.setHorizontalGroup(
-            hall_acceptanceAndDistributionManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_acceptanceAndDistributionManagementPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(hall_acceptanceAndDistribution_Arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(hall_acceptanceAndDistribution_Send, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-        hall_acceptanceAndDistributionManagementPanelLayout.setVerticalGroup(
-            hall_acceptanceAndDistributionManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_acceptanceAndDistributionManagementPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(hall_acceptanceAndDistributionManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hall_acceptanceAndDistribution_Arrival, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hall_acceptanceAndDistribution_Send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        hall_mainPanel.add(hall_acceptanceAndDistributionManagementPanel, "card2");
-
-        hall_vehiclesManagement_carList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Name", "Engine", "No.", "Chassis", "JoinTime", "Service Time"
-            }
-        ));
-        hall_vehiclesManagement_tablePanel.setViewportView(hall_vehiclesManagement_carList);
-
-        hall_vehiclesManagement_carImagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("//car number"));
-
-        hall_vehiclesManagement_carImage.setText("image");
-
-        javax.swing.GroupLayout hall_vehiclesManagement_carImagePanelLayout = new javax.swing.GroupLayout(hall_vehiclesManagement_carImagePanel);
-        hall_vehiclesManagement_carImagePanel.setLayout(hall_vehiclesManagement_carImagePanelLayout);
-        hall_vehiclesManagement_carImagePanelLayout.setHorizontalGroup(
-            hall_vehiclesManagement_carImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_vehiclesManagement_carImagePanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(hall_vehiclesManagement_carImage, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        hall_vehiclesManagement_carImagePanelLayout.setVerticalGroup(
-            hall_vehiclesManagement_carImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_vehiclesManagement_carImagePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(hall_vehiclesManagement_carImage, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-        );
-
-        hall_vehiclesManagement_AddButton.setText("Add");
-        hall_vehiclesManagement_AddButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_vehiclesManagement_AddButtonActionPerformed(evt);
-            }
-        });
-
-        hall_vehiclesManagementPanel_SearchButton.setText("Search");
-
-        hall_vehiclesManagement_UpdateButton.setText("Update");
-
-        hall_vehiclesManagement_SearchName.setText("carName");
-
-        hall_vehiclesManagement_label_name.setText("Name");
-
-        hall_vehiclesManagement_label_engine.setText("Engine");
-
-        hall_vehiclesManagement_label_chassis.setText("Chassis");
-
-        hall_vehiclesManagement_label_join.setText("Join Time");
-
-        hall_vehiclesManagement_jointime.setText("xxxx-xx-xx");
-
-        hall_vehiclesManagement_label_no.setText("No");
-
-        javax.swing.GroupLayout hall_vehiclesManagementPanelLayout = new javax.swing.GroupLayout(hall_vehiclesManagementPanel);
-        hall_vehiclesManagementPanel.setLayout(hall_vehiclesManagementPanelLayout);
-        hall_vehiclesManagementPanelLayout.setHorizontalGroup(
-            hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_vehiclesManagement_label_name)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehiclesManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_vehiclesManagement_label_engine)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehiclesManagement_engine, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_vehiclesManagement_label_no)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehiclesManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_vehiclesManagement_label_chassis)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hall_vehiclesManagement_chassis, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(hall_vehiclesManagement_label_join)
-                                .addGap(18, 18, 18)
-                                .addComponent(hall_vehiclesManagement_jointime, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hall_vehiclesManagement_UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehiclesManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)))
-                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hall_vehiclesManagement_carImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addComponent(hall_vehiclesManagementPanel_SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
-        );
-        hall_vehiclesManagementPanelLayout.setVerticalGroup(
-            hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(hall_vehiclesManagementPanelLayout.createSequentialGroup()
-                        .addComponent(hall_vehiclesManagement_carImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(hall_vehiclesManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(hall_vehiclesManagementPanel_SearchButton))
-                    .addComponent(hall_vehiclesManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hall_vehiclesManagement_AddButton)
-                    .addComponent(hall_vehiclesManagement_label_name)
-                    .addComponent(hall_vehiclesManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_vehiclesManagement_label_engine)
-                    .addComponent(hall_vehiclesManagement_engine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hall_vehiclesManagement_label_no)
-                        .addComponent(hall_vehiclesManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(hall_vehiclesManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hall_vehiclesManagement_UpdateButton)
-                    .addComponent(hall_vehiclesManagement_label_chassis)
-                    .addComponent(hall_vehiclesManagement_chassis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hall_vehiclesManagement_label_join)
-                    .addComponent(hall_vehiclesManagement_jointime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 49, Short.MAX_VALUE))
-        );
-
-        hall_mainPanel.add(hall_vehiclesManagementPanel, "card3");
-
-        hall_driversManagementPanel_driverList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "No.", "Name", "Birthday", "Identity No.", "Phone", "Unit", "Sex", "Service Time"
-            }
-        ));
-        hall_driversManagement_tablePanel.setViewportView(hall_driversManagementPanel_driverList);
-
-        hall_driversManagement_driverImagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("//driver name"));
-
-        hall_driversManagement_driverImage.setText("image");
-
-        javax.swing.GroupLayout hall_driversManagement_driverImagePanelLayout = new javax.swing.GroupLayout(hall_driversManagement_driverImagePanel);
-        hall_driversManagement_driverImagePanel.setLayout(hall_driversManagement_driverImagePanelLayout);
-        hall_driversManagement_driverImagePanelLayout.setHorizontalGroup(
-            hall_driversManagement_driverImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_driversManagement_driverImagePanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(hall_driversManagement_driverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        hall_driversManagement_driverImagePanelLayout.setVerticalGroup(
-            hall_driversManagement_driverImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_driversManagement_driverImagePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(hall_driversManagement_driverImage, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-        );
-
-        hall_driversManagement_AddButton.setText("Add");
-        hall_driversManagement_AddButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_driversManagement_AddButtonActionPerformed(evt);
-            }
-        });
-
-        hall_driversManagement_SearchName.setText("driverName");
-
-        hall_driversManagement_SearchButton.setText("Search");
-        hall_driversManagement_SearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_driversManagement_SearchButtonActionPerformed(evt);
-            }
-        });
-
-        hall_driverManagement_label_no.setText("Date");
-
-        hall_driverManagement_label_name.setText("Name");
-
-        hall_driverManagement_label_birthday.setText("Birthday");
-
-        hall_driverManagement_label_indentity.setText("Indentity");
-
-        hall_driverManagement_label_phone.setText("Phone");
-
-        hall_driverManagement_label_unit.setText("Unit");
-
-        hall_driverManagement_label_sex.setText("Sex");
-
-        javax.swing.GroupLayout hall_driversManagementPanelLayout = new javax.swing.GroupLayout(hall_driversManagementPanel);
-        hall_driversManagementPanel.setLayout(hall_driversManagementPanelLayout);
-        hall_driversManagementPanelLayout.setHorizontalGroup(
-            hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_driverManagement_label_no)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(hall_driverManagement_label_name)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_driverManagement_label_phone)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_driverManagement_label_birthday)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_birthday, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_driverManagement_label_unit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_driverManagement_label_sex)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addComponent(hall_driverManagement_label_indentity)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hall_driverManagement_indentity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(hall_driversManagement_SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(hall_driversManagement_AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65))))
-        );
-        hall_driversManagementPanelLayout.setVerticalGroup(
-            hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hall_driversManagement_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addComponent(hall_driversManagement_driverImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(hall_driversManagement_SearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_driversManagement_SearchButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_driversManagementPanelLayout.createSequentialGroup()
-                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_driverManagement_label_no)
-                            .addComponent(hall_driverManagement_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_driverManagement_label_name)
-                            .addComponent(hall_driverManagement_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_driverManagement_label_birthday)
-                            .addComponent(hall_driverManagement_birthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_driverManagement_label_indentity)
-                            .addComponent(hall_driverManagement_indentity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(hall_driversManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_driverManagement_label_phone)
-                            .addComponent(hall_driverManagement_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_driverManagement_label_unit)
-                            .addComponent(hall_driverManagement_unit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_driverManagement_label_sex)
-                            .addComponent(hall_driverManagement_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(hall_driversManagement_AddButton))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        hall_mainPanel.add(hall_driversManagementPanel, "card4");
-
-        hall_vehicleLoading_label_loadingDate.setText("Loading Date:");
-
-        hall_vehicleLoading_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
-
-        hall_vehicleLoading_label_year.setText("Year");
-
-        hall_vehicleLoading_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        hall_vehicleLoading_label_month.setText("Month");
-
-        hall_vehicleLoading_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        hall_vehicleLoading_label_day.setText("Day");
-
-        hall_vehicleLoading_label_hallNo.setText("Hall No. :");
-
-        hall_vehicleLoading_hallNo.setText("xxxx-xxxx");
-
-        hall_vehicleLoading_button_hallNoDefault.setText("Default");
-
-        hall_vehicleLoading_label_departure.setText("Departure place:");
-
-        hall_vehicleLoading_label_departure_province.setText("Province");
-
-        hall_vehicleLoading_label_departure_city.setText("City");
-
-        hall_vehicleLoading_label_destination.setText("Destination:");
-
-        hall_vehicleLoading_label_destination_province.setText("Province");
-
-        hall_vehicleLoading_label_destination_city.setText("City");
-
-        hall_vehicleLoading_label_supervisor.setText("Supervisor's:");
-
-        hall_vehicleLoading_label_supercargo.setText("Supercargo:");
-
-        hall_vehicleLoading_goodsNoTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Goods No."
-            }
-        ));
-        jScrollPane1.setViewportView(hall_vehicleLoading_goodsNoTable);
-
-        hall_vehicleLoading_label_transportationExpense.setText("transportation expenses:");
-
-        hall_vehicleLoading_transportationExpense.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hall_vehicleLoading_transportationExpenseActionPerformed(evt);
-            }
-        });
-
-        hall_vehicleLoading_button_submit.setText("Submit");
-
-        hall_vehicleLoading_button_cancel.setText("Cancel");
-
-        hall_vehicleLoading_label_transportNo.setText("transport no:");
-
-        javax.swing.GroupLayout hall_vehicleLoadingManagementPanelLayout = new javax.swing.GroupLayout(hall_vehicleLoadingManagementPanel);
-        hall_vehicleLoadingManagementPanel.setLayout(hall_vehicleLoadingManagementPanelLayout);
-        hall_vehicleLoadingManagementPanelLayout.setHorizontalGroup(
-            hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(hall_vehicleLoading_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_label_year)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_label_month)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_label_day))
-                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(hall_vehicleLoading_hallNo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(hall_vehicleLoading_button_hallNoDefault))
-                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hall_vehicleLoading_label_destination)
-                            .addComponent(hall_vehicleLoading_label_hallNo)
-                            .addComponent(hall_vehicleLoading_label_loadingDate)
-                            .addComponent(hall_vehicleLoading_label_departure)
-                            .addComponent(hall_vehicleLoading_label_supervisor)
-                            .addComponent(hall_vehicleLoading_label_transportationExpense)
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(hall_vehicleLoading_label_supercargo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                    .addGap(75, 75, 75)
-                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                            .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(hall_vehicleLoading_label_departure_province)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(hall_vehicleLoading_label_departure_city))
-                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                                    .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(hall_vehicleLoading_label_destination_province))
-                                                .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(hall_vehicleLoading_label_transportNo)
-                                                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                                            .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(hall_vehicleLoading_label_destination_city))))
-                                                .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                                                    .addGap(107, 107, 107)
-                                                    .addComponent(hall_vehicleLoading_tansportNo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
-                .addGap(0, 75, Short.MAX_VALUE)
-                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(hall_vehicleLoading_button_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(hall_vehicleLoading_button_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))))
-        );
-        hall_vehicleLoadingManagementPanelLayout.setVerticalGroup(
-            hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addComponent(hall_vehicleLoading_label_loadingDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_vehicleLoading_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehicleLoading_label_year)
-                            .addComponent(hall_vehicleLoading_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehicleLoading_label_month)
-                            .addComponent(hall_vehicleLoading_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehicleLoading_label_day))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_vehicleLoading_label_hallNo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_vehicleLoading_hallNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehicleLoading_button_hallNoDefault))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_vehicleLoading_label_departure)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(hall_vehicleLoading_departure_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(hall_vehicleLoading_label_departure_city))
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(hall_vehicleLoading_departure_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(hall_vehicleLoading_label_departure_province)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_vehicleLoading_label_destination)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(hall_vehicleLoading_destination_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(hall_vehicleLoading_label_destination_city))
-                            .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(hall_vehicleLoading_destination_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(hall_vehicleLoading_label_destination_province)))
-                        .addGap(18, 18, 18)
-                        .addComponent(hall_vehicleLoading_label_supervisor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_supervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_vehicleLoading_label_supercargo)
-                            .addComponent(hall_vehicleLoading_label_transportNo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_vehicleLoading_supercargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_vehicleLoading_tansportNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_vehicleLoading_label_transportationExpense)
-                .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hall_vehicleLoading_transportationExpense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_vehicleLoadingManagementPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(hall_vehicleLoadingManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hall_vehicleLoading_button_submit)
-                            .addComponent(hall_vehicleLoading_button_cancel))
-                        .addGap(18, 18, 18))))
-        );
-
-        hall_mainPanel.add(hall_vehicleLoadingManagementPanel, "card5");
-
-        hall_collectionNote_dateList.setBorder(javax.swing.BorderFactory.createTitledBorder("Date"));
-        hall_collectionNote_dateList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "2015/12/12", "2015/12/11", ".." };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        hall_collectionNote_listPanel.setViewportView(hall_collectionNote_dateList);
-
-        hall_collectionNote_dailyCollection.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Date", "Amount", "Postman", "Collection No."
-            }
-        ));
-        hall_collectionNote_tablePanel.setViewportView(hall_collectionNote_dailyCollection);
-        if (hall_collectionNote_dailyCollection.getColumnModel().getColumnCount() > 0) {
-            hall_collectionNote_dailyCollection.getColumnModel().getColumn(0).setResizable(false);
-            hall_collectionNote_dailyCollection.getColumnModel().getColumn(1).setResizable(false);
-            hall_collectionNote_dailyCollection.getColumnModel().getColumn(2).setResizable(false);
-            hall_collectionNote_dailyCollection.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        hall_collectionNote_SaveButton.setText("Save");
-
-        hall_collectionNote_CancelButton.setText("Cancel");
-
-        javax.swing.GroupLayout hall_collectionNotePanelLayout = new javax.swing.GroupLayout(hall_collectionNotePanel);
-        hall_collectionNotePanel.setLayout(hall_collectionNotePanelLayout);
-        hall_collectionNotePanelLayout.setHorizontalGroup(
-            hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_collectionNotePanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(hall_collectionNote_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(hall_collectionNote_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(17, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hall_collectionNotePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(hall_collectionNote_CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hall_collectionNote_SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40))))
-        );
-        hall_collectionNotePanelLayout.setVerticalGroup(
-            hall_collectionNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(hall_collectionNote_tablePanel)
-                .addContainerGap())
-            .addGroup(hall_collectionNotePanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(hall_collectionNote_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(hall_collectionNote_SaveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hall_collectionNote_CancelButton)
-                .addGap(25, 25, 25))
-        );
-
-        hall_mainPanel.add(hall_collectionNotePanel, "card6");
-
-        javax.swing.GroupLayout hallPanelLayout = new javax.swing.GroupLayout(hallPanel);
-        hallPanel.setLayout(hallPanelLayout);
-        hallPanelLayout.setHorizontalGroup(
-            hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hallPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(hall_acceptanceAndDistributionManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hall_vehicleLoadingManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hall_vehiclesManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hall_driversManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hall_collectionNote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(hall_mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
-        hallPanelLayout.setVerticalGroup(
-            hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hallPanelLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(hallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hall_mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(hallPanelLayout.createSequentialGroup()
-                        .addComponent(hall_vehicleLoadingManagement)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_acceptanceAndDistributionManagement)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_vehiclesManagement)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_driversManagement)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hall_collectionNote)))
-                .addGap(28, 28, 28))
-        );
-
-        cardPanel.add(hallPanel, "card3");
+        centerPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
         center_button_airline.setText("Airline Loading");
         center_button_airline.addActionListener(new java.awt.event.ActionListener() {
@@ -2326,8 +2372,217 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_button_transfer.setText("Transfer Manaement");
+        center_button_transfer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                center_button_transferActionPerformed(evt);
+            }
+        });
 
         center_mainPanel.setLayout(new java.awt.CardLayout());
+
+        center_transfer_arrival.setBorder(javax.swing.BorderFactory.createTitledBorder("Arrival"));
+
+        center_transfer_arrival_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        center_transfer_arrival_label_goodsState.setText("Goods State:");
+
+        center_transfer_arrival_label_province.setText("Province");
+
+        center_transfer_arrival_label_departure.setText("Departure Place:");
+
+        center_transfer_arrival_state_damaged.setText("damaged");
+
+        center_transfer_arrival_state_losed.setText("losed");
+
+        center_transfer_arrival_label_year.setText("Year");
+
+        center_transfer_arrival_state_intact.setText("intact");
+
+        center_transfer_arrival_label_day.setText("Day");
+
+        center_transfer_arrival_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
+
+        center_transfer_arrival_label_city.setText("City");
+
+        center_transfer_arrival_label_month.setText("Month");
+
+        center_transfer_arrival_freightNo.setText("xxxx-xxxxxx");
+
+        center_transfer_arrival_label_freightNo.setText("Freight No. :");
+
+        center_transfer_arrival_label_arrivalDate.setText("Arrive Date:");
+
+        center_transfer_arrival_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        center_transfer_arrival_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                center_transfer_arrival_monthActionPerformed(evt);
+            }
+        });
+
+        center_transfer_arrival_label_arrivalNo.setText("Arrival No. :");
+
+        center_transfer_arrival_arrivalNo.setText("xxxx-xxxxxx");
+
+        center_transfer_arrival_submit.setText("Submit");
+        center_transfer_arrival_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                center_transfer_arrival_submitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout center_transfer_arrivalLayout = new javax.swing.GroupLayout(center_transfer_arrival);
+        center_transfer_arrival.setLayout(center_transfer_arrivalLayout);
+        center_transfer_arrivalLayout.setHorizontalGroup(
+            center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(center_transfer_arrival_label_arrivalNo)
+                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(center_transfer_arrival_arrivalNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(center_transfer_arrival_label_freightNo)
+                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                        .addComponent(center_transfer_arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_label_year)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_label_month)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_label_day))
+                    .addComponent(center_transfer_arrival_label_arrivalDate)
+                    .addComponent(center_transfer_arrival_label_departure)
+                    .addComponent(center_transfer_arrival_label_goodsState)
+                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(center_transfer_arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(center_transfer_arrival_state_intact)
+                            .addComponent(center_transfer_arrival_state_damaged)
+                            .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                                .addComponent(center_transfer_arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(center_transfer_arrival_label_province)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(center_transfer_arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(center_transfer_arrival_label_city))
+                            .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                                .addComponent(center_transfer_arrival_state_losed)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                                .addComponent(center_transfer_arrival_submit))))
+                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(center_transfer_arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
+        );
+        center_transfer_arrivalLayout.setVerticalGroup(
+            center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_arrivalLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(center_transfer_arrival_label_arrivalNo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(center_transfer_arrival_arrivalNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(center_transfer_arrival_label_arrivalDate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(center_transfer_arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(center_transfer_arrival_label_year)
+                    .addComponent(center_transfer_arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(center_transfer_arrival_label_month)
+                    .addComponent(center_transfer_arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(center_transfer_arrival_label_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
+                        .addComponent(center_transfer_arrival_label_freightNo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(center_transfer_arrival_label_departure)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(center_transfer_arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(center_transfer_arrival_label_city))
+                            .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(center_transfer_arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(center_transfer_arrival_label_province)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(center_transfer_arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(center_transfer_arrival_label_goodsState)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(center_transfer_arrival_state_intact)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_state_damaged)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(center_transfer_arrival_state_losed)
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_arrivalLayout.createSequentialGroup()
+                        .addComponent(center_transfer_arrival_submit)
+                        .addContainerGap())))
+        );
+
+        center_transfer_transferPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Transfer"));
+
+        center_transfer_transfer_stockList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "transport_no", "date", "departure", "destination", "line", "expense"
+            }
+        ));
+        center_transfer_transfer_stocklistPanel.setViewportView(center_transfer_transfer_stockList);
+
+        javax.swing.GroupLayout center_transfer_transferPanelLayout = new javax.swing.GroupLayout(center_transfer_transferPanel);
+        center_transfer_transferPanel.setLayout(center_transfer_transferPanelLayout);
+        center_transfer_transferPanelLayout.setHorizontalGroup(
+            center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_transferPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(center_transfer_transfer_stocklistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        center_transfer_transferPanelLayout.setVerticalGroup(
+            center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(center_transfer_transferPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(center_transfer_transfer_stocklistPanel)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout center_transferPanelLayout = new javax.swing.GroupLayout(center_transferPanel);
+        center_transferPanel.setLayout(center_transferPanelLayout);
+        center_transferPanelLayout.setHorizontalGroup(
+            center_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(center_transferPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(center_transfer_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(center_transfer_transferPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        center_transferPanelLayout.setVerticalGroup(
+            center_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(center_transferPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(center_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(center_transfer_arrival, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(center_transfer_transferPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        center_mainPanel.add(center_transferPanel, "card5");
 
         center_airline_label_loadingDate.setText("Loading Date:");
 
@@ -2355,12 +2610,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         center_airline_label_departure_province.setText("Province");
 
-        center_airline_departure_city.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_airline_departure_cityActionPerformed(evt);
-            }
-        });
-
         center_airline_label_departure_city.setText("City");
 
         center_airline_label_destination_city.setText("City");
@@ -2372,27 +2621,10 @@ public class MainFrame extends javax.swing.JFrame {
         center_airline_label_counterNo.setText("Counter No. :");
 
         center_airline_counterNo.setText("xxxx-xxxx");
-        center_airline_counterNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_airline_counterNoActionPerformed(evt);
-            }
-        });
 
         center_airline_label_supervisor.setText("Supervisor's:");
 
-        center_airline_supervisor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_airline_supervisorActionPerformed(evt);
-            }
-        });
-
         center_airline_label_transportationExpense.setText("transportation expenses:");
-
-        center_airline_transportationExpense.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_airline_transportationExpenseActionPerformed(evt);
-            }
-        });
 
         center_airline_goodsNoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2415,6 +2647,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_airline_button_cancel.setText("Cancel");
+        center_airline_button_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                center_airline_button_cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout center_airlinePanelLayout = new javax.swing.GroupLayout(center_airlinePanel);
         center_airlinePanel.setLayout(center_airlinePanelLayout);
@@ -2586,12 +2823,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         center_train_label_departure_province.setText("Province");
 
-        center_train_departure_city.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_train_departure_cityActionPerformed(evt);
-            }
-        });
-
         center_train_label_departure_city.setText("City");
 
         center_train_label_destination_city.setText("City");
@@ -2603,27 +2834,10 @@ public class MainFrame extends javax.swing.JFrame {
         center_train_label_carriageNo.setText("Carriage No. :");
 
         center_train_carriageNo.setText("xxxx-xxxx");
-        center_train_carriageNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_train_carriageNoActionPerformed(evt);
-            }
-        });
 
         center_train_label_supervisor.setText("Supervisor's:");
 
-        center_train_supervisor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_train_supervisorActionPerformed(evt);
-            }
-        });
-
         center_train_label_transportationExpense.setText("transportation expenses:");
-
-        center_train_transportationExpense.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_train_transportationExpenseActionPerformed(evt);
-            }
-        });
 
         center_train_goodsNoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2646,6 +2860,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_train_button_cancel.setText("Cancel");
+        center_train_button_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                center_train_button_cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout center_trainlinePanelLayout = new javax.swing.GroupLayout(center_trainlinePanel);
         center_trainlinePanel.setLayout(center_trainlinePanelLayout);
@@ -2817,12 +3036,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         center_vehicle_label_departure_province.setText("Province");
 
-        center_vehicle_departure_city.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_vehicle_departure_cityActionPerformed(evt);
-            }
-        });
-
         center_vehicle_label_departure_city.setText("City");
 
         center_vehicle_label_destination_city.setText("City");
@@ -2834,27 +3047,10 @@ public class MainFrame extends javax.swing.JFrame {
         center_vehicle_label_SupercargoNo.setText("Supercargo:");
 
         center_vehicle_SupercargoNo.setText("xxxx-xxxx");
-        center_vehicle_SupercargoNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_vehicle_SupercargoNoActionPerformed(evt);
-            }
-        });
 
         center_vehicle_label_supervisor.setText("Supervisor's:");
 
-        center_vehicle_supervisor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_vehicle_supervisorActionPerformed(evt);
-            }
-        });
-
         center_vehicle_label_transportationExpense.setText("transportation expenses:");
-
-        center_vehicle_transportationExpense.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_vehicle_transportationExpenseActionPerformed(evt);
-            }
-        });
 
         center_vehicle_goodsNoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2877,6 +3073,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         center_vehicle_button_cancel.setText("Cancel");
+        center_vehicle_button_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                center_vehicle_button_cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout center_vehiclePanelLayout = new javax.swing.GroupLayout(center_vehiclePanel);
         center_vehiclePanel.setLayout(center_vehiclePanelLayout);
@@ -3022,205 +3223,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         center_mainPanel.add(center_vehiclePanel, "card4");
 
-        center_transfer_arrival.setBorder(javax.swing.BorderFactory.createTitledBorder("Arrival"));
-
-        center_transfer_arrival_day.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        center_transfer_arrival_label_goodsState.setText("Goods State:");
-
-        center_transfer_arrival_label_province.setText("Province");
-
-        center_transfer_arrival_label_departure.setText("Departure Place:");
-
-        center_transfer_arrival_state_damaged.setText("damaged");
-
-        center_transfer_arrival_state_losed.setText("losed");
-
-        center_transfer_arrival_label_year.setText("Year");
-
-        center_transfer_arrival_state_intact.setText("intact");
-
-        center_transfer_arrival_label_day.setText("Day");
-
-        center_transfer_arrival_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
-
-        center_transfer_arrival_label_city.setText("City");
-
-        center_transfer_arrival_label_month.setText("Month");
-
-        center_transfer_arrival_freightNo.setText("xxxx-xxxxxx");
-
-        center_transfer_arrival_label_freightNo.setText("Freight No. :");
-
-        center_transfer_arrival_label_arrivalDate.setText("Arrive Date:");
-
-        center_transfer_arrival_month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        center_transfer_arrival_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                center_transfer_arrival_monthActionPerformed(evt);
-            }
-        });
-
-        center_transfer_arrival_label_arrivalNo.setText("Arrival No. :");
-
-        center_transfer_arrival_arrivalNo.setText("xxxx-xxxxxx");
-
-        center_transfer_arrival_submit.setText("Submit");
-
-        javax.swing.GroupLayout center_transfer_arrivalLayout = new javax.swing.GroupLayout(center_transfer_arrival);
-        center_transfer_arrival.setLayout(center_transfer_arrivalLayout);
-        center_transfer_arrivalLayout.setHorizontalGroup(
-            center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(center_transfer_arrival_label_arrivalNo)
-                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(center_transfer_arrival_arrivalNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(center_transfer_arrival_label_freightNo)
-                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                        .addComponent(center_transfer_arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_label_year)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_label_month)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_label_day))
-                    .addComponent(center_transfer_arrival_label_arrivalDate)
-                    .addComponent(center_transfer_arrival_label_departure)
-                    .addComponent(center_transfer_arrival_label_goodsState)
-                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(center_transfer_arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(center_transfer_arrival_state_intact)
-                            .addComponent(center_transfer_arrival_state_damaged)
-                            .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                                .addComponent(center_transfer_arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_transfer_arrival_label_province)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_transfer_arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(center_transfer_arrival_label_city))
-                            .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                                .addComponent(center_transfer_arrival_state_losed)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
-                                .addComponent(center_transfer_arrival_submit))))
-                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(center_transfer_arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32))
-        );
-        center_transfer_arrivalLayout.setVerticalGroup(
-            center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_arrivalLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(center_transfer_arrival_label_arrivalNo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(center_transfer_arrival_arrivalNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(center_transfer_arrival_label_arrivalDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(center_transfer_arrival_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(center_transfer_arrival_label_year)
-                    .addComponent(center_transfer_arrival_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(center_transfer_arrival_label_month)
-                    .addComponent(center_transfer_arrival_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(center_transfer_arrival_label_day))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(center_transfer_arrivalLayout.createSequentialGroup()
-                        .addComponent(center_transfer_arrival_label_freightNo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_freightNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(center_transfer_arrival_label_departure)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(center_transfer_arrival_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_transfer_arrival_label_city))
-                            .addGroup(center_transfer_arrivalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(center_transfer_arrival_province, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(center_transfer_arrival_label_province)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(center_transfer_arrival_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(center_transfer_arrival_label_goodsState)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(center_transfer_arrival_state_intact)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_state_damaged)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(center_transfer_arrival_state_losed)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_arrivalLayout.createSequentialGroup()
-                        .addComponent(center_transfer_arrival_submit)
-                        .addContainerGap())))
-        );
-
-        center_transfer_transferPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Transfer"));
-
-        center_transfer_transfer_stockList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "transport_no", "date", "departure", "destination", "line", "expense"
-            }
-        ));
-        center_transfer_transfer_stocklistPanel.setViewportView(center_transfer_transfer_stockList);
-
-        javax.swing.GroupLayout center_transfer_transferPanelLayout = new javax.swing.GroupLayout(center_transfer_transferPanel);
-        center_transfer_transferPanel.setLayout(center_transfer_transferPanelLayout);
-        center_transfer_transferPanelLayout.setHorizontalGroup(
-            center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, center_transfer_transferPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(center_transfer_transfer_stocklistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        center_transfer_transferPanelLayout.setVerticalGroup(
-            center_transfer_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(center_transfer_transferPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(center_transfer_transfer_stocklistPanel)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout center_transferPanelLayout = new javax.swing.GroupLayout(center_transferPanel);
-        center_transferPanel.setLayout(center_transferPanelLayout);
-        center_transferPanelLayout.setHorizontalGroup(
-            center_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(center_transferPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(center_transfer_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(center_transfer_transferPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        center_transferPanelLayout.setVerticalGroup(
-            center_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(center_transferPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(center_transferPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(center_transfer_arrival, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(center_transfer_transferPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        center_mainPanel.add(center_transferPanel, "card5");
-
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
         centerPanelLayout.setHorizontalGroup(
@@ -3250,10 +3252,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(center_button_vehicle)
                         .addGap(18, 18, 18)
                         .addComponent(center_button_transfer)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         cardPanel.add(centerPanel, "card4");
+
+        financePanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
         finance_button_settelement.setText("Settlement Management");
         finance_button_settelement.addActionListener(new java.awt.event.ActionListener() {
@@ -3331,8 +3335,18 @@ public class MainFrame extends javax.swing.JFrame {
         finance_settlement_receipt_label_city.setText("City");
 
         finance_settlement_receipt_button_save.setText("Save");
+        finance_settlement_receipt_button_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_settlement_receipt_button_saveActionPerformed(evt);
+            }
+        });
 
         finance_settlement_receipt_button_reset.setText("Reset");
+        finance_settlement_receipt_button_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_settlement_receipt_button_resetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_settlement_receiptPanelLayout = new javax.swing.GroupLayout(finance_settlement_receiptPanel);
         finance_settlement_receiptPanel.setLayout(finance_settlement_receiptPanelLayout);
@@ -3468,6 +3482,11 @@ public class MainFrame extends javax.swing.JFrame {
         finance_settlement_checkReceipt_hall.setText("xxx-xxx-xx");
 
         finance_settlement_checkReceipt_button_check.setText("Check");
+        finance_settlement_checkReceipt_button_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_settlement_checkReceipt_button_checkActionPerformed(evt);
+            }
+        });
 
         finance_settlement_checkReceipt_result_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -3650,8 +3669,18 @@ public class MainFrame extends javax.swing.JFrame {
         finance_cost_payment_remarkPanel.setViewportView(finance_cost_payment_remark1);
 
         finance_cost_payment_button_reset1.setText("Reset");
+        finance_cost_payment_button_reset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_cost_payment_button_reset1ActionPerformed(evt);
+            }
+        });
 
         finance_cost_payment_button_save1.setText("Save");
+        finance_cost_payment_button_save1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_cost_payment_button_save1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_cost_paymentPanel1Layout = new javax.swing.GroupLayout(finance_cost_paymentPanel1);
         finance_cost_paymentPanel1.setLayout(finance_cost_paymentPanel1Layout);
@@ -3789,6 +3818,11 @@ public class MainFrame extends javax.swing.JFrame {
         finance_cost_costAndIncomePanel_result_tablePanel.setViewportView(finance_cost_costAndIncomePanel_result_table);
 
         finance_cost_costAndIncomePanel_button_export.setText("Export");
+        finance_cost_costAndIncomePanel_button_export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_cost_costAndIncomePanel_button_exportActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_cost_costAndIncomePanel_resultPanelLayout = new javax.swing.GroupLayout(finance_cost_costAndIncomePanel_resultPanel);
         finance_cost_costAndIncomePanel_resultPanel.setLayout(finance_cost_costAndIncomePanel_resultPanelLayout);
@@ -3813,6 +3847,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        finance_cost_costAndIncomePanel_button_Check.setText("Check");
+        finance_cost_costAndIncomePanel_button_Check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_cost_costAndIncomePanel_button_CheckActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout finance_cost_costAndIncomePanelLayout = new javax.swing.GroupLayout(finance_cost_costAndIncomePanel);
         finance_cost_costAndIncomePanel.setLayout(finance_cost_costAndIncomePanelLayout);
         finance_cost_costAndIncomePanelLayout.setHorizontalGroup(
@@ -3820,23 +3861,28 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(finance_cost_costAndIncomePanel_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
-                        .addGroup(finance_cost_costAndIncomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(finance_cost_costAndIncomePanel_label_endDate)
-                            .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
-                                .addComponent(finance_cost_costAndIncomePanel_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(finance_cost_costAndIncomePanel_label_year)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(finance_cost_costAndIncomePanel_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(finance_cost_costAndIncomePanel_label_month)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(finance_cost_costAndIncomePanel_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(finance_cost_costAndIncomePanel_label_day)))
-                        .addGap(0, 74, Short.MAX_VALUE)))
+                        .addComponent(finance_cost_costAndIncomePanel_year, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_costAndIncomePanel_label_year)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_costAndIncomePanel_month, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_costAndIncomePanel_label_month)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_costAndIncomePanel_day, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finance_cost_costAndIncomePanel_label_day)
+                        .addContainerGap(80, Short.MAX_VALUE))
+                    .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                        .addComponent(finance_cost_costAndIncomePanel_label_endDate)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(finance_cost_costAndIncomePanel_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, finance_cost_costAndIncomePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(finance_cost_costAndIncomePanel_button_Check)
                 .addContainerGap())
         );
         finance_cost_costAndIncomePanelLayout.setVerticalGroup(
@@ -3852,9 +3898,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(finance_cost_costAndIncomePanel_label_month)
                     .addComponent(finance_cost_costAndIncomePanel_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(finance_cost_costAndIncomePanel_label_day))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(finance_cost_costAndIncomePanel_button_Check)
                 .addGap(18, 18, 18)
-                .addComponent(finance_cost_costAndIncomePanel_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(finance_cost_costAndIncomePanel_resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout finance_costManagementLayout = new javax.swing.GroupLayout(finance_costManagement);
@@ -3919,6 +3966,11 @@ public class MainFrame extends javax.swing.JFrame {
         finance_numerical_label_to_day.setText("Day");
 
         finance_numerical_button_check.setText("Check");
+        finance_numerical_button_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	finance_numerical_button_checkActionPerformed(evt);
+            }
+        });
 
         finance_numerical_resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Statement"));
 
@@ -3970,8 +4022,18 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         finance_numerical_button_export_payment.setText("Export");
+        finance_numerical_button_export_payment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_numerical_button_export_paymentActionPerformed(evt);
+            }
+        });
 
         finance_numerical_button_export_receipt.setText("Export");
+        finance_numerical_button_export_receipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_numerical_button_export_receiptActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_numericalStatementLayout = new javax.swing.GroupLayout(finance_numericalStatement);
         finance_numericalStatement.setLayout(finance_numericalStatementLayout);
@@ -4052,7 +4114,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(finance_numericalStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(finance_numerical_button_export_payment)
                     .addComponent(finance_numerical_button_export_receipt))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         finance_mainPanel.add(finance_numericalStatement, "card4");
@@ -4096,6 +4158,11 @@ public class MainFrame extends javax.swing.JFrame {
         finance_account_add_name.setText("// Name");
 
         finance_account_add_button_add.setText("Add");
+        finance_account_add_button_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_account_add_button_addActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_account_addPanelLayout = new javax.swing.GroupLayout(finance_account_addPanel);
         finance_account_addPanel.setLayout(finance_account_addPanelLayout);
@@ -4126,6 +4193,11 @@ public class MainFrame extends javax.swing.JFrame {
         finance_account_searchAndDelete_name.setText("// Name");
 
         finance_account_searchAndDelete_button_search.setText("Search");
+        finance_account_searchAndDelete_button_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_account_searchAndDelete_button_searchActionPerformed(evt);
+            }
+        });
 
         finance_account_searchAndDelete_detail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -4152,6 +4224,11 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         finance_account_searchAndDelete_delete.setText("Delete");
+        finance_account_searchAndDelete_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_account_searchAndDelete_deleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_account_searchAndDeletePanelLayout = new javax.swing.GroupLayout(finance_account_searchAndDeletePanel);
         finance_account_searchAndDeletePanel.setLayout(finance_account_searchAndDeletePanelLayout);
@@ -4192,6 +4269,11 @@ public class MainFrame extends javax.swing.JFrame {
         finance_account_init_label_accountName.setText("Account Name:");
 
         finance_account_init_button_check.setText("Check");
+        finance_account_init_button_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_account_init_button_checkActionPerformed(evt);
+            }
+        });
 
         finance_account_init_result_staff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -4278,6 +4360,11 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         finance_account_init_button_init.setText("Init Account");
+        finance_account_init_button_init.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finance_account_init_button_initActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout finance_account_initPanelLayout = new javax.swing.GroupLayout(finance_account_initPanel);
         finance_account_initPanel.setLayout(finance_account_initPanelLayout);
@@ -4343,7 +4430,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(finance_account_initPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(finance_account_accountListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         finance_mainPanel.add(finance_accountManagement, "card5");
@@ -4383,6 +4470,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         cardPanel.add(financePanel, "card5");
 
+        managerPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
+
         manager_button_staff.setText("Staff Management");
         manager_button_staff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4408,6 +4497,13 @@ public class MainFrame extends javax.swing.JFrame {
         manager_button_statement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manager_button_statementActionPerformed(evt);
+            }
+        });
+
+        manager_button_numercial.setText("Check Numercial");
+        manager_button_numercial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_button_numercialActionPerformed(evt);
             }
         });
 
@@ -4516,6 +4612,11 @@ public class MainFrame extends javax.swing.JFrame {
         manager_staff_updatePanel_label_salary.setText("Staff salary:");
 
         manager_staff_update_button_submit.setText("Submit");
+        manager_staff_update_button_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_staff_update_button_submitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manager_staff_updatePanelLayout = new javax.swing.GroupLayout(manager_staff_updatePanel);
         manager_staff_updatePanel.setLayout(manager_staff_updatePanelLayout);
@@ -4629,6 +4730,11 @@ public class MainFrame extends javax.swing.JFrame {
         manager_department_staff_label_to.setText("to:");
 
         manager_department_staff_button_save.setText("Save");
+        manager_department_staff_button_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_department_staff_button_saveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manager_department_staffPanelLayout = new javax.swing.GroupLayout(manager_department_staffPanel);
         manager_department_staffPanel.setLayout(manager_department_staffPanelLayout);
@@ -4703,6 +4809,11 @@ public class MainFrame extends javax.swing.JFrame {
         manager_department_updatePanel_label_parent.setText("new parent:");
 
         manager_department_updatePanel_button_save.setText("Save");
+        manager_department_updatePanel_button_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_department_updatePanel_button_saveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manager_department_updatePanelLayout = new javax.swing.GroupLayout(manager_department_updatePanel);
         manager_department_updatePanel.setLayout(manager_department_updatePanelLayout);
@@ -4783,12 +4894,202 @@ public class MainFrame extends javax.swing.JFrame {
 
         manager_mainPanel.add(manager_departmentPanel, "card3");
 
-        manager_button_numercial.setText("Check Numercial");
-        manager_button_numercial.addActionListener(new java.awt.event.ActionListener() {
+        manager_document_button_ticket.setText("send ticket");
+        manager_document_button_ticket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manager_button_numercialActionPerformed(evt);
+                manager_document_button_ticketActionPerformed(evt);
             }
         });
+
+        manager_document_button_air.setText("air loading");
+        manager_document_button_air.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_airActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_train.setText("train loading");
+        manager_document_button_train.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_trainActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_vehicle.setText("vehicle loading");
+        manager_document_button_vehicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_vehicleActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_hallarrival.setText("hall arrival");
+        manager_document_button_hallarrival.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_hallarrivalActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_halldistribution.setText("hall_distribution");
+        manager_document_button_halldistribution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_halldistributionActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_receipt.setText("receipt");
+        manager_document_button_receipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_receiptActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_ceterarrival.setText("center_arrival");
+        manager_document_button_ceterarrival.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_ceterarrivalActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_stockin.setText("stock_in");
+        manager_document_button_stockin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_stockinActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_transfer.setText("transfer");
+        manager_document_button_transfer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_transferActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_stockex.setText("stock_ex");
+        manager_document_button_stockex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_stockexActionPerformed(evt);
+            }
+        });
+
+        manager_document_button_payment.setText("payment");
+        manager_document_button_payment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_paymentActionPerformed(evt);
+            }
+        });
+
+        manager_document_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        manager_document_listPanel.setViewportView(manager_document_list);
+
+        manager_document_button_save.setText("Save");
+        manager_document_button_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_document_button_saveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manager_documentLayout = new javax.swing.GroupLayout(manager_document);
+        manager_document.setLayout(manager_documentLayout);
+        manager_documentLayout.setHorizontalGroup(
+            manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_documentLayout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(manager_document_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(manager_document_button_ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_halldistribution, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_hallarrival, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_receipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_ceterarrival, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_stockin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_transfer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_stockex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_vehicle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_train, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manager_document_button_air, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manager_document_button_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manager_documentLayout.createSequentialGroup()
+                        .addComponent(manager_document_button_save)
+                        .addGap(18, 18, 18)))
+                .addGap(32, 32, 32))
+        );
+        manager_documentLayout.setVerticalGroup(
+            manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manager_documentLayout.createSequentialGroup()
+                .addGroup(manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(manager_documentLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(manager_document_listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manager_documentLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(manager_document_button_ticket)
+                            .addComponent(manager_document_button_payment))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_air)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_train)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_vehicle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_hallarrival)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_halldistribution)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_receipt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_ceterarrival)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_stockin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(manager_document_button_transfer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(manager_documentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(manager_document_button_stockex)
+                            .addComponent(manager_document_button_save))))
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
+        manager_mainPanel.add(manager_document, "card4");
+
+        javax.swing.GroupLayout manager_checkStatementLayout = new javax.swing.GroupLayout(manager_checkStatement);
+        manager_checkStatement.setLayout(manager_checkStatementLayout);
+        manager_checkStatementLayout.setHorizontalGroup(
+            manager_checkStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 923, Short.MAX_VALUE)
+        );
+        manager_checkStatementLayout.setVerticalGroup(
+            manager_checkStatementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 526, Short.MAX_VALUE)
+        );
+
+        manager_mainPanel.add(manager_checkStatement, "card5");
+
+        javax.swing.GroupLayout manager_checkNumercialLayout = new javax.swing.GroupLayout(manager_checkNumercial);
+        manager_checkNumercial.setLayout(manager_checkNumercialLayout);
+        manager_checkNumercialLayout.setHorizontalGroup(
+            manager_checkNumercialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 923, Short.MAX_VALUE)
+        );
+        manager_checkNumercialLayout.setVerticalGroup(
+            manager_checkNumercialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 526, Short.MAX_VALUE)
+        );
+
+        manager_mainPanel.add(manager_checkNumercial, "card6");
 
         javax.swing.GroupLayout managerPanelLayout = new javax.swing.GroupLayout(managerPanel);
         managerPanel.setLayout(managerPanelLayout);
@@ -4828,6 +5129,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         cardPanel.add(managerPanel, "card6");
 
+        curtomerPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
+
         javax.swing.GroupLayout curtomerPanelLayout = new javax.swing.GroupLayout(curtomerPanel);
         curtomerPanel.setLayout(curtomerPanelLayout);
         curtomerPanelLayout.setHorizontalGroup(
@@ -4840,6 +5143,8 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         cardPanel.add(curtomerPanel, "card8");
+
+        centerStockPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
 
         stock_button_inwarehouse.setText("In-warehouse");
         stock_button_inwarehouse.addActionListener(new java.awt.event.ActionListener() {
@@ -4863,8 +5168,18 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         stock_button_inventoryCounts.setText("Inventory Counts");
+        stock_button_inventoryCounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_button_inventoryCountsActionPerformed(evt);
+            }
+        });
 
         stock_button_inventoryAdjustments.setText("Inventory Adjustments");
+        stock_button_inventoryAdjustments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_button_inventoryAdjustmentsActionPerformed(evt);
+            }
+        });
 
         stock_realtimePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Real-time inventory"));
 
@@ -5031,6 +5346,11 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inwarehouse_line.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
 
         stock_inwarehouse_button_inwarehouse.setText("In-warehouse");
+        stock_inwarehouse_button_inwarehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inwarehouse_button_inwarehouseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout stock_inwarehouseLayout = new javax.swing.GroupLayout(stock_inwarehouse);
         stock_inwarehouse.setLayout(stock_inwarehouseLayout);
@@ -5203,6 +5523,11 @@ public class MainFrame extends javax.swing.JFrame {
         stock_exwarehouse_transportNo.setText("xxxx-xxxx");
 
         stock_exwarehouse_button_exwarehouse.setText("Ex-warehouse");
+        stock_exwarehouse_button_exwarehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_exwarehouse_button_exwarehouseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout stock_exwarehouseLayout = new javax.swing.GroupLayout(stock_exwarehouse);
         stock_exwarehouse.setLayout(stock_exwarehouseLayout);
@@ -5369,8 +5694,18 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inventoryCheck_label_end_day.setText("Day");
 
         stock_inventoryCheck_button_check.setText("Check");
+        stock_inventoryCheck_button_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inventoryCheck_button_checkActionPerformed(evt);
+            }
+        });
 
         stock_inventoryCheck_button_reset.setText("Reset");
+        stock_inventoryCheck_button_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inventoryCheck_button_resetActionPerformed(evt);
+            }
+        });
 
         stock_inventoryCheck_label_inwarehouse.setText("In-warehouse:");
 
@@ -5553,43 +5888,48 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inventoryCounts_snaptime.setText("2015/12/14/19:45:11");
 
         stock_inventoryCounts_button_export.setText("Export");
+        stock_inventoryCounts_button_export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inventoryCounts_button_exportActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout stock_inventoryyCountsLayout = new javax.swing.GroupLayout(stock_inventoryyCounts);
-        stock_inventoryyCounts.setLayout(stock_inventoryyCountsLayout);
-        stock_inventoryyCountsLayout.setHorizontalGroup(
-            stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
-                .addGroup(stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+        javax.swing.GroupLayout stock_inventoryCountsLayout = new javax.swing.GroupLayout(stock_inventoryCounts);
+        stock_inventoryCounts.setLayout(stock_inventoryCountsLayout);
+        stock_inventoryCountsLayout.setHorizontalGroup(
+            stock_inventoryCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryCountsLayout.createSequentialGroup()
+                .addGroup(stock_inventoryCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stock_inventoryCountsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(stock_inventoryCounts_tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
-                    .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+                    .addGroup(stock_inventoryCountsLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(stock_inventoryCounts_label_time)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+            .addGroup(stock_inventoryCountsLayout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addComponent(stock_inventoryCounts_snaptime)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stock_inventoryCounts_button_export, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
-        stock_inventoryyCountsLayout.setVerticalGroup(
-            stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(stock_inventoryyCountsLayout.createSequentialGroup()
+        stock_inventoryCountsLayout.setVerticalGroup(
+            stock_inventoryCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stock_inventoryCountsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(stock_inventoryCounts_tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(stock_inventoryCounts_label_time)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(stock_inventoryyCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stock_inventoryCountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stock_inventoryCounts_snaptime)
                     .addComponent(stock_inventoryCounts_button_export))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        stock_mainPanel.add(stock_inventoryyCounts, "card5");
+        stock_mainPanel.add(stock_inventoryCounts, "card5");
 
         stock_inventoryAdjust_label_warningPercent.setText("Warning Percent:");
 
@@ -5597,6 +5937,11 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inventoryAdjust_warningPercent.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10", "20", "30", "40", "50", "60", "70", "80", "90" }));
 
         stock_inventoryAdjust_button_check.setText("Check");
+        stock_inventoryAdjust_button_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inventoryAdjust_button_checkActionPerformed(evt);
+            }
+        });
 
         stock_inventoryAdjust_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -5638,6 +5983,11 @@ public class MainFrame extends javax.swing.JFrame {
         stock_inventoryAdjust_label_toLine.setText("Line");
 
         stock_inventoryAdjust_button_Save.setText("Save");
+        stock_inventoryAdjust_button_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_inventoryAdjust_button_SaveActionPerformed(evt);
+            }
+        });
 
         stock_inventoryAdjust_from_position.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
@@ -5838,18 +6188,74 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-                      
 
-    private void mainPanel_logoutActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void finance_numerical_button_checkActionPerformed(ActionEvent evt) {
+		String from_year = String.valueOf(finance_numerical_from_year.getSelectedItem());
+		String from_month = String.valueOf(finance_numerical_from_month.getSelectedItem());
+		String from_day = String.valueOf(finance_numerical_from_day.getSelectedItem());
+		String to_year = String.valueOf(finance_numerical_to_year.getSelectedItem());
+		String to_month = String.valueOf(finance_numerical_to_month.getSelectedItem());
+		String to_day = String.valueOf(finance_numerical_to_day.getSelectedItem());
+		Date f = new Date(from_year,from_month,from_day);
+		Date t = new Date(to_year,to_month,to_day);
+		Finance_numerical_receipt_mod m = new Finance_numerical_receipt_mod(f,t);
+		DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+		finance_numerical_receipt.setModel(mod);
+		Finance_numerical_payment_mod mm = new Finance_numerical_payment_mod(f,t);
+		DefaultTableModel mod2 = new DefaultTableModel(mm.getContent(),mm.getTitle());
+		finance_numerical_payment.setModel(mod2);
+		
+		finance_numerical_resultPanel.setVisible(true);
+	}
+
+	private void finance_cost_costAndIncomePanel_button_CheckActionPerformed(
+			ActionEvent evt) {
+		String year = String.valueOf(finance_cost_costAndIncomePanel_year.getSelectedItem());
+		String month = String.valueOf(finance_cost_costAndIncomePanel_month.getSelectedItem());
+		String day = String.valueOf(finance_cost_costAndIncomePanel_day.getSelectedItem());
+		
+		CostAndIncome ci = companyBL.getCostAndIncome(new Date(year,month,day));
+		String[][] content = new String[1][];
+		content[0][0] = ci.getTotal_income();
+		content[0][1] = ci.getTotal_cost();
+		content[0][2] = ci.getTotal_gain();
+		String[] title = new String[]{"income","cost","gain"};
+		DefaultTableModel mod = new DefaultTableModel(content,title);
+		finance_cost_costAndIncomePanel_result_table.setModel(mod);
+		finance_cost_costAndIncomePanel_resultPanel.setVisible(true);
+	}
+
+	private void mainPanel_logoutActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
     }                                                
 
     private void postman_resetbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+    	this.postman_sender_nameText.setText("");
+        this.postman_sender_cellText.setText("");
+        this.postman_sender_address_provinceText.setText("");
+        this.postman_sender_address_cityText.setText("");
+        this.postman_sender_address_detailText.setText("");
+        this.postman_sender_unitText.setText("");
+        this.postman_sender_telephoneText.setText("");
+        this.postman_recipient_nameText.setText("");
+        this.postman_recipient_cellText.setText("");
+        this.postman_recipient_address_provinceText.setText("");
+        this.postman_recipient_address_cityText.setText("");
+        this.postman_recipient_address_detailText.setText("");
+        this.postman_recipient_unitText.setText("");
+        this.postman_recipient_telephoneText.setText("");
+        this.postman_consighment_scriptText.setText("");
+        this.postman_consighment_heightText.setText("");
+        this.postman_consighment_weightText.setText("");
+        this.postman_consighment_widthText.setText("");
+        this.postman_consighment_internalText.setText("");
+        this.postman_consighment_depthText.setText("");
+        this.postman_consighment_depthText1.setText("");
+        this.postman_ticketNO.setText("");
     }                                                   
 
     private void postman_submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        String sender_name = this.postman_sender_nameText.getText();
+    	String sender_name = this.postman_sender_nameText.getText();
         String sender_cell = this.postman_sender_cellText.getText();
         String sender_province = this.postman_sender_address_provinceText.getText();
         String sender_city = this.postman_sender_address_cityText.getText();
@@ -5879,59 +6285,61 @@ public class MainFrame extends javax.swing.JFrame {
         								 new Customer(receive_name,receive_cell,re,receive_unit,receive_tele),
         								 script,height,weight,width,internal,depth,volume,no,DeliveryType.valueOf(delivery),PacketType.valueOf(packet)));
     }                                                    
-
-    private void postman_recipient_telephoneTextActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        // TODO add your handling code here:
-    }                                                               
-
-    private void postman_consighment_scriptTextActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
-    }                                                              
-
-    private void postman_consighment_weightTextActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
-    }                                                              
-
-    private void postman_consighment_heightTextActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
-    }                                                              
-
-    private void postman_consighment_widthTextActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        // TODO add your handling code here:
-    }                                                             
-
-    private void postman_consighment_depthTextActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        // TODO add your handling code here:
-    }                                                             
-
-    private void postman_consighment_internalTextActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
-    private void postman_consighment_depthText1ActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
-    }                                                              
+                    
 
     private void postman_getPriceButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         // TODO add your handling code here:
     }                                                      
-
-    private void postman_recipient_address_provinceTextActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
-        // TODO add your handling code here:
-    }                                                                      
-
-    private void login_nameTextActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-    }                                              
+                                       
 
     private void login_loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        String id = this.login_nameText.getText();
+    	String id = this.login_nameText.getText();
         String password = this.login_keyText.getText();
         Login login = systemBL.judgeLogin(id, password);
         System.out.println(String.valueOf(login));
         this.loginPanel.setVisible(false);
-        this.postman_ticketNO.setText(this.postmanBL.getTicketNo());
-        this.postmanPanel.setVisible(true);
+        if(login.equals(Login.none)){
+        	
+        	this.login_keywrongDialoglabel.setText("none user");
+        	this.login_keywrongDialog.setVisible(true);
+        }else if(login.equals(Login.wrong)){
+        	
+        	this.login_keywrongDialog.setVisible(true);
+        }else if(login.equals(Login.postman)){
+        	
+        	this.postman_ticketNO.setText(this.postmanBL.getTicketNo());
+            this.postmanPanel.setVisible(true);
+        }else if(login.equals(Login.hall)){
+        	Cbox_Date date = new Cbox_Date();
+        	this.hall_acceptanceAndDistribution_Arrival_year = new JComboBox(date.getYear());
+        	this.hall_acceptanceAndDistribution_Arrival_month = new JComboBox(date.getMonth());
+        	this.hall_acceptanceAndDistribution_Arrival_day = new JComboBox(date.getDay((String)this.hall_acceptanceAndDistribution_Arrival_month.getSelectedItem()));
+        	this.hall_acceptanceAndDistribution_Send_year = new JComboBox(date.getYear());
+        	this.hall_acceptanceAndDistribution_Send_month = new JComboBox(date.getMonth());
+        	this.hall_acceptanceAndDistribution_Send_day = new JComboBox(date.getDay((String)this.hall_acceptanceAndDistribution_Send_month.getSelectedItem()));
+        	this.hallPanel.setVisible(true);
+        }else if(login.equals(Login.center)){
+        	Center_transfer_transfer_stockList_mod m = new Center_transfer_transfer_stockList_mod();
+        	DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+        	center_transfer_transfer_stockList.setModel(mod);
+        	this.centerPanel.setVisible(true);
+        }else if(login.equals(Login.stock)){
+        	Stock_realtime_list_mod m = new Stock_realtime_list_mod("air","Row I","Line 1");
+        	DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+        	stock_realtime_list.setModel(mod);
+        	this.center_mainPanel.setVisible(true);
+        	stock_realtimePanel.setVisible(true);
+        	
+        }else if(login.equals(Login.finance)){
+        	this.finance_settlementManagement.setVisible(true);
+        }else if(login.equals(Login.mananger)){
+        	 String dep = "Nanjing_hall";
+             Manager_staff_stafflist_mod m = new Manager_staff_stafflist_mod(dep);
+             DefaultTableModel mod = new DefaultTableModel();
+             manager_staff_stafflist.setModel(mod);
+         	this.manager_mainPanel.setVisible(true);
+             this.manager_staffPanel.setVisible(true);
+        }
     }                                                 
 
     private void login_aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -5942,116 +6350,200 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                    
 
-    private void hall_vehicleLoadingManagementActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        // TODO add your handling code here:
+    private void hall_vehicleLoadingManagementActionPerformed(java.awt.event.ActionEvent evt) { 
+    	this.hall_acceptanceAndDistributionManagementPanel.setVisible(false);
+    	this.hall_vehiclesManagementPanel.setVisible(false);
+    	this.hall_driversManagementPanel.setVisible(false);
+    	this.hall_vehicleLoadingManagementPanel.setVisible(false);
+    	this.hall_collectionNotePanel.setVisible(false);
+    	
+        this.hall_vehicleLoadingManagementPanel.setVisible(true);
     }                                                             
 
     private void hall_acceptanceAndDistributionManagementActionPerformed(java.awt.event.ActionEvent evt) {                                                                         
-        // TODO add your handling code here:
+    	this.hall_acceptanceAndDistributionManagementPanel.setVisible(false);
+    	this.hall_vehiclesManagementPanel.setVisible(false);
+    	this.hall_driversManagementPanel.setVisible(false);
+    	this.hall_vehicleLoadingManagementPanel.setVisible(false);
+    	this.hall_collectionNotePanel.setVisible(false);
+    	
+    	Cbox_Date date = new Cbox_Date();
+    	this.hall_acceptanceAndDistribution_Arrival_year = new JComboBox(date.getYear());
+    	this.hall_acceptanceAndDistribution_Arrival_month = new JComboBox(date.getMonth());
+    	this.hall_acceptanceAndDistribution_Arrival_day = new JComboBox(date.getDay((String)this.hall_acceptanceAndDistribution_Arrival_month.getSelectedItem()));
+    	this.hall_acceptanceAndDistribution_Send_year = new JComboBox(date.getYear());
+    	this.hall_acceptanceAndDistribution_Send_month = new JComboBox(date.getMonth());
+    	this.hall_acceptanceAndDistribution_Send_day = new JComboBox(date.getDay((String)this.hall_acceptanceAndDistribution_Send_month.getSelectedItem()));
+    	this.hall_acceptanceAndDistributionManagementPanel.setVisible(true);
     }                                                                        
-
-    private void hall_vehicleLoading_transportationExpenseActionPerformed(java.awt.event.ActionEvent evt) {                                                                          
-        // TODO add your handling code here:
-    }                                                                         
+                                                                    
 
     private void hall_acceptanceAndDistribution_Arrival_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                                             
-        // TODO add your handling code here:
+        String month = (String)this.hall_acceptanceAndDistribution_Arrival_month.getSelectedItem();
+        Cbox_Date date = new Cbox_Date();
+        this.hall_acceptanceAndDistribution_Arrival_day = new JComboBox(date.getDay(month));
     }                                                                            
 
     private void hall_vehiclesManagement_AddButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
-        // TODO add your handling code here:
+        String name = hall_vehiclesManagement_name.getText();
+        String engine = hall_vehiclesManagement_engine.getText();
+        String no = hall_vehiclesManagement_no.getText();
+        String chassis = hall_vehiclesManagement_chassis.getText();
+        String join_time = hall_vehiclesManagement_jointime.getText();
+        
+        hallData.addVehicle(new Vehicle(name,engine,no,chassis,join_time));
     }                                                                 
 
     private void hall_driversManagement_AddButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
+        String no = hall_driverManagement_no.getText();
+        String name = hall_driverManagement_name.getText();
+        String birthday = hall_driverManagement_birthday.getText();
+        String sex = hall_driverManagement_sex.getText();
+        String indentity = hall_driverManagement_indentity.getText();
+        String unit = hall_driverManagement_unit.getText();
+        String phone = hall_driverManagement_phone.getText();
+        String date = hall_driverManagement_date.getText();
+        
+        hallData.addDriver(new Vehicle_Driver(no,name,birthday,indentity,phone,unit,sex,date));
     }                                                                
 
-    private void center_button_airlineActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+    private void center_button_airlineActionPerformed(java.awt.event.ActionEvent evt) {  
+    	center_airlinePanel.setVisible(false);
+    	center_trainlinePanel.setVisible(false);
+    	center_vehiclePanel.setVisible(false);
+    	center_transferPanel.setVisible(false);
+    	
+    	Cbox_Date date = new Cbox_Date();
+    	center_airline_year = new JComboBox(date.getYear());
+    	center_airline_month = new JComboBox(date.getMonth());
+    	center_airline_day = new JComboBox(date.getDay(String.valueOf(center_airline_month.getSelectedItem())));
+        this.center_airlinePanel.setVisible(true);
     }                                                     
 
-    private void center_button_trainlineActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
+    private void center_button_trainlineActionPerformed(java.awt.event.ActionEvent evt) {
+    	center_airlinePanel.setVisible(false);
+    	center_trainlinePanel.setVisible(false);
+    	center_vehiclePanel.setVisible(false);
+    	center_transferPanel.setVisible(false);
+    	
+        this.center_trainlinePanel.setVisible(true);
     }                                                       
 
-    private void center_button_vehicleActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
-    }                                                     
-
-    private void center_airline_transportationExpenseActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
-        // TODO add your handling code here:
-    }                                                                    
+    private void center_button_vehicleActionPerformed(java.awt.event.ActionEvent evt) {
+    	center_airlinePanel.setVisible(false);
+    	center_trainlinePanel.setVisible(false);
+    	center_vehiclePanel.setVisible(false);
+    	center_transferPanel.setVisible(false);
+    	
+        this.center_vehiclePanel.setVisible(true);
+    }                                                                                                                     
 
     private void center_airline_button_submitActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        // TODO add your handling code here:
+        String year = String.valueOf(center_airline_year.getSelectedItem());
+        String month = String.valueOf(this.center_airline_month.getSelectedItem());
+        String day = String.valueOf(center_airline_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String transport_no = center_airline_transportNo.getText();
+        String flight_no = center_airline_flightNo.getText();
+        String dep_pro = center_airline_departure_province.getText();
+        String dep_city = center_airline_departure_city.getText();
+        String des_pro = center_airline_destination_province.getText();
+        String des_city = center_airline_destination_city.getText();
+        String counter_no = center_airline_counterNo.getText();
+        String supervisor = center_airline_supervisor.getText();
+        String expense = center_airline_transportationExpense.getText();
+        ArrayList<String> goods = new ArrayList<String>();
+        for(int i = 0;i<center_airline_goodsNoTable.getRowCount();i++){
+        	goods.add(String.valueOf(center_airline_goodsNoTable.getValueAt(i, 0)));
+        }
+        
+        centerData.addAirLoading(new CenterAirLoadingPO(date,dep_pro,dep_city,des_pro,des_city,
+        												supervisor,expense,transport_no,goods,
+        												flight_no,counter_no));
     }                                                            
 
-    private void center_airline_supervisorActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
-    }                                                         
-
-    private void center_airline_counterNoActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
-    }                                                        
-
-    private void center_airline_departure_cityActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        // TODO add your handling code here:
-    }                                                             
-
-    private void center_train_departure_cityActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        // TODO add your handling code here:
-    }                                                           
-
-    private void center_train_carriageNoActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void center_train_supervisorActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void center_train_transportationExpenseActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
-        // TODO add your handling code here:
-    }                                                                  
+                                                                                           
 
     private void center_train_button_submitActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        // TODO add your handling code here:
-    }                                                          
-
-    private void center_vehicle_departure_cityActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        // TODO add your handling code here:
-    }                                                             
-
-    private void center_vehicle_SupercargoNoActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        // TODO add your handling code here:
-    }                                                           
-
-    private void center_vehicle_supervisorActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
-    }                                                         
-
-    private void center_vehicle_transportationExpenseActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
-        // TODO add your handling code here:
-    }                                                                    
+    	String year = String.valueOf(center_train_year.getSelectedItem());
+        String month = String.valueOf(this.center_train_month.getSelectedItem());
+        String day = String.valueOf(center_train_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String transport_no = center_train_transportNo.getText();
+        String flight_no = center_train_trainNo.getText();
+        String dep_pro = center_train_departure_province.getText();
+        String dep_city = center_train_departure_city.getText();
+        String des_pro = center_train_destination_province.getText();
+        String des_city = center_train_destination_city.getText();
+        String counter_no = center_train_carriageNo.getText();
+        String supervisor = center_train_supervisor.getText();
+        String expense = center_train_transportationExpense.getText();
+        ArrayList<String> goods = new ArrayList<String>();
+        for(int i = 0;i<center_train_goodsNoTable.getRowCount();i++){
+        	goods.add(String.valueOf(center_train_goodsNoTable.getValueAt(i, 0)));
+        }
+        
+        centerData.addAirLoading(new CenterAirLoadingPO(date,dep_pro,dep_city,des_pro,des_city,
+        												supervisor,expense,transport_no,goods,
+        												flight_no,counter_no));
+    }                                                                                                                   
 
     private void center_vehicle_button_submitActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        // TODO add your handling code here:
+    	String year = String.valueOf(center_vehicle_year.getSelectedItem());
+        String month = String.valueOf(this.center_vehicle_month.getSelectedItem());
+        String day = String.valueOf(center_vehicle_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String transport_no = center_vehicle_transportNo.getText();
+        String vehicle_no = center_vehicle_vehicleNo.getText();
+        String dep_pro = center_vehicle_departure_province.getText();
+        String dep_city = center_vehicle_departure_city.getText();
+        String des_pro = center_vehicle_destination_province.getText();
+        String des_city = center_vehicle_destination_city.getText();
+        String supercargo = center_vehicle_SupercargoNo.getText();
+        String supervisor = center_vehicle_supervisor.getText();
+        String expense = center_vehicle_transportationExpense.getText();
+        ArrayList<String> goods = new ArrayList<String>();
+        for(int i = 0;i<center_vehicle_goodsNoTable.getRowCount();i++){
+        	goods.add(String.valueOf(center_vehicle_goodsNoTable.getValueAt(i, 0)));
+        }
+        
+        centerData.addVehicleLoading(new CenterVehicleLoadingPO(date,dep_pro,dep_city,des_pro,des_city,
+        												supervisor,expense,goods,transport_no,
+        												vehicle_no,supercargo));
     }                                                            
 
     private void center_transfer_arrival_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                              
         // TODO add your handling code here:
     }                                                             
 
-    private void stock_button_inwarehouseActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+    private void stock_button_inwarehouseActionPerformed(java.awt.event.ActionEvent evt) {
+    	stock_inwarehouse.setVisible(false);
+    	stock_exwarehouse.setVisible(false);
+    	stock_inventoryCheck.setVisible(false);
+    	stock_inventoryCounts.setVisible(false);
+    	stock_inventoryAdjustments.setVisible(false);
+    	
+        this.stock_inwarehouse.setVisible(true);
     }                                                        
 
-    private void stock_button_exwarehouseActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+    private void stock_button_exwarehouseActionPerformed(java.awt.event.ActionEvent evt) {
+    	stock_inwarehouse.setVisible(false);
+    	stock_exwarehouse.setVisible(false);
+    	stock_inventoryCheck.setVisible(false);
+    	stock_inventoryCounts.setVisible(false);
+    	stock_inventoryAdjustments.setVisible(false);
+    	
+        this.stock_exwarehouse.setVisible(true);
     }                                                        
 
     private void stock_button_inventoryCheckActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        // TODO add your handling code here:
+    	stock_inwarehouse.setVisible(false);
+    	stock_exwarehouse.setVisible(false);
+    	stock_inventoryCheck.setVisible(false);
+    	stock_inventoryCounts.setVisible(false);
+    	stock_inventoryAdjustments.setVisible(false);
+    	
+    	this.stock_inventoryCheck.setVisible(true);
     }                                                           
 
     private void stock_inwarehouse_addressActionPerformed(java.awt.event.ActionEvent evt) {                                                          
@@ -6062,20 +6554,40 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                         
 
-    private void finance_button_settelementActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        // TODO add your handling code here:
+    private void finance_button_settelementActionPerformed(java.awt.event.ActionEvent evt) {
+    	finance_settlementManagement.setVisible(false);
+    	finance_costManagement.setVisible(false);
+    	finance_numericalStatement.setVisible(false);
+    	finance_accountManagement.setVisible(false);
+    	
+        this.finance_settlementManagement.setVisible(true);
     }                                                          
 
-    private void finance_button_costActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+    private void finance_button_costActionPerformed(java.awt.event.ActionEvent evt) {
+    	finance_settlementManagement.setVisible(false);
+    	finance_costManagement.setVisible(false);
+    	finance_numericalStatement.setVisible(false);
+    	finance_accountManagement.setVisible(false);
+    	
+        this.finance_costManagement.setVisible(true);
     }                                                   
 
-    private void finance_button_numericalActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+    private void finance_button_numericalActionPerformed(java.awt.event.ActionEvent evt) {  
+    	finance_settlementManagement.setVisible(false);
+    	finance_costManagement.setVisible(false);
+    	finance_numericalStatement.setVisible(false);
+    	finance_accountManagement.setVisible(false);
+    	
+        this.finance_numericalStatement.setVisible(true);
     }                                                        
 
-    private void finance_button_accountActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
+    private void finance_button_accountActionPerformed(java.awt.event.ActionEvent evt) {
+    	finance_settlementManagement.setVisible(false);
+    	finance_costManagement.setVisible(false);
+    	finance_numericalStatement.setVisible(false);
+    	finance_accountManagement.setVisible(false);
+    	
+        this.finance_accountManagement.setVisible(true);
     }                                                      
 
     private void finance_settlement_receipt_monthActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
@@ -6102,33 +6614,558 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                          
 
-    private void manager_button_staffActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
+    private void manager_button_staffActionPerformed(java.awt.event.ActionEvent evt) { 
+    	manager_staffPanel.setVisible(false);
+    	manager_departmentPanel.setVisible(false);
+    	manager_document.setVisible(false);
+    	this.finance_settlementManagement.setVisible(false);
+        this.finance_numericalStatement.setVisible(false);
+        this.manager_mainPanel.setVisible(false);
+        this.finance_mainPanel.setVisible(false);
+    	
+        String dep = "Nanjing_hall";
+        Manager_staff_stafflist_mod m = new Manager_staff_stafflist_mod(dep);
+        DefaultTableModel mod = new DefaultTableModel();
+        manager_staff_stafflist.setModel(mod);
+    	this.manager_mainPanel.setVisible(true);
+        this.manager_staffPanel.setVisible(true);
     }                                                    
 
-    private void manager_button_departmentActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
+    private void manager_button_departmentActionPerformed(java.awt.event.ActionEvent evt) {
+    	manager_staffPanel.setVisible(false);
+    	manager_departmentPanel.setVisible(false);
+    	manager_document.setVisible(false);
+    	this.finance_settlementManagement.setVisible(false);
+        this.finance_numericalStatement.setVisible(false);
+        this.manager_mainPanel.setVisible(false);
+        this.finance_mainPanel.setVisible(false);
+    	
+        String dep = "Nanjing_hall";
+        Manager_staff_stafflist_mod m = new Manager_staff_stafflist_mod(dep);
+        DefaultTableModel mod = new DefaultTableModel();
+        manager_department_stafflist.setModel(mod);
+    	this.manager_mainPanel.setVisible(true);
+        this.manager_departmentPanel.setVisible(true);
     }                                                         
 
-    private void manager_button_ducumentActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
+    private void manager_button_ducumentActionPerformed(java.awt.event.ActionEvent evt) { 
+    	manager_staffPanel.setVisible(false);
+    	manager_departmentPanel.setVisible(false);
+    	manager_document.setVisible(false);
+    	this.finance_settlementManagement.setVisible(false);
+        this.finance_numericalStatement.setVisible(false);
+        this.manager_mainPanel.setVisible(false);
+        this.finance_mainPanel.setVisible(false);
+    	
+    	this.manager_mainPanel.setVisible(true);
+        this.manager_document.setVisible(true);
     }                                                       
 
-    private void manager_button_statementActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+    private void manager_button_statementActionPerformed(java.awt.event.ActionEvent evt) { 
+    	manager_staffPanel.setVisible(false);
+    	manager_departmentPanel.setVisible(false);
+    	manager_document.setVisible(false);
+    	this.finance_settlementManagement.setVisible(false);
+        this.finance_numericalStatement.setVisible(false);
+    	this.finance_mainPanel.setVisible(false);
+    	this.manager_mainPanel.setVisible(false);
+    	
+        this.finance_mainPanel.setVisible(true);
+        this.finance_settlementManagement.setVisible(true);
     }                                                        
 
     private void manager_department_updatePanel_managerActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
-        // TODO add your handling code here:
+        String id = manager_department_updatePanel_id.getText();
+        String name = manager_department_updatePanel_name.getText();
+        String manager = manager_department_updatePanel_manager.getText();
+        String parent = manager_department_updatePanel_parent.getText();
+        
+        companyBL.updateDepartment(id, name, manager, parent);
     }                                                                      
 
-    private void manager_button_numercialActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+    private void manager_button_numercialActionPerformed(java.awt.event.ActionEvent evt) {
+    	manager_staffPanel.setVisible(false);
+    	manager_departmentPanel.setVisible(false);
+    	manager_document.setVisible(false);
+    	this.finance_settlementManagement.setVisible(false);
+        this.finance_numericalStatement.setVisible(false);
+        this.manager_mainPanel.setVisible(false);
+        this.finance_mainPanel.setVisible(false);
+        
+        this.finance_mainPanel.setVisible(true);
+        this.finance_numericalStatement.setVisible(true);
     }                                                        
 
     private void hall_driversManagement_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         // TODO add your handling code here:
     }                                                                   
+
+    private void postman_getArriveTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        // TODO add your handling code here:
+    }                                                           
+
+    private void hall_vehicleLoading_button_submitActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        String year = (String)hall_vehicleLoading_year.getSelectedItem();
+        String month = (String)hall_vehicleLoading_month.getSelectedItem();
+        String day = (String)hall_vehicleLoading_day.getSelectedItem();
+        String date = year+"-"+month+"-"+day;
+        String hall_no = hall_vehicleLoading_hallNo.getText();
+        String departure_province = hall_vehicleLoading_departure_province.getText();
+        String departure_city = hall_vehicleLoading_departure_city.getText();
+        String destination_province = hall_vehicleLoading_destination_province.getText();
+        String destination_city = hall_vehicleLoading_destination_city.getText();
+        String supervisor = hall_vehicleLoading_supervisor.getText();
+        String supercargo = hall_vehicleLoading_supercargo.getText();
+        String transport_no = hall_vehicleLoading_tansportNo.getText();
+        String expense = hall_vehicleLoading_transportationExpense.getText();
+        String hall_id = "235";
+        ArrayList<String> goods = new ArrayList<String>();
+        for(int i = 0;i<hall_vehicleLoading_goodsNoTable.getRowCount();i++){
+        	goods.add(String.valueOf(hall_vehicleLoading_goodsNoTable.getValueAt(i, 0)));
+        }
+        hallData.submitLoading(new HallVehicleLoadingPO(date,departure_province,departure_city,
+        												destination_province,destination_city,
+        												supervisor,expense,transport_no,
+        												goods,hall_id,supercargo));
+    }                                                                 
+
+    private void hall_vehicleLoading_button_cancelActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        // TODO add your handling code here:
+    }                                                                 
+
+    private void hall_acceptanceAndDistribution_Arrival_SubmitActionPerformed(java.awt.event.ActionEvent evt) {                                                                              
+        String year = (String)hall_acceptanceAndDistribution_Arrival_year.getSelectedItem();
+        String month = (String)hall_acceptanceAndDistribution_Arrival_month.getSelectedItem();
+        String day = (String)hall_acceptanceAndDistribution_Arrival_day.getSelectedItem();
+        String date = year+"-"+month+"-"+day;
+        String no = hall_acceptanceAndDistribution_Arrival_freightNo.getText();
+        String province = hall_acceptanceAndDistribution_Arrival_province.getText();
+        String city = hall_acceptanceAndDistribution_Arrival_city.getText();
+        String add = hall_acceptanceAndDistribution_Arrival_address.getText();
+        String state = "intact";
+        
+        hallData.saveAcceptance(new AcceptancePO(date,no,province,city,add,state));
+    }                                                                             
+
+    private void hall_acceptanceAndDistribution_Send_SubmitActionPerformed(java.awt.event.ActionEvent evt) {                                                                           
+    	String year = (String)hall_acceptanceAndDistribution_Send_year.getSelectedItem();
+        String month = (String)hall_acceptanceAndDistribution_Send_month.getSelectedItem();
+        String day = (String)hall_acceptanceAndDistribution_Send_day.getSelectedItem();
+        String date = year+"-"+month+"-"+day;
+        String goods_no = hall_acceptanceAndDistribution_Send_goodsNo.getText();
+        String province = hall_acceptanceAndDistribution_Send_province.getText();
+        String city = hall_acceptanceAndDistribution_Send_city.getText();
+        String add = hall_acceptanceAndDistribution_Send_address.getText();
+        String postman_no = hall_acceptanceAndDistribution_Send_postmanNo.getText();
+        
+        hallData.saveDistribution(new DistributionPO(date,goods_no,province,city,add,postman_no));
+    }                                                                          
+
+    private void hall_vehiclesManagement_UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
+    	String name = hall_vehiclesManagement_name.getText();
+        String engine = hall_vehiclesManagement_engine.getText();
+        String no = hall_vehiclesManagement_no.getText();
+        String chassis = hall_vehiclesManagement_chassis.getText();
+        String join_time = hall_vehiclesManagement_jointime.getText();
+        
+        hallData.deleteVehicle(no);
+        hallData.addVehicle(new Vehicle(name,engine,no,chassis,join_time));
+    }                                                                    
+
+    private void hall_vehiclesManagementPanel_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                          
+        
+    }                                                                         
+
+    private void hall_collectionNote_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        // TODO add your handling code here:
+    }                                                              
+
+    private void hall_collectionNote_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        // TODO add your handling code here:
+    }                                                                
+
+    private void hall_collectionNote_dateListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                                          
+        // TODO add your handling code here:
+    }                                                         
+
+    private void center_airline_button_cancelActionPerformed(java.awt.event.ActionEvent evt) {                                                             
+        // TODO add your handling code here:
+    }                                                            
+
+    private void center_train_button_cancelActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        // TODO add your handling code here:
+    }                                                          
+
+    private void center_vehicle_button_cancelActionPerformed(java.awt.event.ActionEvent evt) {                                                             
+        // TODO add your handling code here:
+    }                                                            
+
+    private void center_transfer_arrival_submitActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        String arrival_no = center_transfer_arrival_arrivalNo.getText();
+        String year = String.valueOf(center_transfer_arrival_year.getSelectedItem());
+        String month = String.valueOf(center_transfer_arrival_month.getSelectedItem());
+        String day = String.valueOf(center_transfer_arrival_day.getSelectedItem());
+        String freight_no = center_transfer_arrival_freightNo.getText();
+        String dep_pro = center_transfer_arrival_province.getText();
+        String dep_city = center_transfer_arrival_city.getText();
+        String dep_add = center_transfer_arrival_address.getText();
+        String state = "intact";
+        
+        centerData.addArrival(new AcceptancePO(year+"-"+month+"-"+day,freight_no,dep_pro,dep_city,dep_add,
+        										state));
+    }                                                              
+
+    private void finance_settlement_receipt_button_resetActionPerformed(java.awt.event.ActionEvent evt) {                                                                        
+    	finance_settlement_receipt_department.setText("");
+        finance_settlement_receipt_payee.setText("");
+        finance_settlement_receipt_party.setText("");
+        finance_settlement_receipt_amount.setText("");
+        finance_settlement_receipt_province.setText("");
+        finance_settlement_receipt_city.setText("");
+        finance_settlement_receipt_address.setText("");
+    }                                                                       
+
+    private void finance_settlement_receipt_button_saveActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
+        String year = String.valueOf(finance_settlement_receipt_year.getSelectedItem());
+        String month = String.valueOf(finance_settlement_receipt_month.getSelectedItem());
+        String day = String.valueOf(finance_settlement_receipt_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String dep = finance_settlement_receipt_department.getText();
+        String payee = finance_settlement_receipt_payee.getText();
+        String ben = finance_settlement_receipt_party.getText();
+        String amount = finance_settlement_receipt_amount.getText();
+        String pro = finance_settlement_receipt_province.getText();
+        String city = finance_settlement_receipt_city.getText();
+        String add = finance_settlement_receipt_address.getText();
+        
+        companyData.saveReceipt(new ReceiptPO(date,dep,payee,ben,amount,pro,city,add));
+    }                                                                      
+
+    private void finance_settlement_checkReceipt_button_checkActionPerformed(java.awt.event.ActionEvent evt) {                                                                             
+        String year = String.valueOf(finance_settlement_checkReceipt_year.getSelectedItem());
+        String month = String.valueOf(finance_settlement_checkReceipt_month.getSelectedItem());
+        String day = String.valueOf(finance_settlement_checkReceipt_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        Date d = new Date(year,month,day);
+        Finance_settlement_checkReceipt_result_list_mod m = new Finance_settlement_checkReceipt_result_list_mod(d);
+        DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+        finance_settlement_checkReceipt_result_totalPrice.setText(m.getTotal());
+        finance_settlement_checkReceipt_resultPanel.setVisible(true);
+    }                                                                            
+
+    private void finance_cost_payment_button_reset1ActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
+        // TODO add your handling code here:
+    }                                                                  
+
+    private void finance_cost_payment_button_save1ActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        String year = String.valueOf(finance_cost_payment_year1.getSelectedItem());
+        String month = String.valueOf(finance_cost_payment_month1.getSelectedItem());
+        String day = String.valueOf(finance_cost_payment_day1.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String payee = finance_cost_payment_payee1.getText();
+        String amount = finance_cost_payment_amount1.getText();
+        String account = finance_cost_payment_account1.getText();
+        String entry = "rent";
+        String remark = finance_cost_payment_remark1.getText();
+        
+        companyData.savePayment(new PaymentPO(date,payee,amount,entry,remark));
+        companyBL.addAmountIntoAccount(account,amount);
+    }                                                                 
+
+    private void finance_cost_costAndIncomePanel_button_exportActionPerformed(java.awt.event.ActionEvent evt) {                                                                              
+        // TODO add your handling code here:
+    }                                                                             
+
+    private void finance_numerical_button_export_receiptActionPerformed(java.awt.event.ActionEvent evt) {                                                                        
+        // TODO add your handling code here:
+    }                                                                       
+
+    private void finance_numerical_button_export_paymentActionPerformed(java.awt.event.ActionEvent evt) {                                                                        
+        // TODO add your handling code here:
+    }                                                                       
+
+    private void finance_account_add_button_addActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        String name = finance_account_add_name.getText();
+        companyBL.addAccount(name);
+    }                                                              
+
+    private void finance_account_searchAndDelete_button_searchActionPerformed(java.awt.event.ActionEvent evt) {                                                                              
+        String name = finance_account_searchAndDelete_name.getText();
+        Finance_account_searchAndDelete_detail_mod m = new Finance_account_searchAndDelete_detail_mod(name);
+        DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+        finance_account_searchAndDelete_detail.setModel(mod);
+        finance_account_searchAndDelete_resultPanel.setVisible(true);
+    }                                                                             
+
+    private void finance_account_searchAndDelete_deleteActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
+        
+    }                                                                      
+
+    private void finance_account_init_button_checkActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        String name = finance_account_init_name.getText();
+        ArrayList<String> staffs = companyBL.getStaffByAccount(name);
+        ArrayList<String> cars = companyBL.getCarsByAccount(name);
+        String[] title1 = new String[]{"staff"};
+        String[] title2 = new String[]{"car"};
+        String[][] con1 = new String[staffs.size()][];
+        for(int i = 0;i<staffs.size();i++){
+        	con1[i][0] = staffs.get(i);
+        }
+        String[][] con2 = new String[cars.size()][];
+        for(int i = 0;i<cars.size();i++){
+        	con2[i][0] = cars.get(i);
+        }
+        DefaultTableModel mod1 = new DefaultTableModel(con1,title1);
+        DefaultTableModel mod2 = new DefaultTableModel(con2,title2);
+        finance_account_init_result_staff.setModel(mod1);
+        finance_account_init_result_cars.setModel(mod2);
+        finance_account_init_result_department.setText(name.split(".")[2]);
+        finance_account_init_result_amount.setText(companyData.getAccountByName(name).getAmount());
+        finance_account_init_resultPanel.setVisible(true);
+    }                                                                 
+
+    private void finance_account_init_button_initActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        companyData.initAccount(finance_account_init_name.getText());
+    }                                                                
+
+    private void manager_staff_update_button_submitActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
+        String id = manager_staff_update_id.getText();
+        String salary = manager_staff_update_salary.getText();
+        companyBL.changeSalary(id, salary);
+    }                                                                  
+
+    private void manager_department_staff_button_saveActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
+    	String id = manager_department_staff_id.getText();
+        String dep = manager_department_staff_to.getText();
+        companyBL.moveStaff(id, dep);
+    }                                                                    
+
+    private void manager_department_updatePanel_button_saveActionPerformed(java.awt.event.ActionEvent evt) {                                                                           
+        // TODO add your handling code here:
+    }                                                                          
+
+    private void stock_inventoryAdjust_button_checkActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
+        String per = String.valueOf(stock_inventoryAdjust_warningPercent.getSelectedItem());
+        ArrayList<AlarmVO> vo = stockBL.checkSituration(per, stockData.getSiturationList(per));
+        Stock_inventoryAdjust_table_mod m = new Stock_inventoryAdjust_table_mod(vo);
+        DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+        stock_inventoryAdjust_table.setModel(mod);
+        stock_inventoryAdjust_tablePanel.setVisible(true);
+    }                                                                  
+
+    private void stock_inventoryAdjust_button_SaveActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        String unit = String.valueOf(stock_inventoryAdjust_from_unit.getSelectedItem());
+        String row1 = String.valueOf(stock_inventoryAdjust_from_row.getSelectedItem());
+        String line1 = String.valueOf(stock_inventoryAdjust_from_line.getSelectedItem());
+        String pos1 = String.valueOf(stock_inventoryAdjust_from_position.getSelectedItem());
+        String row2 = String.valueOf(stock_inventoryAdjust_to_row.getSelectedItem());
+        String line2 = String.valueOf(stock_inventoryAdjust_to_line.getSelectedItem());
+        String pos2 = String.valueOf(stock_inventoryAdjust_to_position.getSelectedItem());
+        stockData.adjustStock(new GoodsPosition(TransportLine.valueOf(unit),row1,line1,pos1),new GoodsPosition(TransportLine.valueOf(unit),row2,line2,pos2));
+    }                                                                 
+
+    private void stock_inwarehouse_button_inwarehouseActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
+        String goods_no = stock_inwarehouse_goodsNo.getText();
+        String year = String.valueOf(stock_inwarehouse_year.getSelectedItem());
+        String month = String.valueOf(stock_inwarehouse_month.getSelectedItem());
+        String day = String.valueOf(stock_inwarehouse_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String pro = stock_inwarehouse_province.getText();
+        String city = stock_inwarehouse_city.getText();
+        String add = stock_inwarehouse_address.getText();
+        String unit = String.valueOf(stock_inwarehouse_unit.getSelectedItem());
+        String row = String.valueOf(stock_inwarehouse_row.getSelectedItem());
+        String line = String.valueOf(stock_inwarehouse_line.getSelectedItem());
+        
+        try {
+			stockData.inStock(new StockInPO(goods_no,date,pro,city,add,unit,row,line));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }                                                                    
+
+    private void stock_exwarehouse_button_exwarehouseActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
+    	String goods_no = stock_exwarehouse_goodsNo.getText();
+        String year = String.valueOf(stock_exwarehouse_year.getSelectedItem());
+        String month = String.valueOf(stock_exwarehouse_month.getSelectedItem());
+        String day = String.valueOf(stock_exwarehouse_day.getSelectedItem());
+        String date = year+"-"+month+"-"+day;
+        String pro = stock_exwarehouse_province.getText();
+        String city = stock_exwarehouse_city.getText();
+        String add = stock_exwarehouse_address.getText();
+        String unit = String.valueOf(stock_exwarehouse_unit.getSelectedItem());
+        String row = String.valueOf(stock_exwarehouse_row.getSelectedItem());
+        String line = String.valueOf(stock_exwarehouse_line.getSelectedItem());
+        String pos = String.valueOf(stock_exwarehouse_exactposition.getSelectedItem());
+        String transport_no = stock_exwarehouse_transportNo.getText();
+        
+        stockData.exStock(new StockExPO(goods_no,date,pro,city,add,unit,row,line,pos,transport_no));
+    }                                                                    
+
+    private void stock_inventoryCheck_button_resetActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        // TODO add your handling code here:
+    }                                                                 
+
+    private void stock_inventoryCheck_button_checkActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        String y1 = String.valueOf(stock_inventoryCheck_front_year.getSelectedItem());
+        String m1 = String.valueOf(stock_inventoryCheck_front_month.getSelectedItem());
+        String d1 = String.valueOf(stock_inventoryCheck_front_day.getSelectedItem());
+        String date1 = y1+"-"+m1+"-"+d1;
+        String y2 = String.valueOf(stock_inventoryCheck_end_year.getSelectedItem());
+        String m2 = String.valueOf(stock_inventoryCheck_end_month.getSelectedItem());
+        String d2 = String.valueOf(stock_inventoryCheck_end_day.getSelectedItem());
+        String date2 = y2+"-"+m2+"-"+d2;
+        ArrayList<InventoryCheckVO> vo = stockData.getCheckList(date1, date2);
+        Stock_inventoryCheck_list_mod m =new Stock_inventoryCheck_list_mod(vo);
+        DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+        stock_inventoryCheck_list.setModel(mod);
+        TotalWarehouseVO tw = stockBL.getTotalWarehouse(vo);
+        stock_inventoryCheck_result_inwarehouse.setText(tw.getIn());
+        stock_inventoryCheck_result_exwarehouse.setText(tw.getEx());
+        stock_inventoryCheck_result_inSubex.setText(tw.getInSubex());
+        stock_inventoryCheck_resultPanel.setVisible(true);
+    }                                                                 
+
+    private void stock_inventoryCounts_button_exportActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
+        // TODO add your handling code here:
+    }                                                                   
+
+    private void hall_vehiclesManagementActionPerformed(java.awt.event.ActionEvent evt) { 
+    	this.hall_acceptanceAndDistributionManagementPanel.setVisible(false);
+    	this.hall_vehiclesManagementPanel.setVisible(false);
+    	this.hall_driversManagementPanel.setVisible(false);
+    	this.hall_vehicleLoadingManagementPanel.setVisible(false);
+    	this.hall_collectionNotePanel.setVisible(false);
+    	
+    	String hall_id = "";
+    	Hall_vehiclesManagement_carList_mod m = new Hall_vehiclesManagement_carList_mod(hall_id);
+    	DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+    	hall_vehiclesManagement_carList.setModel(mod);
+    	
+        this.hall_vehicleLoadingManagementPanel.setVisible(true);
+    }                                                       
+
+    private void hall_driversManagementActionPerformed(java.awt.event.ActionEvent evt) { 
+    	this.hall_acceptanceAndDistributionManagementPanel.setVisible(false);
+    	this.hall_vehiclesManagementPanel.setVisible(false);
+    	this.hall_driversManagementPanel.setVisible(false);
+    	this.hall_vehicleLoadingManagementPanel.setVisible(false);
+    	this.hall_collectionNotePanel.setVisible(false);
+    	
+    	String hall_id = "";
+    	Hall_driversManagement_driverList_mod m = new Hall_driversManagement_driverList_mod(hall_id);
+    	DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+    	this.hall_driversManagementPanel_driverList.setModel(mod);
+        this.hall_driversManagementPanel.setVisible(true);
+    }                                                      
+
+    private void hall_collectionNoteActionPerformed(java.awt.event.ActionEvent evt) { 
+    	this.hall_acceptanceAndDistributionManagementPanel.setVisible(false);
+    	this.hall_vehiclesManagementPanel.setVisible(false);
+    	this.hall_driversManagementPanel.setVisible(false);
+    	this.hall_vehicleLoadingManagementPanel.setVisible(false);
+    	this.hall_collectionNotePanel.setVisible(false);
+    	
+    	String[] content ;
+    	ArrayList<String> dates = hallData.getCollectionDates();
+    	content = new String[dates.size()];
+    	for(int i = 0;i<dates.size();i++){
+    		content[i] = dates.get(i);	
+    	}
+    	hall_collectionNote_dateList = new JList(content);
+        this.hall_collectionNotePanel.setVisible(true);
+    }                                                   
+
+    private void center_button_transferActionPerformed(java.awt.event.ActionEvent evt) {
+    	center_airlinePanel.setVisible(false);
+    	center_trainlinePanel.setVisible(false);
+    	center_vehiclePanel.setVisible(false);
+    	center_transferPanel.setVisible(false);
+    	Center_transfer_transfer_stockList_mod m = new Center_transfer_transfer_stockList_mod();
+    	DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+    	center_transfer_transfer_stockList.setModel(mod);
+        this.center_transferPanel.setVisible(true);
+    }                                                      
+
+    private void manager_document_button_paymentActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        // TODO add your handling code here:
+    }                                                               
+
+    private void manager_document_button_saveActionPerformed(java.awt.event.ActionEvent evt) {                                                             
+        // TODO add your handling code here:
+    }                                                            
+
+    private void manager_document_button_ticketActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        // TODO add your handling code here:
+    }                                                              
+
+    private void manager_document_button_airActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        // TODO add your handling code here:
+    }                                                           
+
+    private void manager_document_button_trainActionPerformed(java.awt.event.ActionEvent evt) {                                                              
+        // TODO add your handling code here:
+    }                                                             
+
+    private void manager_document_button_vehicleActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        // TODO add your handling code here:
+    }                                                               
+
+    private void manager_document_button_hallarrivalActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
+        // TODO add your handling code here:
+    }                                                                   
+
+    private void manager_document_button_halldistributionActionPerformed(java.awt.event.ActionEvent evt) {                                                                         
+        // TODO add your handling code here:
+    }                                                                        
+
+    private void manager_document_button_receiptActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        // TODO add your handling code here:
+    }                                                               
+
+    private void manager_document_button_ceterarrivalActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
+        // TODO add your handling code here:
+    }                                                                    
+
+    private void manager_document_button_stockinActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        // TODO add your handling code here:
+    }                                                               
+
+    private void manager_document_button_transferActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        // TODO add your handling code here:
+    }                                                                
+
+    private void manager_document_button_stockexActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        // TODO add your handling code here:
+    }                                                               
+
+    private void stock_button_inventoryCountsActionPerformed(java.awt.event.ActionEvent evt) {                                                             
+    	stock_inwarehouse.setVisible(false);
+    	stock_exwarehouse.setVisible(false);
+    	stock_inventoryCheck.setVisible(false);
+    	stock_inventoryCounts.setVisible(false);
+    	stock_inventoryAdjustments.setVisible(false);
+    	
+    	ArrayList<InventoryCountVO> vo = stockData.getCountList();
+    	Stock_inventoryCounts_table_mod m = new Stock_inventoryCounts_table_mod(vo);
+    	DefaultTableModel mod = new DefaultTableModel(m.getContent(),m.getTitle());
+    	stock_inventoryCounts_table.setModel(mod);
+    	java.util.Date d = new java.util.Date();
+    	SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    	stock_inventoryCounts_snaptime.setText(df.format(d));
+    	this.stock_inventoryCounts.setVisible(true);
+    }                                                            
+
+    private void stock_button_inventoryAdjustmentsActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+    	stock_inwarehouse.setVisible(false);
+    	stock_exwarehouse.setVisible(false);
+    	stock_inventoryCheck.setVisible(false);
+    	stock_inventoryCounts.setVisible(false);
+    	stock_inventoryAdjustments.setVisible(false);
+    	
+    	this.stock_inventoryAdjustments.setVisible(true);
+    }                                                                 
 
     /**
      * @param args the command line arguments
@@ -6166,7 +7203,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify 
+    private JButton finance_cost_costAndIncomePanel_button_Check;
+    private JLabel hall_driverManagement_label_date;
+    private javax.swing.JTextField hall_driverManagement_date;
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel centerPanel;
     private javax.swing.JPanel centerStockPanel;
@@ -6514,7 +7554,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton hall_vehicleLoadingManagement;
     private javax.swing.JPanel hall_vehicleLoadingManagementPanel;
     private javax.swing.JButton hall_vehicleLoading_button_cancel;
-    private javax.swing.JButton hall_vehicleLoading_button_hallNoDefault;
     private javax.swing.JButton hall_vehicleLoading_button_submit;
     private javax.swing.JComboBox hall_vehicleLoading_day;
     private javax.swing.JTextField hall_vehicleLoading_departure_city;
@@ -6588,6 +7627,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton manager_button_numercial;
     private javax.swing.JButton manager_button_staff;
     private javax.swing.JButton manager_button_statement;
+    private javax.swing.JPanel manager_checkNumercial;
+    private javax.swing.JPanel manager_checkStatement;
     private javax.swing.JPanel manager_departmentPanel;
     private javax.swing.JPanel manager_department_departmentPanel;
     private javax.swing.JScrollPane manager_department_departmentTreePanel;
@@ -6611,6 +7652,22 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField manager_department_updatePanel_manager;
     private javax.swing.JTextField manager_department_updatePanel_name;
     private javax.swing.JTextField manager_department_updatePanel_parent;
+    private javax.swing.JPanel manager_document;
+    private javax.swing.JButton manager_document_button_air;
+    private javax.swing.JButton manager_document_button_ceterarrival;
+    private javax.swing.JButton manager_document_button_hallarrival;
+    private javax.swing.JButton manager_document_button_halldistribution;
+    private javax.swing.JButton manager_document_button_payment;
+    private javax.swing.JButton manager_document_button_receipt;
+    private javax.swing.JButton manager_document_button_save;
+    private javax.swing.JButton manager_document_button_stockex;
+    private javax.swing.JButton manager_document_button_stockin;
+    private javax.swing.JButton manager_document_button_ticket;
+    private javax.swing.JButton manager_document_button_train;
+    private javax.swing.JButton manager_document_button_transfer;
+    private javax.swing.JButton manager_document_button_vehicle;
+    private javax.swing.JTable manager_document_list;
+    private javax.swing.JScrollPane manager_document_listPanel;
     private javax.swing.JPanel manager_mainPanel;
     private javax.swing.JPanel manager_staffPanel;
     private javax.swing.JPanel manager_staff_departmentPanel;
@@ -6780,12 +7837,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel stock_inventoryCheck_result_exwarehouse;
     private javax.swing.JLabel stock_inventoryCheck_result_inSubex;
     private javax.swing.JLabel stock_inventoryCheck_result_inwarehouse;
+    private javax.swing.JPanel stock_inventoryCounts;
     private javax.swing.JButton stock_inventoryCounts_button_export;
     private javax.swing.JLabel stock_inventoryCounts_label_time;
     private javax.swing.JLabel stock_inventoryCounts_snaptime;
     private javax.swing.JTable stock_inventoryCounts_table;
     private javax.swing.JScrollPane stock_inventoryCounts_tablePanel;
-    private javax.swing.JPanel stock_inventoryyCounts;
     private javax.swing.JPanel stock_inwarehouse;
     private javax.swing.JTextField stock_inwarehouse_address;
     private javax.swing.JButton stock_inwarehouse_button_inwarehouse;
