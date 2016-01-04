@@ -18,9 +18,9 @@ public class PostmanBLController implements PostmanBLService{
 		String from_center = getCenterByAddress(departure);
 		String to_center = getCenterByAddress(destination);
 		double result = Double.parseDouble(weight)*23* (getKmByCenters(from_center,to_center)/1000);
-		if(dtype.equals(DeliveryType.economy)){
+		if(dtype.equals(DeliveryType.economy)||dtype.equals(DeliveryType.Economy)){
 			return String.valueOf((result/23)*18);
-		}else if(dtype.equals(DeliveryType.standard)){
+		}else if(dtype.equals(DeliveryType.standard)||dtype.equals(DeliveryType.Standard)){
 			return String.valueOf(result);
 		}else{
 			return String.valueOf((result/23)*25);
@@ -117,7 +117,13 @@ public class PostmanBLController implements PostmanBLService{
 			//Calendar.Month 是 0,1,2,...,11
 			
 			String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-			System.out.println(year+month+day);
+			//System.out.println(year+month+day);
+			if(Integer.parseInt(month)<10){
+				month = "0"+month;
+			}
+			if(Integer.parseInt(day)<10){
+				day = "0"+day;
+			}
 			if(tickets.size()!=0){
 				String last = tickets.get(tickets.size()-1);
 				String date = last.substring(0,8);
